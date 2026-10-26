@@ -1,0 +1,1082 @@
+[
+  {
+    "category": "shirt",
+    "color": "cream",
+    "description": "cream shirt for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0001",
+    "name": "Atlas Cream Shirt 001",
+    "price_cents": 7900,
+    "style": "formal"
+  },
+  {
+    "category": "trousers",
+    "color": "black",
+    "description": "black trousers for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0002",
+    "name": "Atlas Black Trousers 002",
+    "price_cents": 24900,
+    "style": "casual"
+  },
+  {
+    "category": "dress",
+    "color": "olive",
+    "description": "olive dress for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0003",
+    "name": "Atlas Olive Dress 003",
+    "price_cents": 5900,
+    "style": "smart casual"
+  },
+  {
+    "category": "jacket",
+    "color": "blue",
+    "description": "blue jacket for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0004",
+    "name": "Atlas Blue Jacket 004",
+    "price_cents": 2900,
+    "style": "formal"
+  },
+  {
+    "category": "shoes",
+    "color": "navy",
+    "description": "navy shoes for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0005",
+    "name": "Atlas Navy Shoes 005",
+    "price_cents": 7900,
+    "style": "casual"
+  },
+  {
+    "category": "top",
+    "color": "cream",
+    "description": "cream top for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0006",
+    "name": "Atlas Cream Top 006",
+    "price_cents": 5900,
+    "style": "smart casual"
+  },
+  {
+    "category": "skirt",
+    "color": "black",
+    "description": "black skirt for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0007",
+    "name": "Atlas Black Skirt 007",
+    "price_cents": 2900,
+    "style": "formal"
+  },
+  {
+    "category": "knitwear",
+    "color": "olive",
+    "description": "olive knitwear for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0008",
+    "name": "Atlas Olive Knitwear 008",
+    "price_cents": 5900,
+    "style": "casual"
+  },
+  {
+    "category": "shirt",
+    "color": "blue",
+    "description": "blue shirt for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0009",
+    "name": "Atlas Blue Shirt 009",
+    "price_cents": 2900,
+    "style": "smart casual"
+  },
+  {
+    "category": "trousers",
+    "color": "navy",
+    "description": "navy trousers for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0010",
+    "name": "Atlas Navy Trousers 010",
+    "price_cents": 9900,
+    "style": "formal"
+  },
+  {
+    "category": "dress",
+    "color": "cream",
+    "description": "cream dress for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0011",
+    "name": "Atlas Cream Dress 011",
+    "price_cents": 2900,
+    "style": "casual"
+  },
+  {
+    "category": "jacket",
+    "color": "black",
+    "description": "black jacket for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0012",
+    "name": "Atlas Black Jacket 012",
+    "price_cents": 7900,
+    "style": "smart casual"
+  },
+  {
+    "category": "shoes",
+    "color": "olive",
+    "description": "olive shoes for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0013",
+    "name": "Atlas Olive Shoes 013",
+    "price_cents": 5900,
+    "style": "formal"
+  },
+  {
+    "category": "top",
+    "color": "blue",
+    "description": "blue top for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0014",
+    "name": "Atlas Blue Top 014",
+    "price_cents": 9900,
+    "style": "casual"
+  },
+  {
+    "category": "skirt",
+    "color": "navy",
+    "description": "navy skirt for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0015",
+    "name": "Atlas Navy Skirt 015",
+    "price_cents": 9900,
+    "style": "smart casual"
+  },
+  {
+    "category": "knitwear",
+    "color": "cream",
+    "description": "cream knitwear for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0016",
+    "name": "Atlas Cream Knitwear 016",
+    "price_cents": 5900,
+    "style": "formal"
+  },
+  {
+    "category": "shirt",
+    "color": "black",
+    "description": "black shirt for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0017",
+    "name": "Atlas Black Shirt 017",
+    "price_cents": 3900,
+    "style": "casual"
+  },
+  {
+    "category": "trousers",
+    "color": "olive",
+    "description": "olive trousers for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0018",
+    "name": "Atlas Olive Trousers 018",
+    "price_cents": 3900,
+    "style": "smart casual"
+  },
+  {
+    "category": "dress",
+    "color": "blue",
+    "description": "blue dress for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0019",
+    "name": "Atlas Blue Dress 019",
+    "price_cents": 3900,
+    "style": "formal"
+  },
+  {
+    "category": "jacket",
+    "color": "navy",
+    "description": "navy jacket for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0020",
+    "name": "Atlas Navy Jacket 020",
+    "price_cents": 7900,
+    "style": "casual"
+  },
+  {
+    "category": "shoes",
+    "color": "cream",
+    "description": "cream shoes for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0021",
+    "name": "Atlas Cream Shoes 021",
+    "price_cents": 9900,
+    "style": "smart casual"
+  },
+  {
+    "category": "top",
+    "color": "black",
+    "description": "black top for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0022",
+    "name": "Atlas Black Top 022",
+    "price_cents": 3900,
+    "style": "formal"
+  },
+  {
+    "category": "skirt",
+    "color": "olive",
+    "description": "olive skirt for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0023",
+    "name": "Atlas Olive Skirt 023",
+    "price_cents": 9900,
+    "style": "casual"
+  },
+  {
+    "category": "knitwear",
+    "color": "blue",
+    "description": "blue knitwear for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0024",
+    "name": "Atlas Blue Knitwear 024",
+    "price_cents": 2900,
+    "style": "smart casual"
+  },
+  {
+    "category": "shirt",
+    "color": "navy",
+    "description": "navy shirt for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0025",
+    "name": "Atlas Navy Shirt 025",
+    "price_cents": 7900,
+    "style": "formal"
+  },
+  {
+    "category": "trousers",
+    "color": "cream",
+    "description": "cream trousers for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0026",
+    "name": "Atlas Cream Trousers 026",
+    "price_cents": 5900,
+    "style": "casual"
+  },
+  {
+    "category": "dress",
+    "color": "black",
+    "description": "black dress for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0027",
+    "name": "Atlas Black Dress 027",
+    "price_cents": 9900,
+    "style": "smart casual"
+  },
+  {
+    "category": "jacket",
+    "color": "olive",
+    "description": "olive jacket for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0028",
+    "name": "Atlas Olive Jacket 028",
+    "price_cents": 3900,
+    "style": "formal"
+  },
+  {
+    "category": "shoes",
+    "color": "blue",
+    "description": "blue shoes for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0029",
+    "name": "Atlas Blue Shoes 029",
+    "price_cents": 9900,
+    "style": "casual"
+  },
+  {
+    "category": "top",
+    "color": "navy",
+    "description": "navy top for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0030",
+    "name": "Atlas Navy Top 030",
+    "price_cents": 5900,
+    "style": "smart casual"
+  },
+  {
+    "category": "skirt",
+    "color": "cream",
+    "description": "cream skirt for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0031",
+    "name": "Atlas Cream Skirt 031",
+    "price_cents": 2900,
+    "style": "formal"
+  },
+  {
+    "category": "knitwear",
+    "color": "black",
+    "description": "black knitwear for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0032",
+    "name": "Atlas Black Knitwear 032",
+    "price_cents": 7900,
+    "style": "casual"
+  },
+  {
+    "category": "shirt",
+    "color": "olive",
+    "description": "olive shirt for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0033",
+    "name": "Atlas Olive Shirt 033",
+    "price_cents": 7900,
+    "style": "smart casual"
+  },
+  {
+    "category": "trousers",
+    "color": "blue",
+    "description": "blue trousers for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0034",
+    "name": "Atlas Blue Trousers 034",
+    "price_cents": 5900,
+    "style": "formal"
+  },
+  {
+    "category": "dress",
+    "color": "navy",
+    "description": "navy dress for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0035",
+    "name": "Atlas Navy Dress 035",
+    "price_cents": 2900,
+    "style": "casual"
+  },
+  {
+    "category": "jacket",
+    "color": "cream",
+    "description": "cream jacket for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0036",
+    "name": "Atlas Cream Jacket 036",
+    "price_cents": 2900,
+    "style": "smart casual"
+  },
+  {
+    "category": "shoes",
+    "color": "black",
+    "description": "black shoes for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0037",
+    "name": "Atlas Black Shoes 037",
+    "price_cents": 9900,
+    "style": "formal"
+  },
+  {
+    "category": "top",
+    "color": "olive",
+    "description": "olive top for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0038",
+    "name": "Atlas Olive Top 038",
+    "price_cents": 2900,
+    "style": "casual"
+  },
+  {
+    "category": "skirt",
+    "color": "blue",
+    "description": "blue skirt for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0039",
+    "name": "Atlas Blue Skirt 039",
+    "price_cents": 5900,
+    "style": "smart casual"
+  },
+  {
+    "category": "knitwear",
+    "color": "navy",
+    "description": "navy knitwear for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0040",
+    "name": "Atlas Navy Knitwear 040",
+    "price_cents": 9900,
+    "style": "formal"
+  },
+  {
+    "category": "shirt",
+    "color": "cream",
+    "description": "cream shirt for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0041",
+    "name": "Atlas Cream Shirt 041",
+    "price_cents": 2900,
+    "style": "casual"
+  },
+  {
+    "category": "trousers",
+    "color": "black",
+    "description": "black trousers for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0042",
+    "name": "Atlas Black Trousers 042",
+    "price_cents": 7900,
+    "style": "smart casual"
+  },
+  {
+    "category": "dress",
+    "color": "olive",
+    "description": "olive dress for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0043",
+    "name": "Atlas Olive Dress 043",
+    "price_cents": 2900,
+    "style": "formal"
+  },
+  {
+    "category": "jacket",
+    "color": "blue",
+    "description": "blue jacket for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0044",
+    "name": "Atlas Blue Jacket 044",
+    "price_cents": 9900,
+    "style": "casual"
+  },
+  {
+    "category": "shoes",
+    "color": "navy",
+    "description": "navy shoes for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0045",
+    "name": "Atlas Navy Shoes 045",
+    "price_cents": 7900,
+    "style": "smart casual"
+  },
+  {
+    "category": "top",
+    "color": "cream",
+    "description": "cream top for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0046",
+    "name": "Atlas Cream Top 046",
+    "price_cents": 7900,
+    "style": "formal"
+  },
+  {
+    "category": "skirt",
+    "color": "black",
+    "description": "black skirt for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0047",
+    "name": "Atlas Black Skirt 047",
+    "price_cents": 2900,
+    "style": "casual"
+  },
+  {
+    "category": "knitwear",
+    "color": "olive",
+    "description": "olive knitwear for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0048",
+    "name": "Atlas Olive Knitwear 048",
+    "price_cents": 3900,
+    "style": "smart casual"
+  },
+  {
+    "category": "shirt",
+    "color": "blue",
+    "description": "blue shirt for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0049",
+    "name": "Atlas Blue Shirt 049",
+    "price_cents": 7900,
+    "style": "formal"
+  },
+  {
+    "category": "trousers",
+    "color": "navy",
+    "description": "navy trousers for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0050",
+    "name": "Atlas Navy Trousers 050",
+    "price_cents": 7900,
+    "style": "casual"
+  },
+  {
+    "category": "dress",
+    "color": "cream",
+    "description": "cream dress for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0051",
+    "name": "Atlas Cream Dress 051",
+    "price_cents": 9900,
+    "style": "smart casual"
+  },
+  {
+    "category": "jacket",
+    "color": "black",
+    "description": "black jacket for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0052",
+    "name": "Atlas Black Jacket 052",
+    "price_cents": 9900,
+    "style": "formal"
+  },
+  {
+    "category": "shoes",
+    "color": "olive",
+    "description": "olive shoes for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0053",
+    "name": "Atlas Olive Shoes 053",
+    "price_cents": 3900,
+    "style": "casual"
+  },
+  {
+    "category": "top",
+    "color": "blue",
+    "description": "blue top for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0054",
+    "name": "Atlas Blue Top 054",
+    "price_cents": 2900,
+    "style": "smart casual"
+  },
+  {
+    "category": "skirt",
+    "color": "navy",
+    "description": "navy skirt for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0055",
+    "name": "Atlas Navy Skirt 055",
+    "price_cents": 7900,
+    "style": "formal"
+  },
+  {
+    "category": "knitwear",
+    "color": "cream",
+    "description": "cream knitwear for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0056",
+    "name": "Atlas Cream Knitwear 056",
+    "price_cents": 2900,
+    "style": "casual"
+  },
+  {
+    "category": "shirt",
+    "color": "black",
+    "description": "black shirt for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0057",
+    "name": "Atlas Black Shirt 057",
+    "price_cents": 5900,
+    "style": "smart casual"
+  },
+  {
+    "category": "trousers",
+    "color": "olive",
+    "description": "olive trousers for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0058",
+    "name": "Atlas Olive Trousers 058",
+    "price_cents": 7900,
+    "style": "formal"
+  },
+  {
+    "category": "dress",
+    "color": "blue",
+    "description": "blue dress for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0059",
+    "name": "Atlas Blue Dress 059",
+    "price_cents": 2900,
+    "style": "casual"
+  },
+  {
+    "category": "jacket",
+    "color": "navy",
+    "description": "navy jacket for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0060",
+    "name": "Atlas Navy Jacket 060",
+    "price_cents": 3900,
+    "style": "smart casual"
+  },
+  {
+    "category": "shoes",
+    "color": "cream",
+    "description": "cream shoes for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0061",
+    "name": "Atlas Cream Shoes 061",
+    "price_cents": 3900,
+    "style": "formal"
+  },
+  {
+    "category": "top",
+    "color": "black",
+    "description": "black top for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0062",
+    "name": "Atlas Black Top 062",
+    "price_cents": 7900,
+    "style": "casual"
+  },
+  {
+    "category": "skirt",
+    "color": "olive",
+    "description": "olive skirt for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0063",
+    "name": "Atlas Olive Skirt 063",
+    "price_cents": 9900,
+    "style": "smart casual"
+  },
+  {
+    "category": "knitwear",
+    "color": "blue",
+    "description": "blue knitwear for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0064",
+    "name": "Atlas Blue Knitwear 064",
+    "price_cents": 3900,
+    "style": "formal"
+  },
+  {
+    "category": "shirt",
+    "color": "navy",
+    "description": "navy shirt for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0065",
+    "name": "Atlas Navy Shirt 065",
+    "price_cents": 5900,
+    "style": "casual"
+  },
+  {
+    "category": "trousers",
+    "color": "cream",
+    "description": "cream trousers for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0066",
+    "name": "Atlas Cream Trousers 066",
+    "price_cents": 5900,
+    "style": "smart casual"
+  },
+  {
+    "category": "dress",
+    "color": "black",
+    "description": "black dress for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0067",
+    "name": "Atlas Black Dress 067",
+    "price_cents": 7900,
+    "style": "formal"
+  },
+  {
+    "category": "jacket",
+    "color": "olive",
+    "description": "olive jacket for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0068",
+    "name": "Atlas Olive Jacket 068",
+    "price_cents": 5900,
+    "style": "casual"
+  },
+  {
+    "category": "shoes",
+    "color": "blue",
+    "description": "blue shoes for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0069",
+    "name": "Atlas Blue Shoes 069",
+    "price_cents": 2900,
+    "style": "smart casual"
+  },
+  {
+    "category": "top",
+    "color": "navy",
+    "description": "navy top for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0070",
+    "name": "Atlas Navy Top 070",
+    "price_cents": 5900,
+    "style": "formal"
+  },
+  {
+    "category": "skirt",
+    "color": "cream",
+    "description": "cream skirt for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0071",
+    "name": "Atlas Cream Skirt 071",
+    "price_cents": 7900,
+    "style": "casual"
+  },
+  {
+    "category": "knitwear",
+    "color": "black",
+    "description": "black knitwear for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0072",
+    "name": "Atlas Black Knitwear 072",
+    "price_cents": 5900,
+    "style": "smart casual"
+  },
+  {
+    "category": "shirt",
+    "color": "olive",
+    "description": "olive shirt for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0073",
+    "name": "Atlas Olive Shirt 073",
+    "price_cents": 2900,
+    "style": "formal"
+  },
+  {
+    "category": "trousers",
+    "color": "blue",
+    "description": "blue trousers for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0074",
+    "name": "Atlas Blue Trousers 074",
+    "price_cents": 3900,
+    "style": "casual"
+  },
+  {
+    "category": "dress",
+    "color": "navy",
+    "description": "navy dress for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0075",
+    "name": "Atlas Navy Dress 075",
+    "price_cents": 7900,
+    "style": "smart casual"
+  },
+  {
+    "category": "jacket",
+    "color": "cream",
+    "description": "cream jacket for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0076",
+    "name": "Atlas Cream Jacket 076",
+    "price_cents": 2900,
+    "style": "formal"
+  },
+  {
+    "category": "shoes",
+    "color": "black",
+    "description": "black shoes for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0077",
+    "name": "Atlas Black Shoes 077",
+    "price_cents": 5900,
+    "style": "casual"
+  },
+  {
+    "category": "top",
+    "color": "olive",
+    "description": "olive top for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0078",
+    "name": "Atlas Olive Top 078",
+    "price_cents": 5900,
+    "style": "smart casual"
+  },
+  {
+    "category": "skirt",
+    "color": "blue",
+    "description": "blue skirt for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0079",
+    "name": "Atlas Blue Skirt 079",
+    "price_cents": 7900,
+    "style": "formal"
+  },
+  {
+    "category": "knitwear",
+    "color": "navy",
+    "description": "navy knitwear for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0080",
+    "name": "Atlas Navy Knitwear 080",
+    "price_cents": 2900,
+    "style": "casual"
+  },
+  {
+    "category": "shirt",
+    "color": "cream",
+    "description": "cream shirt for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0081",
+    "name": "Atlas Cream Shirt 081",
+    "price_cents": 9900,
+    "style": "smart casual"
+  },
+  {
+    "category": "trousers",
+    "color": "black",
+    "description": "black trousers for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0082",
+    "name": "Atlas Black Trousers 082",
+    "price_cents": 5900,
+    "style": "formal"
+  },
+  {
+    "category": "dress",
+    "color": "olive",
+    "description": "olive dress for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0083",
+    "name": "Atlas Olive Dress 083",
+    "price_cents": 7900,
+    "style": "casual"
+  },
+  {
+    "category": "jacket",
+    "color": "blue",
+    "description": "blue jacket for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0084",
+    "name": "Atlas Blue Jacket 084",
+    "price_cents": 2900,
+    "style": "smart casual"
+  },
+  {
+    "category": "shoes",
+    "color": "navy",
+    "description": "navy shoes for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0085",
+    "name": "Atlas Navy Shoes 085",
+    "price_cents": 2900,
+    "style": "formal"
+  },
+  {
+    "category": "top",
+    "color": "cream",
+    "description": "cream top for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0086",
+    "name": "Atlas Cream Top 086",
+    "price_cents": 5900,
+    "style": "casual"
+  },
+  {
+    "category": "skirt",
+    "color": "black",
+    "description": "black skirt for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0087",
+    "name": "Atlas Black Skirt 087",
+    "price_cents": 3900,
+    "style": "smart casual"
+  },
+  {
+    "category": "knitwear",
+    "color": "olive",
+    "description": "olive knitwear for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0088",
+    "name": "Atlas Olive Knitwear 088",
+    "price_cents": 5900,
+    "style": "formal"
+  },
+  {
+    "category": "shirt",
+    "color": "blue",
+    "description": "blue shirt for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0089",
+    "name": "Atlas Blue Shirt 089",
+    "price_cents": 5900,
+    "style": "casual"
+  },
+  {
+    "category": "trousers",
+    "color": "navy",
+    "description": "navy trousers for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0090",
+    "name": "Atlas Navy Trousers 090",
+    "price_cents": 7900,
+    "style": "smart casual"
+  },
+  {
+    "category": "dress",
+    "color": "cream",
+    "description": "cream dress for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0091",
+    "name": "Atlas Cream Dress 091",
+    "price_cents": 7900,
+    "style": "formal"
+  },
+  {
+    "category": "jacket",
+    "color": "black",
+    "description": "black jacket for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0092",
+    "name": "Atlas Black Jacket 092",
+    "price_cents": 5900,
+    "style": "casual"
+  },
+  {
+    "category": "shoes",
+    "color": "olive",
+    "description": "olive shoes for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0093",
+    "name": "Atlas Olive Shoes 093",
+    "price_cents": 3900,
+    "style": "smart casual"
+  },
+  {
+    "category": "top",
+    "color": "blue",
+    "description": "blue top for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0094",
+    "name": "Atlas Blue Top 094",
+    "price_cents": 7900,
+    "style": "formal"
+  },
+  {
+    "category": "skirt",
+    "color": "navy",
+    "description": "navy skirt for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0095",
+    "name": "Atlas Navy Skirt 095",
+    "price_cents": 7900,
+    "style": "casual"
+  },
+  {
+    "category": "knitwear",
+    "color": "cream",
+    "description": "cream knitwear for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0096",
+    "name": "Atlas Cream Knitwear 096",
+    "price_cents": 2900,
+    "style": "smart casual"
+  },
+  {
+    "category": "shirt",
+    "color": "black",
+    "description": "black shirt for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0097",
+    "name": "Atlas Black Shirt 097",
+    "price_cents": 2900,
+    "style": "formal"
+  },
+  {
+    "category": "trousers",
+    "color": "olive",
+    "description": "olive trousers for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0098",
+    "name": "Atlas Olive Trousers 098",
+    "price_cents": 7900,
+    "style": "casual"
+  },
+  {
+    "category": "dress",
+    "color": "blue",
+    "description": "blue dress for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0099",
+    "name": "Atlas Blue Dress 099",
+    "price_cents": 9900,
+    "style": "smart casual"
+  },
+  {
+    "category": "jacket",
+    "color": "navy",
+    "description": "navy jacket for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0100",
+    "name": "Atlas Navy Jacket 100",
+    "price_cents": 7900,
+    "style": "formal"
+  },
+  {
+    "category": "shoes",
+    "color": "cream",
+    "description": "cream shoes for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0101",
+    "name": "Atlas Cream Shoes 101",
+    "price_cents": 5900,
+    "style": "casual"
+  },
+  {
+    "category": "top",
+    "color": "black",
+    "description": "black top for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0102",
+    "name": "Atlas Black Top 102",
+    "price_cents": 5900,
+    "style": "smart casual"
+  },
+  {
+    "category": "skirt",
+    "color": "olive",
+    "description": "olive skirt for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0103",
+    "name": "Atlas Olive Skirt 103",
+    "price_cents": 5900,
+    "style": "formal"
+  },
+  {
+    "category": "knitwear",
+    "color": "blue",
+    "description": "blue knitwear for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0104",
+    "name": "Atlas Blue Knitwear 104",
+    "price_cents": 3900,
+    "style": "casual"
+  },
+  {
+    "category": "shirt",
+    "color": "navy",
+    "description": "navy shirt for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0105",
+    "name": "Atlas Navy Shirt 105",
+    "price_cents": 7900,
+    "style": "smart casual"
+  },
+  {
+    "category": "trousers",
+    "color": "cream",
+    "description": "cream trousers for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0106",
+    "name": "Atlas Cream Trousers 106",
+    "price_cents": 3900,
+    "style": "formal"
+  },
+  {
+    "category": "dress",
+    "color": "black",
+    "description": "black dress for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0107",
+    "name": "Atlas Black Dress 107",
+    "price_cents": 2900,
+    "style": "casual"
+  },
+  {
+    "category": "jacket",
+    "color": "olive",
+    "description": "olive jacket for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0108",
+    "name": "Atlas Olive Jacket 108",
+    "price_cents": 7900,
+    "style": "smart casual"
+  },
+  {
+    "category": "shoes",
+    "color": "blue",
+    "description": "blue shoes for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0109",
+    "name": "Atlas Blue Shoes 109",
+    "price_cents": 9900,
+    "style": "formal"
+  },
+  {
+    "category": "top",
+    "color": "navy",
+    "description": "navy top for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0110",
+    "name": "Atlas Navy Top 110",
+    "price_cents": 5900,
+    "style": "casual"
+  },
+  {
+    "category": "skirt",
+    "color": "cream",
+    "description": "cream skirt for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0111",
+    "name": "Atlas Cream Skirt 111",
+    "price_cents": 7900,
+    "style": "smart casual"
+  },
+  {
+    "category": "knitwear",
+    "color": "black",
+    "description": "black knitwear for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0112",
+    "name": "Atlas Black Knitwear 112",
+    "price_cents": 7900,
+    "style": "formal"
+  },
+  {
+    "category": "shirt",
+    "color": "olive",
+    "description": "olive shirt for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0113",
+    "name": "Atlas Olive Shirt 113",
+    "price_cents": 3900,
+    "style": "casual"
+  },
+  {
+    "category": "trousers",
+    "color": "blue",
+    "description": "blue trousers for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0114",
+    "name": "Atlas Blue Trousers 114",
+    "price_cents": 5900,
+    "style": "smart casual"
+  },
+  {
+    "category": "dress",
+    "color": "navy",
+    "description": "navy dress for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0115",
+    "name": "Atlas Navy Dress 115",
+    "price_cents": 5900,
+    "style": "formal"
+  },
+  {
+    "category": "jacket",
+    "color": "cream",
+    "description": "cream jacket for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0116",
+    "name": "Atlas Cream Jacket 116",
+    "price_cents": 7900,
+    "style": "casual"
+  },
+  {
+    "category": "shoes",
+    "color": "black",
+    "description": "black shoes for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0117",
+    "name": "Atlas Black Shoes 117",
+    "price_cents": 2900,
+    "style": "smart casual"
+  },
+  {
+    "category": "top",
+    "color": "olive",
+    "description": "olive top for formal occasions. Original fictional Atlas catalog.",
+    "id": "P0118",
+    "name": "Atlas Olive Top 118",
+    "price_cents": 3900,
+    "style": "formal"
+  },
+  {
+    "category": "skirt",
+    "color": "blue",
+    "description": "blue skirt for casual occasions. Original fictional Atlas catalog.",
+    "id": "P0119",
+    "name": "Atlas Blue Skirt 119",
+    "price_cents": 7900,
+    "style": "casual"
+  },
+  {
+    "category": "knitwear",
+    "color": "navy",
+    "description": "navy knitwear for smart casual occasions. Original fictional Atlas catalog.",
+    "id": "P0120",
+    "name": "Atlas Navy Knitwear 120",
+    "price_cents": 5900,
+    "style": "smart casual"
+  }
+]

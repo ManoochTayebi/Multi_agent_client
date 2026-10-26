@@ -1,0 +1,3602 @@
+[
+  {
+    "id": "P0001-XS",
+    "product_id": "P0001",
+    "size": "XS",
+    "stock": 3
+  },
+  {
+    "id": "P0001-S",
+    "product_id": "P0001",
+    "size": "S",
+    "stock": 19
+  },
+  {
+    "id": "P0001-M",
+    "product_id": "P0001",
+    "size": "M",
+    "stock": 17
+  },
+  {
+    "id": "P0001-L",
+    "product_id": "P0001",
+    "size": "L",
+    "stock": 16
+  },
+  {
+    "id": "P0001-XL",
+    "product_id": "P0001",
+    "size": "XL",
+    "stock": 10
+  },
+  {
+    "id": "P0002-XS",
+    "product_id": "P0002",
+    "size": "XS",
+    "stock": 36
+  },
+  {
+    "id": "P0002-S",
+    "product_id": "P0002",
+    "size": "S",
+    "stock": 7
+  },
+  {
+    "id": "P0002-M",
+    "product_id": "P0002",
+    "size": "M",
+    "stock": 39
+  },
+  {
+    "id": "P0002-L",
+    "product_id": "P0002",
+    "size": "L",
+    "stock": 29
+  },
+  {
+    "id": "P0002-XL",
+    "product_id": "P0002",
+    "size": "XL",
+    "stock": 4
+  },
+  {
+    "id": "P0003-XS",
+    "product_id": "P0003",
+    "size": "XS",
+    "stock": 7
+  },
+  {
+    "id": "P0003-S",
+    "product_id": "P0003",
+    "size": "S",
+    "stock": 15
+  },
+  {
+    "id": "P0003-M",
+    "product_id": "P0003",
+    "size": "M",
+    "stock": 16
+  },
+  {
+    "id": "P0003-L",
+    "product_id": "P0003",
+    "size": "L",
+    "stock": 34
+  },
+  {
+    "id": "P0003-XL",
+    "product_id": "P0003",
+    "size": "XL",
+    "stock": 40
+  },
+  {
+    "id": "P0004-XS",
+    "product_id": "P0004",
+    "size": "XS",
+    "stock": 37
+  },
+  {
+    "id": "P0004-S",
+    "product_id": "P0004",
+    "size": "S",
+    "stock": 14
+  },
+  {
+    "id": "P0004-M",
+    "product_id": "P0004",
+    "size": "M",
+    "stock": 36
+  },
+  {
+    "id": "P0004-L",
+    "product_id": "P0004",
+    "size": "L",
+    "stock": 28
+  },
+  {
+    "id": "P0004-XL",
+    "product_id": "P0004",
+    "size": "XL",
+    "stock": 16
+  },
+  {
+    "id": "P0005-XS",
+    "product_id": "P0005",
+    "size": "XS",
+    "stock": 39
+  },
+  {
+    "id": "P0005-S",
+    "product_id": "P0005",
+    "size": "S",
+    "stock": 19
+  },
+  {
+    "id": "P0005-M",
+    "product_id": "P0005",
+    "size": "M",
+    "stock": 2
+  },
+  {
+    "id": "P0005-L",
+    "product_id": "P0005",
+    "size": "L",
+    "stock": 12
+  },
+  {
+    "id": "P0005-XL",
+    "product_id": "P0005",
+    "size": "XL",
+    "stock": 29
+  },
+  {
+    "id": "P0006-XS",
+    "product_id": "P0006",
+    "size": "XS",
+    "stock": 19
+  },
+  {
+    "id": "P0006-S",
+    "product_id": "P0006",
+    "size": "S",
+    "stock": 11
+  },
+  {
+    "id": "P0006-M",
+    "product_id": "P0006",
+    "size": "M",
+    "stock": 15
+  },
+  {
+    "id": "P0006-L",
+    "product_id": "P0006",
+    "size": "L",
+    "stock": 23
+  },
+  {
+    "id": "P0006-XL",
+    "product_id": "P0006",
+    "size": "XL",
+    "stock": 8
+  },
+  {
+    "id": "P0007-XS",
+    "product_id": "P0007",
+    "size": "XS",
+    "stock": 0
+  },
+  {
+    "id": "P0007-S",
+    "product_id": "P0007",
+    "size": "S",
+    "stock": 26
+  },
+  {
+    "id": "P0007-M",
+    "product_id": "P0007",
+    "size": "M",
+    "stock": 8
+  },
+  {
+    "id": "P0007-L",
+    "product_id": "P0007",
+    "size": "L",
+    "stock": 24
+  },
+  {
+    "id": "P0007-XL",
+    "product_id": "P0007",
+    "size": "XL",
+    "stock": 0
+  },
+  {
+    "id": "P0008-XS",
+    "product_id": "P0008",
+    "size": "XS",
+    "stock": 40
+  },
+  {
+    "id": "P0008-S",
+    "product_id": "P0008",
+    "size": "S",
+    "stock": 0
+  },
+  {
+    "id": "P0008-M",
+    "product_id": "P0008",
+    "size": "M",
+    "stock": 0
+  },
+  {
+    "id": "P0008-L",
+    "product_id": "P0008",
+    "size": "L",
+    "stock": 0
+  },
+  {
+    "id": "P0008-XL",
+    "product_id": "P0008",
+    "size": "XL",
+    "stock": 18
+  },
+  {
+    "id": "P0009-XS",
+    "product_id": "P0009",
+    "size": "XS",
+    "stock": 31
+  },
+  {
+    "id": "P0009-S",
+    "product_id": "P0009",
+    "size": "S",
+    "stock": 36
+  },
+  {
+    "id": "P0009-M",
+    "product_id": "P0009",
+    "size": "M",
+    "stock": 9
+  },
+  {
+    "id": "P0009-L",
+    "product_id": "P0009",
+    "size": "L",
+    "stock": 26
+  },
+  {
+    "id": "P0009-XL",
+    "product_id": "P0009",
+    "size": "XL",
+    "stock": 7
+  },
+  {
+    "id": "P0010-XS",
+    "product_id": "P0010",
+    "size": "XS",
+    "stock": 20
+  },
+  {
+    "id": "P0010-S",
+    "product_id": "P0010",
+    "size": "S",
+    "stock": 25
+  },
+  {
+    "id": "P0010-M",
+    "product_id": "P0010",
+    "size": "M",
+    "stock": 38
+  },
+  {
+    "id": "P0010-L",
+    "product_id": "P0010",
+    "size": "L",
+    "stock": 14
+  },
+  {
+    "id": "P0010-XL",
+    "product_id": "P0010",
+    "size": "XL",
+    "stock": 6
+  },
+  {
+    "id": "P0011-XS",
+    "product_id": "P0011",
+    "size": "XS",
+    "stock": 16
+  },
+  {
+    "id": "P0011-S",
+    "product_id": "P0011",
+    "size": "S",
+    "stock": 20
+  },
+  {
+    "id": "P0011-M",
+    "product_id": "P0011",
+    "size": "M",
+    "stock": 7
+  },
+  {
+    "id": "P0011-L",
+    "product_id": "P0011",
+    "size": "L",
+    "stock": 16
+  },
+  {
+    "id": "P0011-XL",
+    "product_id": "P0011",
+    "size": "XL",
+    "stock": 8
+  },
+  {
+    "id": "P0012-XS",
+    "product_id": "P0012",
+    "size": "XS",
+    "stock": 19
+  },
+  {
+    "id": "P0012-S",
+    "product_id": "P0012",
+    "size": "S",
+    "stock": 31
+  },
+  {
+    "id": "P0012-M",
+    "product_id": "P0012",
+    "size": "M",
+    "stock": 25
+  },
+  {
+    "id": "P0012-L",
+    "product_id": "P0012",
+    "size": "L",
+    "stock": 12
+  },
+  {
+    "id": "P0012-XL",
+    "product_id": "P0012",
+    "size": "XL",
+    "stock": 25
+  },
+  {
+    "id": "P0013-XS",
+    "product_id": "P0013",
+    "size": "XS",
+    "stock": 15
+  },
+  {
+    "id": "P0013-S",
+    "product_id": "P0013",
+    "size": "S",
+    "stock": 19
+  },
+  {
+    "id": "P0013-M",
+    "product_id": "P0013",
+    "size": "M",
+    "stock": 6
+  },
+  {
+    "id": "P0013-L",
+    "product_id": "P0013",
+    "size": "L",
+    "stock": 40
+  },
+  {
+    "id": "P0013-XL",
+    "product_id": "P0013",
+    "size": "XL",
+    "stock": 12
+  },
+  {
+    "id": "P0014-XS",
+    "product_id": "P0014",
+    "size": "XS",
+    "stock": 17
+  },
+  {
+    "id": "P0014-S",
+    "product_id": "P0014",
+    "size": "S",
+    "stock": 12
+  },
+  {
+    "id": "P0014-M",
+    "product_id": "P0014",
+    "size": "M",
+    "stock": 31
+  },
+  {
+    "id": "P0014-L",
+    "product_id": "P0014",
+    "size": "L",
+    "stock": 26
+  },
+  {
+    "id": "P0014-XL",
+    "product_id": "P0014",
+    "size": "XL",
+    "stock": 19
+  },
+  {
+    "id": "P0015-XS",
+    "product_id": "P0015",
+    "size": "XS",
+    "stock": 16
+  },
+  {
+    "id": "P0015-S",
+    "product_id": "P0015",
+    "size": "S",
+    "stock": 22
+  },
+  {
+    "id": "P0015-M",
+    "product_id": "P0015",
+    "size": "M",
+    "stock": 5
+  },
+  {
+    "id": "P0015-L",
+    "product_id": "P0015",
+    "size": "L",
+    "stock": 16
+  },
+  {
+    "id": "P0015-XL",
+    "product_id": "P0015",
+    "size": "XL",
+    "stock": 4
+  },
+  {
+    "id": "P0016-XS",
+    "product_id": "P0016",
+    "size": "XS",
+    "stock": 0
+  },
+  {
+    "id": "P0016-S",
+    "product_id": "P0016",
+    "size": "S",
+    "stock": 27
+  },
+  {
+    "id": "P0016-M",
+    "product_id": "P0016",
+    "size": "M",
+    "stock": 19
+  },
+  {
+    "id": "P0016-L",
+    "product_id": "P0016",
+    "size": "L",
+    "stock": 6
+  },
+  {
+    "id": "P0016-XL",
+    "product_id": "P0016",
+    "size": "XL",
+    "stock": 0
+  },
+  {
+    "id": "P0017-XS",
+    "product_id": "P0017",
+    "size": "XS",
+    "stock": 38
+  },
+  {
+    "id": "P0017-S",
+    "product_id": "P0017",
+    "size": "S",
+    "stock": 0
+  },
+  {
+    "id": "P0017-M",
+    "product_id": "P0017",
+    "size": "M",
+    "stock": 0
+  },
+  {
+    "id": "P0017-L",
+    "product_id": "P0017",
+    "size": "L",
+    "stock": 0
+  },
+  {
+    "id": "P0017-XL",
+    "product_id": "P0017",
+    "size": "XL",
+    "stock": 22
+  },
+  {
+    "id": "P0018-XS",
+    "product_id": "P0018",
+    "size": "XS",
+    "stock": 33
+  },
+  {
+    "id": "P0018-S",
+    "product_id": "P0018",
+    "size": "S",
+    "stock": 27
+  },
+  {
+    "id": "P0018-M",
+    "product_id": "P0018",
+    "size": "M",
+    "stock": 31
+  },
+  {
+    "id": "P0018-L",
+    "product_id": "P0018",
+    "size": "L",
+    "stock": 11
+  },
+  {
+    "id": "P0018-XL",
+    "product_id": "P0018",
+    "size": "XL",
+    "stock": 18
+  },
+  {
+    "id": "P0019-XS",
+    "product_id": "P0019",
+    "size": "XS",
+    "stock": 17
+  },
+  {
+    "id": "P0019-S",
+    "product_id": "P0019",
+    "size": "S",
+    "stock": 37
+  },
+  {
+    "id": "P0019-M",
+    "product_id": "P0019",
+    "size": "M",
+    "stock": 36
+  },
+  {
+    "id": "P0019-L",
+    "product_id": "P0019",
+    "size": "L",
+    "stock": 18
+  },
+  {
+    "id": "P0019-XL",
+    "product_id": "P0019",
+    "size": "XL",
+    "stock": 39
+  },
+  {
+    "id": "P0020-XS",
+    "product_id": "P0020",
+    "size": "XS",
+    "stock": 39
+  },
+  {
+    "id": "P0020-S",
+    "product_id": "P0020",
+    "size": "S",
+    "stock": 27
+  },
+  {
+    "id": "P0020-M",
+    "product_id": "P0020",
+    "size": "M",
+    "stock": 25
+  },
+  {
+    "id": "P0020-L",
+    "product_id": "P0020",
+    "size": "L",
+    "stock": 16
+  },
+  {
+    "id": "P0020-XL",
+    "product_id": "P0020",
+    "size": "XL",
+    "stock": 10
+  },
+  {
+    "id": "P0021-XS",
+    "product_id": "P0021",
+    "size": "XS",
+    "stock": 33
+  },
+  {
+    "id": "P0021-S",
+    "product_id": "P0021",
+    "size": "S",
+    "stock": 7
+  },
+  {
+    "id": "P0021-M",
+    "product_id": "P0021",
+    "size": "M",
+    "stock": 5
+  },
+  {
+    "id": "P0021-L",
+    "product_id": "P0021",
+    "size": "L",
+    "stock": 9
+  },
+  {
+    "id": "P0021-XL",
+    "product_id": "P0021",
+    "size": "XL",
+    "stock": 11
+  },
+  {
+    "id": "P0022-XS",
+    "product_id": "P0022",
+    "size": "XS",
+    "stock": 29
+  },
+  {
+    "id": "P0022-S",
+    "product_id": "P0022",
+    "size": "S",
+    "stock": 40
+  },
+  {
+    "id": "P0022-M",
+    "product_id": "P0022",
+    "size": "M",
+    "stock": 6
+  },
+  {
+    "id": "P0022-L",
+    "product_id": "P0022",
+    "size": "L",
+    "stock": 26
+  },
+  {
+    "id": "P0022-XL",
+    "product_id": "P0022",
+    "size": "XL",
+    "stock": 26
+  },
+  {
+    "id": "P0023-XS",
+    "product_id": "P0023",
+    "size": "XS",
+    "stock": 31
+  },
+  {
+    "id": "P0023-S",
+    "product_id": "P0023",
+    "size": "S",
+    "stock": 35
+  },
+  {
+    "id": "P0023-M",
+    "product_id": "P0023",
+    "size": "M",
+    "stock": 18
+  },
+  {
+    "id": "P0023-L",
+    "product_id": "P0023",
+    "size": "L",
+    "stock": 37
+  },
+  {
+    "id": "P0023-XL",
+    "product_id": "P0023",
+    "size": "XL",
+    "stock": 2
+  },
+  {
+    "id": "P0024-XS",
+    "product_id": "P0024",
+    "size": "XS",
+    "stock": 36
+  },
+  {
+    "id": "P0024-S",
+    "product_id": "P0024",
+    "size": "S",
+    "stock": 19
+  },
+  {
+    "id": "P0024-M",
+    "product_id": "P0024",
+    "size": "M",
+    "stock": 23
+  },
+  {
+    "id": "P0024-L",
+    "product_id": "P0024",
+    "size": "L",
+    "stock": 9
+  },
+  {
+    "id": "P0024-XL",
+    "product_id": "P0024",
+    "size": "XL",
+    "stock": 20
+  },
+  {
+    "id": "P0025-XS",
+    "product_id": "P0025",
+    "size": "XS",
+    "stock": 0
+  },
+  {
+    "id": "P0025-S",
+    "product_id": "P0025",
+    "size": "S",
+    "stock": 12
+  },
+  {
+    "id": "P0025-M",
+    "product_id": "P0025",
+    "size": "M",
+    "stock": 31
+  },
+  {
+    "id": "P0025-L",
+    "product_id": "P0025",
+    "size": "L",
+    "stock": 2
+  },
+  {
+    "id": "P0025-XL",
+    "product_id": "P0025",
+    "size": "XL",
+    "stock": 0
+  },
+  {
+    "id": "P0026-XS",
+    "product_id": "P0026",
+    "size": "XS",
+    "stock": 34
+  },
+  {
+    "id": "P0026-S",
+    "product_id": "P0026",
+    "size": "S",
+    "stock": 0
+  },
+  {
+    "id": "P0026-M",
+    "product_id": "P0026",
+    "size": "M",
+    "stock": 0
+  },
+  {
+    "id": "P0026-L",
+    "product_id": "P0026",
+    "size": "L",
+    "stock": 0
+  },
+  {
+    "id": "P0026-XL",
+    "product_id": "P0026",
+    "size": "XL",
+    "stock": 13
+  },
+  {
+    "id": "P0027-XS",
+    "product_id": "P0027",
+    "size": "XS",
+    "stock": 8
+  },
+  {
+    "id": "P0027-S",
+    "product_id": "P0027",
+    "size": "S",
+    "stock": 21
+  },
+  {
+    "id": "P0027-M",
+    "product_id": "P0027",
+    "size": "M",
+    "stock": 34
+  },
+  {
+    "id": "P0027-L",
+    "product_id": "P0027",
+    "size": "L",
+    "stock": 40
+  },
+  {
+    "id": "P0027-XL",
+    "product_id": "P0027",
+    "size": "XL",
+    "stock": 14
+  },
+  {
+    "id": "P0028-XS",
+    "product_id": "P0028",
+    "size": "XS",
+    "stock": 25
+  },
+  {
+    "id": "P0028-S",
+    "product_id": "P0028",
+    "size": "S",
+    "stock": 12
+  },
+  {
+    "id": "P0028-M",
+    "product_id": "P0028",
+    "size": "M",
+    "stock": 36
+  },
+  {
+    "id": "P0028-L",
+    "product_id": "P0028",
+    "size": "L",
+    "stock": 35
+  },
+  {
+    "id": "P0028-XL",
+    "product_id": "P0028",
+    "size": "XL",
+    "stock": 2
+  },
+  {
+    "id": "P0029-XS",
+    "product_id": "P0029",
+    "size": "XS",
+    "stock": 22
+  },
+  {
+    "id": "P0029-S",
+    "product_id": "P0029",
+    "size": "S",
+    "stock": 33
+  },
+  {
+    "id": "P0029-M",
+    "product_id": "P0029",
+    "size": "M",
+    "stock": 3
+  },
+  {
+    "id": "P0029-L",
+    "product_id": "P0029",
+    "size": "L",
+    "stock": 9
+  },
+  {
+    "id": "P0029-XL",
+    "product_id": "P0029",
+    "size": "XL",
+    "stock": 25
+  },
+  {
+    "id": "P0030-XS",
+    "product_id": "P0030",
+    "size": "XS",
+    "stock": 17
+  },
+  {
+    "id": "P0030-S",
+    "product_id": "P0030",
+    "size": "S",
+    "stock": 5
+  },
+  {
+    "id": "P0030-M",
+    "product_id": "P0030",
+    "size": "M",
+    "stock": 17
+  },
+  {
+    "id": "P0030-L",
+    "product_id": "P0030",
+    "size": "L",
+    "stock": 38
+  },
+  {
+    "id": "P0030-XL",
+    "product_id": "P0030",
+    "size": "XL",
+    "stock": 7
+  },
+  {
+    "id": "P0031-XS",
+    "product_id": "P0031",
+    "size": "XS",
+    "stock": 33
+  },
+  {
+    "id": "P0031-S",
+    "product_id": "P0031",
+    "size": "S",
+    "stock": 6
+  },
+  {
+    "id": "P0031-M",
+    "product_id": "P0031",
+    "size": "M",
+    "stock": 36
+  },
+  {
+    "id": "P0031-L",
+    "product_id": "P0031",
+    "size": "L",
+    "stock": 10
+  },
+  {
+    "id": "P0031-XL",
+    "product_id": "P0031",
+    "size": "XL",
+    "stock": 10
+  },
+  {
+    "id": "P0032-XS",
+    "product_id": "P0032",
+    "size": "XS",
+    "stock": 37
+  },
+  {
+    "id": "P0032-S",
+    "product_id": "P0032",
+    "size": "S",
+    "stock": 12
+  },
+  {
+    "id": "P0032-M",
+    "product_id": "P0032",
+    "size": "M",
+    "stock": 18
+  },
+  {
+    "id": "P0032-L",
+    "product_id": "P0032",
+    "size": "L",
+    "stock": 35
+  },
+  {
+    "id": "P0032-XL",
+    "product_id": "P0032",
+    "size": "XL",
+    "stock": 40
+  },
+  {
+    "id": "P0033-XS",
+    "product_id": "P0033",
+    "size": "XS",
+    "stock": 15
+  },
+  {
+    "id": "P0033-S",
+    "product_id": "P0033",
+    "size": "S",
+    "stock": 36
+  },
+  {
+    "id": "P0033-M",
+    "product_id": "P0033",
+    "size": "M",
+    "stock": 14
+  },
+  {
+    "id": "P0033-L",
+    "product_id": "P0033",
+    "size": "L",
+    "stock": 21
+  },
+  {
+    "id": "P0033-XL",
+    "product_id": "P0033",
+    "size": "XL",
+    "stock": 27
+  },
+  {
+    "id": "P0034-XS",
+    "product_id": "P0034",
+    "size": "XS",
+    "stock": 0
+  },
+  {
+    "id": "P0034-S",
+    "product_id": "P0034",
+    "size": "S",
+    "stock": 30
+  },
+  {
+    "id": "P0034-M",
+    "product_id": "P0034",
+    "size": "M",
+    "stock": 35
+  },
+  {
+    "id": "P0034-L",
+    "product_id": "P0034",
+    "size": "L",
+    "stock": 30
+  },
+  {
+    "id": "P0034-XL",
+    "product_id": "P0034",
+    "size": "XL",
+    "stock": 0
+  },
+  {
+    "id": "P0035-XS",
+    "product_id": "P0035",
+    "size": "XS",
+    "stock": 17
+  },
+  {
+    "id": "P0035-S",
+    "product_id": "P0035",
+    "size": "S",
+    "stock": 0
+  },
+  {
+    "id": "P0035-M",
+    "product_id": "P0035",
+    "size": "M",
+    "stock": 0
+  },
+  {
+    "id": "P0035-L",
+    "product_id": "P0035",
+    "size": "L",
+    "stock": 0
+  },
+  {
+    "id": "P0035-XL",
+    "product_id": "P0035",
+    "size": "XL",
+    "stock": 16
+  },
+  {
+    "id": "P0036-XS",
+    "product_id": "P0036",
+    "size": "XS",
+    "stock": 23
+  },
+  {
+    "id": "P0036-S",
+    "product_id": "P0036",
+    "size": "S",
+    "stock": 3
+  },
+  {
+    "id": "P0036-M",
+    "product_id": "P0036",
+    "size": "M",
+    "stock": 39
+  },
+  {
+    "id": "P0036-L",
+    "product_id": "P0036",
+    "size": "L",
+    "stock": 37
+  },
+  {
+    "id": "P0036-XL",
+    "product_id": "P0036",
+    "size": "XL",
+    "stock": 16
+  },
+  {
+    "id": "P0037-XS",
+    "product_id": "P0037",
+    "size": "XS",
+    "stock": 16
+  },
+  {
+    "id": "P0037-S",
+    "product_id": "P0037",
+    "size": "S",
+    "stock": 2
+  },
+  {
+    "id": "P0037-M",
+    "product_id": "P0037",
+    "size": "M",
+    "stock": 6
+  },
+  {
+    "id": "P0037-L",
+    "product_id": "P0037",
+    "size": "L",
+    "stock": 5
+  },
+  {
+    "id": "P0037-XL",
+    "product_id": "P0037",
+    "size": "XL",
+    "stock": 16
+  },
+  {
+    "id": "P0038-XS",
+    "product_id": "P0038",
+    "size": "XS",
+    "stock": 4
+  },
+  {
+    "id": "P0038-S",
+    "product_id": "P0038",
+    "size": "S",
+    "stock": 23
+  },
+  {
+    "id": "P0038-M",
+    "product_id": "P0038",
+    "size": "M",
+    "stock": 6
+  },
+  {
+    "id": "P0038-L",
+    "product_id": "P0038",
+    "size": "L",
+    "stock": 34
+  },
+  {
+    "id": "P0038-XL",
+    "product_id": "P0038",
+    "size": "XL",
+    "stock": 17
+  },
+  {
+    "id": "P0039-XS",
+    "product_id": "P0039",
+    "size": "XS",
+    "stock": 33
+  },
+  {
+    "id": "P0039-S",
+    "product_id": "P0039",
+    "size": "S",
+    "stock": 15
+  },
+  {
+    "id": "P0039-M",
+    "product_id": "P0039",
+    "size": "M",
+    "stock": 36
+  },
+  {
+    "id": "P0039-L",
+    "product_id": "P0039",
+    "size": "L",
+    "stock": 10
+  },
+  {
+    "id": "P0039-XL",
+    "product_id": "P0039",
+    "size": "XL",
+    "stock": 38
+  },
+  {
+    "id": "P0040-XS",
+    "product_id": "P0040",
+    "size": "XS",
+    "stock": 32
+  },
+  {
+    "id": "P0040-S",
+    "product_id": "P0040",
+    "size": "S",
+    "stock": 17
+  },
+  {
+    "id": "P0040-M",
+    "product_id": "P0040",
+    "size": "M",
+    "stock": 32
+  },
+  {
+    "id": "P0040-L",
+    "product_id": "P0040",
+    "size": "L",
+    "stock": 28
+  },
+  {
+    "id": "P0040-XL",
+    "product_id": "P0040",
+    "size": "XL",
+    "stock": 14
+  },
+  {
+    "id": "P0041-XS",
+    "product_id": "P0041",
+    "size": "XS",
+    "stock": 8
+  },
+  {
+    "id": "P0041-S",
+    "product_id": "P0041",
+    "size": "S",
+    "stock": 29
+  },
+  {
+    "id": "P0041-M",
+    "product_id": "P0041",
+    "size": "M",
+    "stock": 24
+  },
+  {
+    "id": "P0041-L",
+    "product_id": "P0041",
+    "size": "L",
+    "stock": 29
+  },
+  {
+    "id": "P0041-XL",
+    "product_id": "P0041",
+    "size": "XL",
+    "stock": 28
+  },
+  {
+    "id": "P0042-XS",
+    "product_id": "P0042",
+    "size": "XS",
+    "stock": 5
+  },
+  {
+    "id": "P0042-S",
+    "product_id": "P0042",
+    "size": "S",
+    "stock": 8
+  },
+  {
+    "id": "P0042-M",
+    "product_id": "P0042",
+    "size": "M",
+    "stock": 5
+  },
+  {
+    "id": "P0042-L",
+    "product_id": "P0042",
+    "size": "L",
+    "stock": 27
+  },
+  {
+    "id": "P0042-XL",
+    "product_id": "P0042",
+    "size": "XL",
+    "stock": 23
+  },
+  {
+    "id": "P0043-XS",
+    "product_id": "P0043",
+    "size": "XS",
+    "stock": 0
+  },
+  {
+    "id": "P0043-S",
+    "product_id": "P0043",
+    "size": "S",
+    "stock": 17
+  },
+  {
+    "id": "P0043-M",
+    "product_id": "P0043",
+    "size": "M",
+    "stock": 14
+  },
+  {
+    "id": "P0043-L",
+    "product_id": "P0043",
+    "size": "L",
+    "stock": 14
+  },
+  {
+    "id": "P0043-XL",
+    "product_id": "P0043",
+    "size": "XL",
+    "stock": 0
+  },
+  {
+    "id": "P0044-XS",
+    "product_id": "P0044",
+    "size": "XS",
+    "stock": 30
+  },
+  {
+    "id": "P0044-S",
+    "product_id": "P0044",
+    "size": "S",
+    "stock": 0
+  },
+  {
+    "id": "P0044-M",
+    "product_id": "P0044",
+    "size": "M",
+    "stock": 0
+  },
+  {
+    "id": "P0044-L",
+    "product_id": "P0044",
+    "size": "L",
+    "stock": 0
+  },
+  {
+    "id": "P0044-XL",
+    "product_id": "P0044",
+    "size": "XL",
+    "stock": 10
+  },
+  {
+    "id": "P0045-XS",
+    "product_id": "P0045",
+    "size": "XS",
+    "stock": 13
+  },
+  {
+    "id": "P0045-S",
+    "product_id": "P0045",
+    "size": "S",
+    "stock": 19
+  },
+  {
+    "id": "P0045-M",
+    "product_id": "P0045",
+    "size": "M",
+    "stock": 31
+  },
+  {
+    "id": "P0045-L",
+    "product_id": "P0045",
+    "size": "L",
+    "stock": 17
+  },
+  {
+    "id": "P0045-XL",
+    "product_id": "P0045",
+    "size": "XL",
+    "stock": 6
+  },
+  {
+    "id": "P0046-XS",
+    "product_id": "P0046",
+    "size": "XS",
+    "stock": 37
+  },
+  {
+    "id": "P0046-S",
+    "product_id": "P0046",
+    "size": "S",
+    "stock": 8
+  },
+  {
+    "id": "P0046-M",
+    "product_id": "P0046",
+    "size": "M",
+    "stock": 5
+  },
+  {
+    "id": "P0046-L",
+    "product_id": "P0046",
+    "size": "L",
+    "stock": 36
+  },
+  {
+    "id": "P0046-XL",
+    "product_id": "P0046",
+    "size": "XL",
+    "stock": 2
+  },
+  {
+    "id": "P0047-XS",
+    "product_id": "P0047",
+    "size": "XS",
+    "stock": 17
+  },
+  {
+    "id": "P0047-S",
+    "product_id": "P0047",
+    "size": "S",
+    "stock": 12
+  },
+  {
+    "id": "P0047-M",
+    "product_id": "P0047",
+    "size": "M",
+    "stock": 28
+  },
+  {
+    "id": "P0047-L",
+    "product_id": "P0047",
+    "size": "L",
+    "stock": 33
+  },
+  {
+    "id": "P0047-XL",
+    "product_id": "P0047",
+    "size": "XL",
+    "stock": 32
+  },
+  {
+    "id": "P0048-XS",
+    "product_id": "P0048",
+    "size": "XS",
+    "stock": 27
+  },
+  {
+    "id": "P0048-S",
+    "product_id": "P0048",
+    "size": "S",
+    "stock": 5
+  },
+  {
+    "id": "P0048-M",
+    "product_id": "P0048",
+    "size": "M",
+    "stock": 12
+  },
+  {
+    "id": "P0048-L",
+    "product_id": "P0048",
+    "size": "L",
+    "stock": 26
+  },
+  {
+    "id": "P0048-XL",
+    "product_id": "P0048",
+    "size": "XL",
+    "stock": 2
+  },
+  {
+    "id": "P0049-XS",
+    "product_id": "P0049",
+    "size": "XS",
+    "stock": 18
+  },
+  {
+    "id": "P0049-S",
+    "product_id": "P0049",
+    "size": "S",
+    "stock": 31
+  },
+  {
+    "id": "P0049-M",
+    "product_id": "P0049",
+    "size": "M",
+    "stock": 20
+  },
+  {
+    "id": "P0049-L",
+    "product_id": "P0049",
+    "size": "L",
+    "stock": 29
+  },
+  {
+    "id": "P0049-XL",
+    "product_id": "P0049",
+    "size": "XL",
+    "stock": 37
+  },
+  {
+    "id": "P0050-XS",
+    "product_id": "P0050",
+    "size": "XS",
+    "stock": 11
+  },
+  {
+    "id": "P0050-S",
+    "product_id": "P0050",
+    "size": "S",
+    "stock": 14
+  },
+  {
+    "id": "P0050-M",
+    "product_id": "P0050",
+    "size": "M",
+    "stock": 20
+  },
+  {
+    "id": "P0050-L",
+    "product_id": "P0050",
+    "size": "L",
+    "stock": 15
+  },
+  {
+    "id": "P0050-XL",
+    "product_id": "P0050",
+    "size": "XL",
+    "stock": 5
+  },
+  {
+    "id": "P0051-XS",
+    "product_id": "P0051",
+    "size": "XS",
+    "stock": 36
+  },
+  {
+    "id": "P0051-S",
+    "product_id": "P0051",
+    "size": "S",
+    "stock": 5
+  },
+  {
+    "id": "P0051-M",
+    "product_id": "P0051",
+    "size": "M",
+    "stock": 22
+  },
+  {
+    "id": "P0051-L",
+    "product_id": "P0051",
+    "size": "L",
+    "stock": 5
+  },
+  {
+    "id": "P0051-XL",
+    "product_id": "P0051",
+    "size": "XL",
+    "stock": 5
+  },
+  {
+    "id": "P0052-XS",
+    "product_id": "P0052",
+    "size": "XS",
+    "stock": 0
+  },
+  {
+    "id": "P0052-S",
+    "product_id": "P0052",
+    "size": "S",
+    "stock": 32
+  },
+  {
+    "id": "P0052-M",
+    "product_id": "P0052",
+    "size": "M",
+    "stock": 34
+  },
+  {
+    "id": "P0052-L",
+    "product_id": "P0052",
+    "size": "L",
+    "stock": 35
+  },
+  {
+    "id": "P0052-XL",
+    "product_id": "P0052",
+    "size": "XL",
+    "stock": 0
+  },
+  {
+    "id": "P0053-XS",
+    "product_id": "P0053",
+    "size": "XS",
+    "stock": 5
+  },
+  {
+    "id": "P0053-S",
+    "product_id": "P0053",
+    "size": "S",
+    "stock": 0
+  },
+  {
+    "id": "P0053-M",
+    "product_id": "P0053",
+    "size": "M",
+    "stock": 0
+  },
+  {
+    "id": "P0053-L",
+    "product_id": "P0053",
+    "size": "L",
+    "stock": 0
+  },
+  {
+    "id": "P0053-XL",
+    "product_id": "P0053",
+    "size": "XL",
+    "stock": 34
+  },
+  {
+    "id": "P0054-XS",
+    "product_id": "P0054",
+    "size": "XS",
+    "stock": 13
+  },
+  {
+    "id": "P0054-S",
+    "product_id": "P0054",
+    "size": "S",
+    "stock": 6
+  },
+  {
+    "id": "P0054-M",
+    "product_id": "P0054",
+    "size": "M",
+    "stock": 40
+  },
+  {
+    "id": "P0054-L",
+    "product_id": "P0054",
+    "size": "L",
+    "stock": 6
+  },
+  {
+    "id": "P0054-XL",
+    "product_id": "P0054",
+    "size": "XL",
+    "stock": 17
+  },
+  {
+    "id": "P0055-XS",
+    "product_id": "P0055",
+    "size": "XS",
+    "stock": 9
+  },
+  {
+    "id": "P0055-S",
+    "product_id": "P0055",
+    "size": "S",
+    "stock": 38
+  },
+  {
+    "id": "P0055-M",
+    "product_id": "P0055",
+    "size": "M",
+    "stock": 17
+  },
+  {
+    "id": "P0055-L",
+    "product_id": "P0055",
+    "size": "L",
+    "stock": 39
+  },
+  {
+    "id": "P0055-XL",
+    "product_id": "P0055",
+    "size": "XL",
+    "stock": 40
+  },
+  {
+    "id": "P0056-XS",
+    "product_id": "P0056",
+    "size": "XS",
+    "stock": 7
+  },
+  {
+    "id": "P0056-S",
+    "product_id": "P0056",
+    "size": "S",
+    "stock": 28
+  },
+  {
+    "id": "P0056-M",
+    "product_id": "P0056",
+    "size": "M",
+    "stock": 39
+  },
+  {
+    "id": "P0056-L",
+    "product_id": "P0056",
+    "size": "L",
+    "stock": 38
+  },
+  {
+    "id": "P0056-XL",
+    "product_id": "P0056",
+    "size": "XL",
+    "stock": 35
+  },
+  {
+    "id": "P0057-XS",
+    "product_id": "P0057",
+    "size": "XS",
+    "stock": 18
+  },
+  {
+    "id": "P0057-S",
+    "product_id": "P0057",
+    "size": "S",
+    "stock": 15
+  },
+  {
+    "id": "P0057-M",
+    "product_id": "P0057",
+    "size": "M",
+    "stock": 22
+  },
+  {
+    "id": "P0057-L",
+    "product_id": "P0057",
+    "size": "L",
+    "stock": 17
+  },
+  {
+    "id": "P0057-XL",
+    "product_id": "P0057",
+    "size": "XL",
+    "stock": 18
+  },
+  {
+    "id": "P0058-XS",
+    "product_id": "P0058",
+    "size": "XS",
+    "stock": 10
+  },
+  {
+    "id": "P0058-S",
+    "product_id": "P0058",
+    "size": "S",
+    "stock": 21
+  },
+  {
+    "id": "P0058-M",
+    "product_id": "P0058",
+    "size": "M",
+    "stock": 31
+  },
+  {
+    "id": "P0058-L",
+    "product_id": "P0058",
+    "size": "L",
+    "stock": 22
+  },
+  {
+    "id": "P0058-XL",
+    "product_id": "P0058",
+    "size": "XL",
+    "stock": 6
+  },
+  {
+    "id": "P0059-XS",
+    "product_id": "P0059",
+    "size": "XS",
+    "stock": 31
+  },
+  {
+    "id": "P0059-S",
+    "product_id": "P0059",
+    "size": "S",
+    "stock": 38
+  },
+  {
+    "id": "P0059-M",
+    "product_id": "P0059",
+    "size": "M",
+    "stock": 8
+  },
+  {
+    "id": "P0059-L",
+    "product_id": "P0059",
+    "size": "L",
+    "stock": 6
+  },
+  {
+    "id": "P0059-XL",
+    "product_id": "P0059",
+    "size": "XL",
+    "stock": 36
+  },
+  {
+    "id": "P0060-XS",
+    "product_id": "P0060",
+    "size": "XS",
+    "stock": 34
+  },
+  {
+    "id": "P0060-S",
+    "product_id": "P0060",
+    "size": "S",
+    "stock": 18
+  },
+  {
+    "id": "P0060-M",
+    "product_id": "P0060",
+    "size": "M",
+    "stock": 10
+  },
+  {
+    "id": "P0060-L",
+    "product_id": "P0060",
+    "size": "L",
+    "stock": 24
+  },
+  {
+    "id": "P0060-XL",
+    "product_id": "P0060",
+    "size": "XL",
+    "stock": 6
+  },
+  {
+    "id": "P0061-XS",
+    "product_id": "P0061",
+    "size": "XS",
+    "stock": 0
+  },
+  {
+    "id": "P0061-S",
+    "product_id": "P0061",
+    "size": "S",
+    "stock": 25
+  },
+  {
+    "id": "P0061-M",
+    "product_id": "P0061",
+    "size": "M",
+    "stock": 20
+  },
+  {
+    "id": "P0061-L",
+    "product_id": "P0061",
+    "size": "L",
+    "stock": 12
+  },
+  {
+    "id": "P0061-XL",
+    "product_id": "P0061",
+    "size": "XL",
+    "stock": 0
+  },
+  {
+    "id": "P0062-XS",
+    "product_id": "P0062",
+    "size": "XS",
+    "stock": 36
+  },
+  {
+    "id": "P0062-S",
+    "product_id": "P0062",
+    "size": "S",
+    "stock": 0
+  },
+  {
+    "id": "P0062-M",
+    "product_id": "P0062",
+    "size": "M",
+    "stock": 0
+  },
+  {
+    "id": "P0062-L",
+    "product_id": "P0062",
+    "size": "L",
+    "stock": 0
+  },
+  {
+    "id": "P0062-XL",
+    "product_id": "P0062",
+    "size": "XL",
+    "stock": 21
+  },
+  {
+    "id": "P0063-XS",
+    "product_id": "P0063",
+    "size": "XS",
+    "stock": 35
+  },
+  {
+    "id": "P0063-S",
+    "product_id": "P0063",
+    "size": "S",
+    "stock": 2
+  },
+  {
+    "id": "P0063-M",
+    "product_id": "P0063",
+    "size": "M",
+    "stock": 37
+  },
+  {
+    "id": "P0063-L",
+    "product_id": "P0063",
+    "size": "L",
+    "stock": 21
+  },
+  {
+    "id": "P0063-XL",
+    "product_id": "P0063",
+    "size": "XL",
+    "stock": 8
+  },
+  {
+    "id": "P0064-XS",
+    "product_id": "P0064",
+    "size": "XS",
+    "stock": 18
+  },
+  {
+    "id": "P0064-S",
+    "product_id": "P0064",
+    "size": "S",
+    "stock": 9
+  },
+  {
+    "id": "P0064-M",
+    "product_id": "P0064",
+    "size": "M",
+    "stock": 8
+  },
+  {
+    "id": "P0064-L",
+    "product_id": "P0064",
+    "size": "L",
+    "stock": 37
+  },
+  {
+    "id": "P0064-XL",
+    "product_id": "P0064",
+    "size": "XL",
+    "stock": 11
+  },
+  {
+    "id": "P0065-XS",
+    "product_id": "P0065",
+    "size": "XS",
+    "stock": 20
+  },
+  {
+    "id": "P0065-S",
+    "product_id": "P0065",
+    "size": "S",
+    "stock": 40
+  },
+  {
+    "id": "P0065-M",
+    "product_id": "P0065",
+    "size": "M",
+    "stock": 15
+  },
+  {
+    "id": "P0065-L",
+    "product_id": "P0065",
+    "size": "L",
+    "stock": 23
+  },
+  {
+    "id": "P0065-XL",
+    "product_id": "P0065",
+    "size": "XL",
+    "stock": 15
+  },
+  {
+    "id": "P0066-XS",
+    "product_id": "P0066",
+    "size": "XS",
+    "stock": 34
+  },
+  {
+    "id": "P0066-S",
+    "product_id": "P0066",
+    "size": "S",
+    "stock": 33
+  },
+  {
+    "id": "P0066-M",
+    "product_id": "P0066",
+    "size": "M",
+    "stock": 18
+  },
+  {
+    "id": "P0066-L",
+    "product_id": "P0066",
+    "size": "L",
+    "stock": 5
+  },
+  {
+    "id": "P0066-XL",
+    "product_id": "P0066",
+    "size": "XL",
+    "stock": 7
+  },
+  {
+    "id": "P0067-XS",
+    "product_id": "P0067",
+    "size": "XS",
+    "stock": 19
+  },
+  {
+    "id": "P0067-S",
+    "product_id": "P0067",
+    "size": "S",
+    "stock": 4
+  },
+  {
+    "id": "P0067-M",
+    "product_id": "P0067",
+    "size": "M",
+    "stock": 2
+  },
+  {
+    "id": "P0067-L",
+    "product_id": "P0067",
+    "size": "L",
+    "stock": 23
+  },
+  {
+    "id": "P0067-XL",
+    "product_id": "P0067",
+    "size": "XL",
+    "stock": 10
+  },
+  {
+    "id": "P0068-XS",
+    "product_id": "P0068",
+    "size": "XS",
+    "stock": 12
+  },
+  {
+    "id": "P0068-S",
+    "product_id": "P0068",
+    "size": "S",
+    "stock": 30
+  },
+  {
+    "id": "P0068-M",
+    "product_id": "P0068",
+    "size": "M",
+    "stock": 37
+  },
+  {
+    "id": "P0068-L",
+    "product_id": "P0068",
+    "size": "L",
+    "stock": 29
+  },
+  {
+    "id": "P0068-XL",
+    "product_id": "P0068",
+    "size": "XL",
+    "stock": 37
+  },
+  {
+    "id": "P0069-XS",
+    "product_id": "P0069",
+    "size": "XS",
+    "stock": 9
+  },
+  {
+    "id": "P0069-S",
+    "product_id": "P0069",
+    "size": "S",
+    "stock": 6
+  },
+  {
+    "id": "P0069-M",
+    "product_id": "P0069",
+    "size": "M",
+    "stock": 11
+  },
+  {
+    "id": "P0069-L",
+    "product_id": "P0069",
+    "size": "L",
+    "stock": 36
+  },
+  {
+    "id": "P0069-XL",
+    "product_id": "P0069",
+    "size": "XL",
+    "stock": 4
+  },
+  {
+    "id": "P0070-XS",
+    "product_id": "P0070",
+    "size": "XS",
+    "stock": 0
+  },
+  {
+    "id": "P0070-S",
+    "product_id": "P0070",
+    "size": "S",
+    "stock": 39
+  },
+  {
+    "id": "P0070-M",
+    "product_id": "P0070",
+    "size": "M",
+    "stock": 37
+  },
+  {
+    "id": "P0070-L",
+    "product_id": "P0070",
+    "size": "L",
+    "stock": 11
+  },
+  {
+    "id": "P0070-XL",
+    "product_id": "P0070",
+    "size": "XL",
+    "stock": 0
+  },
+  {
+    "id": "P0071-XS",
+    "product_id": "P0071",
+    "size": "XS",
+    "stock": 10
+  },
+  {
+    "id": "P0071-S",
+    "product_id": "P0071",
+    "size": "S",
+    "stock": 0
+  },
+  {
+    "id": "P0071-M",
+    "product_id": "P0071",
+    "size": "M",
+    "stock": 0
+  },
+  {
+    "id": "P0071-L",
+    "product_id": "P0071",
+    "size": "L",
+    "stock": 0
+  },
+  {
+    "id": "P0071-XL",
+    "product_id": "P0071",
+    "size": "XL",
+    "stock": 4
+  },
+  {
+    "id": "P0072-XS",
+    "product_id": "P0072",
+    "size": "XS",
+    "stock": 25
+  },
+  {
+    "id": "P0072-S",
+    "product_id": "P0072",
+    "size": "S",
+    "stock": 4
+  },
+  {
+    "id": "P0072-M",
+    "product_id": "P0072",
+    "size": "M",
+    "stock": 24
+  },
+  {
+    "id": "P0072-L",
+    "product_id": "P0072",
+    "size": "L",
+    "stock": 15
+  },
+  {
+    "id": "P0072-XL",
+    "product_id": "P0072",
+    "size": "XL",
+    "stock": 17
+  },
+  {
+    "id": "P0073-XS",
+    "product_id": "P0073",
+    "size": "XS",
+    "stock": 24
+  },
+  {
+    "id": "P0073-S",
+    "product_id": "P0073",
+    "size": "S",
+    "stock": 37
+  },
+  {
+    "id": "P0073-M",
+    "product_id": "P0073",
+    "size": "M",
+    "stock": 28
+  },
+  {
+    "id": "P0073-L",
+    "product_id": "P0073",
+    "size": "L",
+    "stock": 11
+  },
+  {
+    "id": "P0073-XL",
+    "product_id": "P0073",
+    "size": "XL",
+    "stock": 17
+  },
+  {
+    "id": "P0074-XS",
+    "product_id": "P0074",
+    "size": "XS",
+    "stock": 13
+  },
+  {
+    "id": "P0074-S",
+    "product_id": "P0074",
+    "size": "S",
+    "stock": 28
+  },
+  {
+    "id": "P0074-M",
+    "product_id": "P0074",
+    "size": "M",
+    "stock": 3
+  },
+  {
+    "id": "P0074-L",
+    "product_id": "P0074",
+    "size": "L",
+    "stock": 13
+  },
+  {
+    "id": "P0074-XL",
+    "product_id": "P0074",
+    "size": "XL",
+    "stock": 23
+  },
+  {
+    "id": "P0075-XS",
+    "product_id": "P0075",
+    "size": "XS",
+    "stock": 17
+  },
+  {
+    "id": "P0075-S",
+    "product_id": "P0075",
+    "size": "S",
+    "stock": 19
+  },
+  {
+    "id": "P0075-M",
+    "product_id": "P0075",
+    "size": "M",
+    "stock": 12
+  },
+  {
+    "id": "P0075-L",
+    "product_id": "P0075",
+    "size": "L",
+    "stock": 8
+  },
+  {
+    "id": "P0075-XL",
+    "product_id": "P0075",
+    "size": "XL",
+    "stock": 26
+  },
+  {
+    "id": "P0076-XS",
+    "product_id": "P0076",
+    "size": "XS",
+    "stock": 32
+  },
+  {
+    "id": "P0076-S",
+    "product_id": "P0076",
+    "size": "S",
+    "stock": 16
+  },
+  {
+    "id": "P0076-M",
+    "product_id": "P0076",
+    "size": "M",
+    "stock": 14
+  },
+  {
+    "id": "P0076-L",
+    "product_id": "P0076",
+    "size": "L",
+    "stock": 31
+  },
+  {
+    "id": "P0076-XL",
+    "product_id": "P0076",
+    "size": "XL",
+    "stock": 24
+  },
+  {
+    "id": "P0077-XS",
+    "product_id": "P0077",
+    "size": "XS",
+    "stock": 16
+  },
+  {
+    "id": "P0077-S",
+    "product_id": "P0077",
+    "size": "S",
+    "stock": 16
+  },
+  {
+    "id": "P0077-M",
+    "product_id": "P0077",
+    "size": "M",
+    "stock": 3
+  },
+  {
+    "id": "P0077-L",
+    "product_id": "P0077",
+    "size": "L",
+    "stock": 14
+  },
+  {
+    "id": "P0077-XL",
+    "product_id": "P0077",
+    "size": "XL",
+    "stock": 27
+  },
+  {
+    "id": "P0078-XS",
+    "product_id": "P0078",
+    "size": "XS",
+    "stock": 19
+  },
+  {
+    "id": "P0078-S",
+    "product_id": "P0078",
+    "size": "S",
+    "stock": 6
+  },
+  {
+    "id": "P0078-M",
+    "product_id": "P0078",
+    "size": "M",
+    "stock": 19
+  },
+  {
+    "id": "P0078-L",
+    "product_id": "P0078",
+    "size": "L",
+    "stock": 24
+  },
+  {
+    "id": "P0078-XL",
+    "product_id": "P0078",
+    "size": "XL",
+    "stock": 34
+  },
+  {
+    "id": "P0079-XS",
+    "product_id": "P0079",
+    "size": "XS",
+    "stock": 0
+  },
+  {
+    "id": "P0079-S",
+    "product_id": "P0079",
+    "size": "S",
+    "stock": 36
+  },
+  {
+    "id": "P0079-M",
+    "product_id": "P0079",
+    "size": "M",
+    "stock": 23
+  },
+  {
+    "id": "P0079-L",
+    "product_id": "P0079",
+    "size": "L",
+    "stock": 3
+  },
+  {
+    "id": "P0079-XL",
+    "product_id": "P0079",
+    "size": "XL",
+    "stock": 0
+  },
+  {
+    "id": "P0080-XS",
+    "product_id": "P0080",
+    "size": "XS",
+    "stock": 18
+  },
+  {
+    "id": "P0080-S",
+    "product_id": "P0080",
+    "size": "S",
+    "stock": 0
+  },
+  {
+    "id": "P0080-M",
+    "product_id": "P0080",
+    "size": "M",
+    "stock": 0
+  },
+  {
+    "id": "P0080-L",
+    "product_id": "P0080",
+    "size": "L",
+    "stock": 0
+  },
+  {
+    "id": "P0080-XL",
+    "product_id": "P0080",
+    "size": "XL",
+    "stock": 13
+  },
+  {
+    "id": "P0081-XS",
+    "product_id": "P0081",
+    "size": "XS",
+    "stock": 18
+  },
+  {
+    "id": "P0081-S",
+    "product_id": "P0081",
+    "size": "S",
+    "stock": 4
+  },
+  {
+    "id": "P0081-M",
+    "product_id": "P0081",
+    "size": "M",
+    "stock": 8
+  },
+  {
+    "id": "P0081-L",
+    "product_id": "P0081",
+    "size": "L",
+    "stock": 40
+  },
+  {
+    "id": "P0081-XL",
+    "product_id": "P0081",
+    "size": "XL",
+    "stock": 29
+  },
+  {
+    "id": "P0082-XS",
+    "product_id": "P0082",
+    "size": "XS",
+    "stock": 22
+  },
+  {
+    "id": "P0082-S",
+    "product_id": "P0082",
+    "size": "S",
+    "stock": 29
+  },
+  {
+    "id": "P0082-M",
+    "product_id": "P0082",
+    "size": "M",
+    "stock": 40
+  },
+  {
+    "id": "P0082-L",
+    "product_id": "P0082",
+    "size": "L",
+    "stock": 34
+  },
+  {
+    "id": "P0082-XL",
+    "product_id": "P0082",
+    "size": "XL",
+    "stock": 9
+  },
+  {
+    "id": "P0083-XS",
+    "product_id": "P0083",
+    "size": "XS",
+    "stock": 38
+  },
+  {
+    "id": "P0083-S",
+    "product_id": "P0083",
+    "size": "S",
+    "stock": 14
+  },
+  {
+    "id": "P0083-M",
+    "product_id": "P0083",
+    "size": "M",
+    "stock": 18
+  },
+  {
+    "id": "P0083-L",
+    "product_id": "P0083",
+    "size": "L",
+    "stock": 4
+  },
+  {
+    "id": "P0083-XL",
+    "product_id": "P0083",
+    "size": "XL",
+    "stock": 29
+  },
+  {
+    "id": "P0084-XS",
+    "product_id": "P0084",
+    "size": "XS",
+    "stock": 35
+  },
+  {
+    "id": "P0084-S",
+    "product_id": "P0084",
+    "size": "S",
+    "stock": 36
+  },
+  {
+    "id": "P0084-M",
+    "product_id": "P0084",
+    "size": "M",
+    "stock": 14
+  },
+  {
+    "id": "P0084-L",
+    "product_id": "P0084",
+    "size": "L",
+    "stock": 25
+  },
+  {
+    "id": "P0084-XL",
+    "product_id": "P0084",
+    "size": "XL",
+    "stock": 29
+  },
+  {
+    "id": "P0085-XS",
+    "product_id": "P0085",
+    "size": "XS",
+    "stock": 23
+  },
+  {
+    "id": "P0085-S",
+    "product_id": "P0085",
+    "size": "S",
+    "stock": 22
+  },
+  {
+    "id": "P0085-M",
+    "product_id": "P0085",
+    "size": "M",
+    "stock": 9
+  },
+  {
+    "id": "P0085-L",
+    "product_id": "P0085",
+    "size": "L",
+    "stock": 21
+  },
+  {
+    "id": "P0085-XL",
+    "product_id": "P0085",
+    "size": "XL",
+    "stock": 34
+  },
+  {
+    "id": "P0086-XS",
+    "product_id": "P0086",
+    "size": "XS",
+    "stock": 28
+  },
+  {
+    "id": "P0086-S",
+    "product_id": "P0086",
+    "size": "S",
+    "stock": 22
+  },
+  {
+    "id": "P0086-M",
+    "product_id": "P0086",
+    "size": "M",
+    "stock": 27
+  },
+  {
+    "id": "P0086-L",
+    "product_id": "P0086",
+    "size": "L",
+    "stock": 20
+  },
+  {
+    "id": "P0086-XL",
+    "product_id": "P0086",
+    "size": "XL",
+    "stock": 37
+  },
+  {
+    "id": "P0087-XS",
+    "product_id": "P0087",
+    "size": "XS",
+    "stock": 14
+  },
+  {
+    "id": "P0087-S",
+    "product_id": "P0087",
+    "size": "S",
+    "stock": 28
+  },
+  {
+    "id": "P0087-M",
+    "product_id": "P0087",
+    "size": "M",
+    "stock": 26
+  },
+  {
+    "id": "P0087-L",
+    "product_id": "P0087",
+    "size": "L",
+    "stock": 13
+  },
+  {
+    "id": "P0087-XL",
+    "product_id": "P0087",
+    "size": "XL",
+    "stock": 38
+  },
+  {
+    "id": "P0088-XS",
+    "product_id": "P0088",
+    "size": "XS",
+    "stock": 0
+  },
+  {
+    "id": "P0088-S",
+    "product_id": "P0088",
+    "size": "S",
+    "stock": 27
+  },
+  {
+    "id": "P0088-M",
+    "product_id": "P0088",
+    "size": "M",
+    "stock": 37
+  },
+  {
+    "id": "P0088-L",
+    "product_id": "P0088",
+    "size": "L",
+    "stock": 2
+  },
+  {
+    "id": "P0088-XL",
+    "product_id": "P0088",
+    "size": "XL",
+    "stock": 0
+  },
+  {
+    "id": "P0089-XS",
+    "product_id": "P0089",
+    "size": "XS",
+    "stock": 20
+  },
+  {
+    "id": "P0089-S",
+    "product_id": "P0089",
+    "size": "S",
+    "stock": 0
+  },
+  {
+    "id": "P0089-M",
+    "product_id": "P0089",
+    "size": "M",
+    "stock": 0
+  },
+  {
+    "id": "P0089-L",
+    "product_id": "P0089",
+    "size": "L",
+    "stock": 0
+  },
+  {
+    "id": "P0089-XL",
+    "product_id": "P0089",
+    "size": "XL",
+    "stock": 15
+  },
+  {
+    "id": "P0090-XS",
+    "product_id": "P0090",
+    "size": "XS",
+    "stock": 39
+  },
+  {
+    "id": "P0090-S",
+    "product_id": "P0090",
+    "size": "S",
+    "stock": 40
+  },
+  {
+    "id": "P0090-M",
+    "product_id": "P0090",
+    "size": "M",
+    "stock": 22
+  },
+  {
+    "id": "P0090-L",
+    "product_id": "P0090",
+    "size": "L",
+    "stock": 31
+  },
+  {
+    "id": "P0090-XL",
+    "product_id": "P0090",
+    "size": "XL",
+    "stock": 30
+  },
+  {
+    "id": "P0091-XS",
+    "product_id": "P0091",
+    "size": "XS",
+    "stock": 15
+  },
+  {
+    "id": "P0091-S",
+    "product_id": "P0091",
+    "size": "S",
+    "stock": 34
+  },
+  {
+    "id": "P0091-M",
+    "product_id": "P0091",
+    "size": "M",
+    "stock": 32
+  },
+  {
+    "id": "P0091-L",
+    "product_id": "P0091",
+    "size": "L",
+    "stock": 12
+  },
+  {
+    "id": "P0091-XL",
+    "product_id": "P0091",
+    "size": "XL",
+    "stock": 7
+  },
+  {
+    "id": "P0092-XS",
+    "product_id": "P0092",
+    "size": "XS",
+    "stock": 34
+  },
+  {
+    "id": "P0092-S",
+    "product_id": "P0092",
+    "size": "S",
+    "stock": 23
+  },
+  {
+    "id": "P0092-M",
+    "product_id": "P0092",
+    "size": "M",
+    "stock": 7
+  },
+  {
+    "id": "P0092-L",
+    "product_id": "P0092",
+    "size": "L",
+    "stock": 17
+  },
+  {
+    "id": "P0092-XL",
+    "product_id": "P0092",
+    "size": "XL",
+    "stock": 21
+  },
+  {
+    "id": "P0093-XS",
+    "product_id": "P0093",
+    "size": "XS",
+    "stock": 14
+  },
+  {
+    "id": "P0093-S",
+    "product_id": "P0093",
+    "size": "S",
+    "stock": 11
+  },
+  {
+    "id": "P0093-M",
+    "product_id": "P0093",
+    "size": "M",
+    "stock": 3
+  },
+  {
+    "id": "P0093-L",
+    "product_id": "P0093",
+    "size": "L",
+    "stock": 4
+  },
+  {
+    "id": "P0093-XL",
+    "product_id": "P0093",
+    "size": "XL",
+    "stock": 17
+  },
+  {
+    "id": "P0094-XS",
+    "product_id": "P0094",
+    "size": "XS",
+    "stock": 6
+  },
+  {
+    "id": "P0094-S",
+    "product_id": "P0094",
+    "size": "S",
+    "stock": 31
+  },
+  {
+    "id": "P0094-M",
+    "product_id": "P0094",
+    "size": "M",
+    "stock": 28
+  },
+  {
+    "id": "P0094-L",
+    "product_id": "P0094",
+    "size": "L",
+    "stock": 38
+  },
+  {
+    "id": "P0094-XL",
+    "product_id": "P0094",
+    "size": "XL",
+    "stock": 14
+  },
+  {
+    "id": "P0095-XS",
+    "product_id": "P0095",
+    "size": "XS",
+    "stock": 33
+  },
+  {
+    "id": "P0095-S",
+    "product_id": "P0095",
+    "size": "S",
+    "stock": 27
+  },
+  {
+    "id": "P0095-M",
+    "product_id": "P0095",
+    "size": "M",
+    "stock": 17
+  },
+  {
+    "id": "P0095-L",
+    "product_id": "P0095",
+    "size": "L",
+    "stock": 11
+  },
+  {
+    "id": "P0095-XL",
+    "product_id": "P0095",
+    "size": "XL",
+    "stock": 2
+  },
+  {
+    "id": "P0096-XS",
+    "product_id": "P0096",
+    "size": "XS",
+    "stock": 29
+  },
+  {
+    "id": "P0096-S",
+    "product_id": "P0096",
+    "size": "S",
+    "stock": 16
+  },
+  {
+    "id": "P0096-M",
+    "product_id": "P0096",
+    "size": "M",
+    "stock": 13
+  },
+  {
+    "id": "P0096-L",
+    "product_id": "P0096",
+    "size": "L",
+    "stock": 35
+  },
+  {
+    "id": "P0096-XL",
+    "product_id": "P0096",
+    "size": "XL",
+    "stock": 31
+  },
+  {
+    "id": "P0097-XS",
+    "product_id": "P0097",
+    "size": "XS",
+    "stock": 0
+  },
+  {
+    "id": "P0097-S",
+    "product_id": "P0097",
+    "size": "S",
+    "stock": 37
+  },
+  {
+    "id": "P0097-M",
+    "product_id": "P0097",
+    "size": "M",
+    "stock": 17
+  },
+  {
+    "id": "P0097-L",
+    "product_id": "P0097",
+    "size": "L",
+    "stock": 9
+  },
+  {
+    "id": "P0097-XL",
+    "product_id": "P0097",
+    "size": "XL",
+    "stock": 0
+  },
+  {
+    "id": "P0098-XS",
+    "product_id": "P0098",
+    "size": "XS",
+    "stock": 10
+  },
+  {
+    "id": "P0098-S",
+    "product_id": "P0098",
+    "size": "S",
+    "stock": 0
+  },
+  {
+    "id": "P0098-M",
+    "product_id": "P0098",
+    "size": "M",
+    "stock": 0
+  },
+  {
+    "id": "P0098-L",
+    "product_id": "P0098",
+    "size": "L",
+    "stock": 0
+  },
+  {
+    "id": "P0098-XL",
+    "product_id": "P0098",
+    "size": "XL",
+    "stock": 31
+  },
+  {
+    "id": "P0099-XS",
+    "product_id": "P0099",
+    "size": "XS",
+    "stock": 37
+  },
+  {
+    "id": "P0099-S",
+    "product_id": "P0099",
+    "size": "S",
+    "stock": 40
+  },
+  {
+    "id": "P0099-M",
+    "product_id": "P0099",
+    "size": "M",
+    "stock": 22
+  },
+  {
+    "id": "P0099-L",
+    "product_id": "P0099",
+    "size": "L",
+    "stock": 30
+  },
+  {
+    "id": "P0099-XL",
+    "product_id": "P0099",
+    "size": "XL",
+    "stock": 34
+  },
+  {
+    "id": "P0100-XS",
+    "product_id": "P0100",
+    "size": "XS",
+    "stock": 37
+  },
+  {
+    "id": "P0100-S",
+    "product_id": "P0100",
+    "size": "S",
+    "stock": 30
+  },
+  {
+    "id": "P0100-M",
+    "product_id": "P0100",
+    "size": "M",
+    "stock": 12
+  },
+  {
+    "id": "P0100-L",
+    "product_id": "P0100",
+    "size": "L",
+    "stock": 32
+  },
+  {
+    "id": "P0100-XL",
+    "product_id": "P0100",
+    "size": "XL",
+    "stock": 30
+  },
+  {
+    "id": "P0101-XS",
+    "product_id": "P0101",
+    "size": "XS",
+    "stock": 17
+  },
+  {
+    "id": "P0101-S",
+    "product_id": "P0101",
+    "size": "S",
+    "stock": 19
+  },
+  {
+    "id": "P0101-M",
+    "product_id": "P0101",
+    "size": "M",
+    "stock": 35
+  },
+  {
+    "id": "P0101-L",
+    "product_id": "P0101",
+    "size": "L",
+    "stock": 33
+  },
+  {
+    "id": "P0101-XL",
+    "product_id": "P0101",
+    "size": "XL",
+    "stock": 17
+  },
+  {
+    "id": "P0102-XS",
+    "product_id": "P0102",
+    "size": "XS",
+    "stock": 30
+  },
+  {
+    "id": "P0102-S",
+    "product_id": "P0102",
+    "size": "S",
+    "stock": 6
+  },
+  {
+    "id": "P0102-M",
+    "product_id": "P0102",
+    "size": "M",
+    "stock": 20
+  },
+  {
+    "id": "P0102-L",
+    "product_id": "P0102",
+    "size": "L",
+    "stock": 17
+  },
+  {
+    "id": "P0102-XL",
+    "product_id": "P0102",
+    "size": "XL",
+    "stock": 19
+  },
+  {
+    "id": "P0103-XS",
+    "product_id": "P0103",
+    "size": "XS",
+    "stock": 22
+  },
+  {
+    "id": "P0103-S",
+    "product_id": "P0103",
+    "size": "S",
+    "stock": 36
+  },
+  {
+    "id": "P0103-M",
+    "product_id": "P0103",
+    "size": "M",
+    "stock": 7
+  },
+  {
+    "id": "P0103-L",
+    "product_id": "P0103",
+    "size": "L",
+    "stock": 10
+  },
+  {
+    "id": "P0103-XL",
+    "product_id": "P0103",
+    "size": "XL",
+    "stock": 11
+  },
+  {
+    "id": "P0104-XS",
+    "product_id": "P0104",
+    "size": "XS",
+    "stock": 26
+  },
+  {
+    "id": "P0104-S",
+    "product_id": "P0104",
+    "size": "S",
+    "stock": 11
+  },
+  {
+    "id": "P0104-M",
+    "product_id": "P0104",
+    "size": "M",
+    "stock": 15
+  },
+  {
+    "id": "P0104-L",
+    "product_id": "P0104",
+    "size": "L",
+    "stock": 6
+  },
+  {
+    "id": "P0104-XL",
+    "product_id": "P0104",
+    "size": "XL",
+    "stock": 28
+  },
+  {
+    "id": "P0105-XS",
+    "product_id": "P0105",
+    "size": "XS",
+    "stock": 23
+  },
+  {
+    "id": "P0105-S",
+    "product_id": "P0105",
+    "size": "S",
+    "stock": 36
+  },
+  {
+    "id": "P0105-M",
+    "product_id": "P0105",
+    "size": "M",
+    "stock": 31
+  },
+  {
+    "id": "P0105-L",
+    "product_id": "P0105",
+    "size": "L",
+    "stock": 28
+  },
+  {
+    "id": "P0105-XL",
+    "product_id": "P0105",
+    "size": "XL",
+    "stock": 5
+  },
+  {
+    "id": "P0106-XS",
+    "product_id": "P0106",
+    "size": "XS",
+    "stock": 0
+  },
+  {
+    "id": "P0106-S",
+    "product_id": "P0106",
+    "size": "S",
+    "stock": 28
+  },
+  {
+    "id": "P0106-M",
+    "product_id": "P0106",
+    "size": "M",
+    "stock": 26
+  },
+  {
+    "id": "P0106-L",
+    "product_id": "P0106",
+    "size": "L",
+    "stock": 39
+  },
+  {
+    "id": "P0106-XL",
+    "product_id": "P0106",
+    "size": "XL",
+    "stock": 0
+  },
+  {
+    "id": "P0107-XS",
+    "product_id": "P0107",
+    "size": "XS",
+    "stock": 38
+  },
+  {
+    "id": "P0107-S",
+    "product_id": "P0107",
+    "size": "S",
+    "stock": 0
+  },
+  {
+    "id": "P0107-M",
+    "product_id": "P0107",
+    "size": "M",
+    "stock": 0
+  },
+  {
+    "id": "P0107-L",
+    "product_id": "P0107",
+    "size": "L",
+    "stock": 0
+  },
+  {
+    "id": "P0107-XL",
+    "product_id": "P0107",
+    "size": "XL",
+    "stock": 26
+  },
+  {
+    "id": "P0108-XS",
+    "product_id": "P0108",
+    "size": "XS",
+    "stock": 2
+  },
+  {
+    "id": "P0108-S",
+    "product_id": "P0108",
+    "size": "S",
+    "stock": 24
+  },
+  {
+    "id": "P0108-M",
+    "product_id": "P0108",
+    "size": "M",
+    "stock": 21
+  },
+  {
+    "id": "P0108-L",
+    "product_id": "P0108",
+    "size": "L",
+    "stock": 26
+  },
+  {
+    "id": "P0108-XL",
+    "product_id": "P0108",
+    "size": "XL",
+    "stock": 28
+  },
+  {
+    "id": "P0109-XS",
+    "product_id": "P0109",
+    "size": "XS",
+    "stock": 36
+  },
+  {
+    "id": "P0109-S",
+    "product_id": "P0109",
+    "size": "S",
+    "stock": 40
+  },
+  {
+    "id": "P0109-M",
+    "product_id": "P0109",
+    "size": "M",
+    "stock": 16
+  },
+  {
+    "id": "P0109-L",
+    "product_id": "P0109",
+    "size": "L",
+    "stock": 33
+  },
+  {
+    "id": "P0109-XL",
+    "product_id": "P0109",
+    "size": "XL",
+    "stock": 16
+  },
+  {
+    "id": "P0110-XS",
+    "product_id": "P0110",
+    "size": "XS",
+    "stock": 29
+  },
+  {
+    "id": "P0110-S",
+    "product_id": "P0110",
+    "size": "S",
+    "stock": 33
+  },
+  {
+    "id": "P0110-M",
+    "product_id": "P0110",
+    "size": "M",
+    "stock": 3
+  },
+  {
+    "id": "P0110-L",
+    "product_id": "P0110",
+    "size": "L",
+    "stock": 26
+  },
+  {
+    "id": "P0110-XL",
+    "product_id": "P0110",
+    "size": "XL",
+    "stock": 23
+  },
+  {
+    "id": "P0111-XS",
+    "product_id": "P0111",
+    "size": "XS",
+    "stock": 12
+  },
+  {
+    "id": "P0111-S",
+    "product_id": "P0111",
+    "size": "S",
+    "stock": 31
+  },
+  {
+    "id": "P0111-M",
+    "product_id": "P0111",
+    "size": "M",
+    "stock": 10
+  },
+  {
+    "id": "P0111-L",
+    "product_id": "P0111",
+    "size": "L",
+    "stock": 36
+  },
+  {
+    "id": "P0111-XL",
+    "product_id": "P0111",
+    "size": "XL",
+    "stock": 3
+  },
+  {
+    "id": "P0112-XS",
+    "product_id": "P0112",
+    "size": "XS",
+    "stock": 39
+  },
+  {
+    "id": "P0112-S",
+    "product_id": "P0112",
+    "size": "S",
+    "stock": 38
+  },
+  {
+    "id": "P0112-M",
+    "product_id": "P0112",
+    "size": "M",
+    "stock": 3
+  },
+  {
+    "id": "P0112-L",
+    "product_id": "P0112",
+    "size": "L",
+    "stock": 7
+  },
+  {
+    "id": "P0112-XL",
+    "product_id": "P0112",
+    "size": "XL",
+    "stock": 29
+  },
+  {
+    "id": "P0113-XS",
+    "product_id": "P0113",
+    "size": "XS",
+    "stock": 31
+  },
+  {
+    "id": "P0113-S",
+    "product_id": "P0113",
+    "size": "S",
+    "stock": 13
+  },
+  {
+    "id": "P0113-M",
+    "product_id": "P0113",
+    "size": "M",
+    "stock": 5
+  },
+  {
+    "id": "P0113-L",
+    "product_id": "P0113",
+    "size": "L",
+    "stock": 18
+  },
+  {
+    "id": "P0113-XL",
+    "product_id": "P0113",
+    "size": "XL",
+    "stock": 26
+  },
+  {
+    "id": "P0114-XS",
+    "product_id": "P0114",
+    "size": "XS",
+    "stock": 15
+  },
+  {
+    "id": "P0114-S",
+    "product_id": "P0114",
+    "size": "S",
+    "stock": 31
+  },
+  {
+    "id": "P0114-M",
+    "product_id": "P0114",
+    "size": "M",
+    "stock": 22
+  },
+  {
+    "id": "P0114-L",
+    "product_id": "P0114",
+    "size": "L",
+    "stock": 23
+  },
+  {
+    "id": "P0114-XL",
+    "product_id": "P0114",
+    "size": "XL",
+    "stock": 26
+  },
+  {
+    "id": "P0115-XS",
+    "product_id": "P0115",
+    "size": "XS",
+    "stock": 0
+  },
+  {
+    "id": "P0115-S",
+    "product_id": "P0115",
+    "size": "S",
+    "stock": 28
+  },
+  {
+    "id": "P0115-M",
+    "product_id": "P0115",
+    "size": "M",
+    "stock": 18
+  },
+  {
+    "id": "P0115-L",
+    "product_id": "P0115",
+    "size": "L",
+    "stock": 7
+  },
+  {
+    "id": "P0115-XL",
+    "product_id": "P0115",
+    "size": "XL",
+    "stock": 0
+  },
+  {
+    "id": "P0116-XS",
+    "product_id": "P0116",
+    "size": "XS",
+    "stock": 3
+  },
+  {
+    "id": "P0116-S",
+    "product_id": "P0116",
+    "size": "S",
+    "stock": 0
+  },
+  {
+    "id": "P0116-M",
+    "product_id": "P0116",
+    "size": "M",
+    "stock": 0
+  },
+  {
+    "id": "P0116-L",
+    "product_id": "P0116",
+    "size": "L",
+    "stock": 0
+  },
+  {
+    "id": "P0116-XL",
+    "product_id": "P0116",
+    "size": "XL",
+    "stock": 36
+  },
+  {
+    "id": "P0117-XS",
+    "product_id": "P0117",
+    "size": "XS",
+    "stock": 24
+  },
+  {
+    "id": "P0117-S",
+    "product_id": "P0117",
+    "size": "S",
+    "stock": 16
+  },
+  {
+    "id": "P0117-M",
+    "product_id": "P0117",
+    "size": "M",
+    "stock": 6
+  },
+  {
+    "id": "P0117-L",
+    "product_id": "P0117",
+    "size": "L",
+    "stock": 4
+  },
+  {
+    "id": "P0117-XL",
+    "product_id": "P0117",
+    "size": "XL",
+    "stock": 3
+  },
+  {
+    "id": "P0118-XS",
+    "product_id": "P0118",
+    "size": "XS",
+    "stock": 14
+  },
+  {
+    "id": "P0118-S",
+    "product_id": "P0118",
+    "size": "S",
+    "stock": 3
+  },
+  {
+    "id": "P0118-M",
+    "product_id": "P0118",
+    "size": "M",
+    "stock": 11
+  },
+  {
+    "id": "P0118-L",
+    "product_id": "P0118",
+    "size": "L",
+    "stock": 17
+  },
+  {
+    "id": "P0118-XL",
+    "product_id": "P0118",
+    "size": "XL",
+    "stock": 10
+  },
+  {
+    "id": "P0119-XS",
+    "product_id": "P0119",
+    "size": "XS",
+    "stock": 9
+  },
+  {
+    "id": "P0119-S",
+    "product_id": "P0119",
+    "size": "S",
+    "stock": 38
+  },
+  {
+    "id": "P0119-M",
+    "product_id": "P0119",
+    "size": "M",
+    "stock": 15
+  },
+  {
+    "id": "P0119-L",
+    "product_id": "P0119",
+    "size": "L",
+    "stock": 31
+  },
+  {
+    "id": "P0119-XL",
+    "product_id": "P0119",
+    "size": "XL",
+    "stock": 18
+  },
+  {
+    "id": "P0120-XS",
+    "product_id": "P0120",
+    "size": "XS",
+    "stock": 12
+  },
+  {
+    "id": "P0120-S",
+    "product_id": "P0120",
+    "size": "S",
+    "stock": 40
+  },
+  {
+    "id": "P0120-M",
+    "product_id": "P0120",
+    "size": "M",
+    "stock": 40
+  },
+  {
+    "id": "P0120-L",
+    "product_id": "P0120",
+    "size": "L",
+    "stock": 9
+  },
+  {
+    "id": "P0120-XL",
+    "product_id": "P0120",
+    "size": "XL",
+    "stock": 12
+  }
+]

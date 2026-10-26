@@ -1,0 +1,44 @@
+services:
+  api:
+    build: .
+    ports: ["127.0.0.1:8000:8000"]
+    environment:
+      DATABASE_URL: postgresql+psycopg://atlas:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@postgres:5432/atlas
+      CHROMA_PATH: /app/runtime/chroma
+      ATLAS_MODE: ${ATLAS_MODE:-demo}
+      DEMO_ACCESS: ${DEMO_ACCESS:-true}
+      CUSTOMER_TOKENS: ${CUSTOMER_TOKENS}
+      ADMIN_API_KEY: ${ADMIN_API_KEY:?Set ADMIN_API_KEY in .env}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.openai.com/v1}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-}
+      CARRIER_BASE_URL: http://carrier:8001
+    volumes: ["atlas-runtime:/app/runtime"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      carrier:
+        condition: service_started
+    restart: unless-stopped
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: atlas
+      POSTGRES_USER: atlas
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    volumes: ["atlas-postgres:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U atlas -d atlas"]
+      interval: 5s
+      retries: 10
+    restart: unless-stopped
+  carrier:
+    build: .
+    command: ["python", "-m", "uvicorn", "atlas.mock_carrier:app", "--host", "0.0.0.0", "--port", "8001"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/health')"]
+    restart: unless-stopped
+volumes:
+  atlas-runtime:
+  atlas-postgres:

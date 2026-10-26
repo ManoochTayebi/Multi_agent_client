@@ -1,0 +1,146 @@
+{
+  "mode": "demo",
+  "cases": 12,
+  "passed": 12,
+  "pass_rate": 1.0,
+  "retrieval_recall_at_2": 1.0,
+  "latency_p50_ms": 8.0,
+  "latency_p95_ms": 14,
+  "limitations": "Curated synthetic integration cases; not a held-out customer benchmark or production SLA.",
+  "results": [
+    {
+      "id": "return_standard",
+      "passed": true,
+      "checks": {
+        "expected_roles": true,
+        "quality": true,
+        "eligibility": true
+      },
+      "latency_ms": 17,
+      "judged": false
+    },
+    {
+      "id": "return_high_value",
+      "passed": true,
+      "checks": {
+        "expected_roles": true,
+        "quality": true,
+        "review": true
+      },
+      "latency_ms": 10,
+      "judged": false
+    },
+    {
+      "id": "return_late",
+      "passed": true,
+      "checks": {
+        "expected_roles": true,
+        "quality": true,
+        "eligibility": true
+      },
+      "latency_ms": 9,
+      "judged": false
+    },
+    {
+      "id": "ownership_attack",
+      "passed": true,
+      "checks": {
+        "expected_roles": true,
+        "quality": true,
+        "action": true
+      },
+      "latency_ms": 6,
+      "judged": false
+    },
+    {
+      "id": "tracking",
+      "passed": true,
+      "checks": {
+        "expected_roles": true,
+        "quality": true,
+        "status": true
+      },
+      "latency_ms": 6,
+      "judged": false
+    },
+    {
+      "id": "styling",
+      "passed": true,
+      "checks": {
+        "expected_roles": true,
+        "quality": true,
+        "budget": true,
+        "stock": true
+      },
+      "latency_ms": 8,
+      "judged": false
+    },
+    {
+      "id": "small_budget",
+      "passed": true,
+      "checks": {
+        "expected_roles": true,
+        "quality": true,
+        "budget": true,
+        "stock": true
+      },
+      "latency_ms": 8,
+      "judged": false
+    },
+    {
+      "id": "product",
+      "passed": true,
+      "checks": {
+        "expected_roles": true,
+        "quality": true
+      },
+      "latency_ms": 7,
+      "judged": false
+    },
+    {
+      "id": "multi_intent",
+      "passed": true,
+      "checks": {
+        "expected_roles": true,
+        "quality": true,
+        "budget": true,
+        "stock": true
+      },
+      "latency_ms": 14,
+      "judged": false
+    },
+    {
+      "id": "unknown",
+      "passed": true,
+      "checks": {
+        "expected_roles": true,
+        "quality": true,
+        "action": true
+      },
+      "latency_ms": 2,
+      "judged": false
+    },
+    {
+      "id": "missing_order",
+      "passed": true,
+      "checks": {
+        "expected_roles": true,
+        "quality": true,
+        "action": true
+      },
+      "latency_ms": 6,
+      "judged": false
+    },
+    {
+      "id": "french_return",
+      "passed": true,
+      "checks": {
+        "expected_roles": true,
+        "quality": true,
+        "eligibility": true
+      },
+      "latency_ms": 8,
+      "judged": false
+    }
+  ]
+}

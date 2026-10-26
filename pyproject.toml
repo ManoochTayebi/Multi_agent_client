@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "atlas-customerai"
+version = "1.0.0"
+description = "Six-agent retail customer service and styling platform — Saegus case study"
+requires-python = ">=3.12"
+dependencies = ["fastapi==0.162.0", "uvicorn==0.54.0", "sqlalchemy==2.1.6", "langgraph==1.2.17", "chromadb==1.5.9", "openai==3.37.0", "httpx==0.28.1", "psycopg[binary]==3.3.6", "pydantic-settings==2.16.1"]
+
+[project.optional-dependencies]
+dev = ["pytest==9.1.1", "ruff==0.15.7"]
+ui = ["streamlit==1.66.1"]
+
+[tool.setuptools.packages.find]
+include = ["atlas*"]
+[tool.setuptools.package-data]
+atlas = ["static/*"]
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+[tool.ruff]
+line-length = 110
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]

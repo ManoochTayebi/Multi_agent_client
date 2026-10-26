@@ -1,0 +1,2 @@
+# Atlas fictional shipping policy — v1, effective 2026-01-01
+Standard delivery normally takes 3–5 business days. Estimated delivery dates are estimates, not guarantees. A delayed package requires checking the carrier status; support must not invent a delivery date. If the live carrier service is unavailable, use the last synchronized shipment record and clearly label it as cached. Escalate lost or disputed deliveries to support. Cross-border shipments may require extra processing time.

@@ -1,0 +1,39 @@
+name: Validate and package Atlas
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.lock && pip install '.[dev]'
+      - run: ruff check atlas scripts tests
+      - run: pytest -q
+      - run: python -m scripts.evaluate
+      - uses: actions/upload-artifact@v4
+        with:
+          name: evaluation
+          path: reports/evaluation.json
+  container:
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t atlas:test .
+      - name: Smoke test container
+        run: |
+          docker run -d --name atlas -p 8000:8000 atlas:test
+          for i in $(seq 1 45); do
+            if curl --fail http://localhost:8000/health; then break; fi
+            sleep 2
+          done
+          curl --fail http://localhost:8000/health
+          docker logs atlas
