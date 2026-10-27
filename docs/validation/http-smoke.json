@@ -1,0 +1,22 @@
+{
+  "health": {
+    "status": "ok",
+    "mode": "llm",
+    "policy_chunks": 4,
+    "indexed_products": 120,
+    "retrieval": "semantic",
+    "chat_model": "atlas-local",
+    "synthetic_clock": "2026-10-26",
+    "demo_access": true,
+    "payments": "simulation"
+  },
+  "html_status": 200,
+  "customer_auth": true,
+  "operator_isolation": true,
+  "real_carrier_http": true,
+  "carrier_source": "live mock carrier API",
+  "shipment_status": "delivered",
+  "ownership_enforced": true,
+  "session_deleted": true,
+  "visual_browser_review": false
+}

@@ -1,0 +1,1031 @@
+{
+  "mode": "llm",
+  "model": "atlas-local",
+  "embedding_model": "all-minilm",
+  "suite": "journeys",
+  "repeat": 2,
+  "cases": 4,
+  "passed": 2,
+  "pass_rate": 0.5,
+  "degraded_runs": 2,
+  "model_calls": 28,
+  "model_tokens": 34994,
+  "estimated_chat_cost_usd": 0.0,
+  "retrieval_recall_at_2": 1.0,
+  "product_category_recall_at_3": 1.0,
+  "latency_p50_ms": 56284.5,
+  "latency_p95_ms": 105289,
+  "limitations": "Curated development cases, tuned during development; not held-out quality or an SLA. Independent judge call uses the same model; its errors may correlate. Latency includes model cold starts but excludes app/index startup. Cost excludes embeddings, hardware and operations; null means unknown. Local zero provider charges do not imply zero operating cost.",
+  "retrieval_probes": [
+    {
+      "query": "refund return window",
+      "expected": "returns.md",
+      "sources": [
+        "returns.md#0",
+        "governance.md#0"
+      ],
+      "hit": true
+    },
+    {
+      "query": "carrier shipping delayed",
+      "expected": "shipping.md",
+      "sources": [
+        "shipping.md#0",
+        "returns.md#0"
+      ],
+      "hit": true
+    },
+    {
+      "query": "outfit stock budget size",
+      "expected": "styling.md",
+      "sources": [
+        "styling.md#0",
+        "returns.md#0"
+      ],
+      "hit": true
+    },
+    {
+      "query": "customer privacy SQL",
+      "expected": "governance.md",
+      "sources": [
+        "governance.md#0",
+        "styling.md#0"
+      ],
+      "hit": true
+    },
+    {
+      "query": "Can I send back something I wore yesterday?",
+      "expected": "returns.md",
+      "sources": [
+        "returns.md#0",
+        "styling.md#0"
+      ],
+      "hit": true
+    },
+    {
+      "query": "My parcel has not arrived and the courier is offline",
+      "expected": "shipping.md",
+      "sources": [
+        "shipping.md#0",
+        "returns.md#0"
+      ],
+      "hit": true
+    },
+    {
+      "query": "Combine garments without spending more than my allowance",
+      "expected": "styling.md",
+      "sources": [
+        "styling.md#0",
+        "returns.md#0"
+      ],
+      "hit": true
+    },
+    {
+      "query": "Someone asks to see a different shopper purchase history",
+      "expected": "governance.md",
+      "sources": [
+        "governance.md#0",
+        "returns.md#0"
+      ],
+      "hit": true
+    },
+    {
+      "query": "refund return window",
+      "expected": "returns.md",
+      "sources": [
+        "returns.md#0",
+        "governance.md#0"
+      ],
+      "hit": true
+    },
+    {
+      "query": "carrier shipping delayed",
+      "expected": "shipping.md",
+      "sources": [
+        "shipping.md#0",
+        "returns.md#0"
+      ],
+      "hit": true
+    },
+    {
+      "query": "outfit stock budget size",
+      "expected": "styling.md",
+      "sources": [
+        "styling.md#0",
+        "returns.md#0"
+      ],
+      "hit": true
+    },
+    {
+      "query": "customer privacy SQL",
+      "expected": "governance.md",
+      "sources": [
+        "governance.md#0",
+        "styling.md#0"
+      ],
+      "hit": true
+    },
+    {
+      "query": "Can I send back something I wore yesterday?",
+      "expected": "returns.md",
+      "sources": [
+        "returns.md#0",
+        "styling.md#0"
+      ],
+      "hit": true
+    },
+    {
+      "query": "My parcel has not arrived and the courier is offline",
+      "expected": "shipping.md",
+      "sources": [
+        "shipping.md#0",
+        "returns.md#0"
+      ],
+      "hit": true
+    },
+    {
+      "query": "Combine garments without spending more than my allowance",
+      "expected": "styling.md",
+      "sources": [
+        "styling.md#0",
+        "returns.md#0"
+      ],
+      "hit": true
+    },
+    {
+      "query": "Someone asks to see a different shopper purchase history",
+      "expected": "governance.md",
+      "sources": [
+        "governance.md#0",
+        "returns.md#0"
+      ],
+      "hit": true
+    }
+  ],
+  "product_probes": [
+    {
+      "query": "Something to wear on my feet",
+      "expected_category": "shoes",
+      "categories": [
+        "shoes",
+        "shoes",
+        "shoes"
+      ],
+      "hit": true
+    },
+    {
+      "query": "A one-piece garment for a gala",
+      "expected_category": "dress",
+      "categories": [
+        "skirt",
+        "dress",
+        "skirt"
+      ],
+      "hit": true
+    },
+    {
+      "query": "Something to wear on my feet",
+      "expected_category": "shoes",
+      "categories": [
+        "shoes",
+        "shoes",
+        "shoes"
+      ],
+      "hit": true
+    },
+    {
+      "query": "A one-piece garment for a gala",
+      "expected_category": "dress",
+      "categories": [
+        "skirt",
+        "dress",
+        "skirt"
+      ],
+      "hit": true
+    }
+  ],
+  "results": [
+    {
+      "id": "return_high_value",
+      "iteration": 1,
+      "passed": true,
+      "checks": {
+        "exact_roles": true,
+        "quality": true,
+        "review": true,
+        "proposal": true,
+        "premature_approval_blocked": true,
+        "customer_confirmation": true,
+        "review_queue": true,
+        "human_approval": true,
+        "simulated_completion": true,
+        "idempotent_drain": true,
+        "audit_trail": true,
+        "real_llm": true,
+        "no_fallback": true,
+        "required_model_stages": true
+      },
+      "latency_ms": 41262,
+      "judged": true,
+      "degraded": false,
+      "warnings": [],
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "deterministic": false
+      },
+      "model_usage": {
+        "model": "atlas-local",
+        "calls": 6,
+        "failed_calls": 0,
+        "prompt_tokens": 5927,
+        "completion_tokens": 265,
+        "usage_complete": true,
+        "estimated_cost_usd": 0.0,
+        "events": [
+          {
+            "run_id": "6622dc52-e426-46c9-9078-8677ac4b3b4b",
+            "stage": "Plan",
+            "ok": true,
+            "prompt_tokens": 543,
+            "completion_tokens": 81,
+            "usage_reported": true,
+            "duration_ms": 3502
+          },
+          {
+            "run_id": "6622dc52-e426-46c9-9078-8677ac4b3b4b",
+            "stage": "returns_investigation",
+            "ok": true,
+            "prompt_tokens": 393,
+            "completion_tokens": 21,
+            "usage_reported": true,
+            "duration_ms": 790
+          },
+          {
+            "run_id": "6622dc52-e426-46c9-9078-8677ac4b3b4b",
+            "stage": "returns_investigation",
+            "ok": true,
+            "prompt_tokens": 1115,
+            "completion_tokens": 16,
+            "usage_reported": true,
+            "duration_ms": 6048
+          },
+          {
+            "run_id": "6622dc52-e426-46c9-9078-8677ac4b3b4b",
+            "stage": "ResolutionDecision",
+            "ok": true,
+            "prompt_tokens": 1101,
+            "completion_tokens": 62,
+            "usage_reported": true,
+            "duration_ms": 2738
+          },
+          {
+            "run_id": "6622dc52-e426-46c9-9078-8677ac4b3b4b",
+            "stage": "AnswerSchema",
+            "ok": true,
+            "prompt_tokens": 1269,
+            "completion_tokens": 71,
+            "usage_reported": true,
+            "duration_ms": 13483
+          },
+          {
+            "run_id": "6622dc52-e426-46c9-9078-8677ac4b3b4b",
+            "stage": "JudgeVerdict",
+            "ok": true,
+            "prompt_tokens": 1506,
+            "completion_tokens": 14,
+            "usage_reported": true,
+            "duration_ms": 14656
+          }
+        ]
+      },
+      "embedding_usage": {
+        "model": "all-minilm",
+        "calls": 1,
+        "failed_calls": 0,
+        "reported_tokens": 4,
+        "events": [
+          {
+            "run_id": "6622dc52-e426-46c9-9078-8677ac4b3b4b",
+            "ok": true,
+            "texts": 1,
+            "tokens": 4,
+            "duration_ms": 10
+          }
+        ]
+      },
+      "trace": [
+        {
+          "agent": "orchestrator",
+          "role": "Classify customer goals, plan dependencies and aggregate grounded results.",
+          "plan": [
+            "Refund request for order O1002. No previous plan provided, so no further action needed."
+          ],
+          "started_ms": 26581597.981,
+          "ended_ms": 26585106.619,
+          "duration_ms": 3508,
+          "sources": []
+        },
+        {
+          "agent": "returns_investigation",
+          "role": "Verify order ownership, return window, condition and review signals.",
+          "plan": [
+            "policy_search",
+            "investigate"
+          ],
+          "started_ms": 26585108.119,
+          "ended_ms": 26591965.782,
+          "duration_ms": 6857,
+          "sources": [
+            "returns.md#0",
+            "governance.md#0",
+            "shipping.md#0"
+          ],
+          "execution": "llm_tools",
+          "tool_calls": [
+            {
+              "tool": "policy_search",
+              "arguments": {
+                "query": "Refund"
+              },
+              "status": "ok"
+            },
+            {
+              "tool": "investigate",
+              "arguments": {},
+              "status": "ok"
+            }
+          ]
+        },
+        {
+          "agent": "resolution",
+          "role": "Propose a policy-compliant resolution; never execute a payment.",
+          "plan": [
+            "Confirm refund request with customer",
+            "Evaluate policy exception",
+            "Initiate human review",
+            "Process refund via warehouse inspection"
+          ],
+          "started_ms": 26591966.475,
+          "ended_ms": 26594706.199,
+          "duration_ms": 2739,
+          "sources": [],
+          "execution": "llm_decision"
+        }
+      ],
+      "draft_answer": "The requested refund for order O1002 is pending human review due to the refund amount exceeding EUR 150. The item was delivered within the return window and is in unworn condition. The refund will require confirmation from the customer and a warehouse inspection before processing. No payment has been executed yet.",
+      "answer": "The requested refund for order O1002 is pending human review due to the refund amount exceeding EUR 150. The item was delivered within the return window and is in unworn condition. The refund will require confirmation from the customer and a warehouse inspection before processing. No payment has been executed yet."
+    },
+    {
+      "id": "parallel_tracking_styling",
+      "iteration": 1,
+      "passed": false,
+      "checks": {
+        "exact_roles": true,
+        "quality": true,
+        "budget_extracted": true,
+        "budget": true,
+        "stock": true,
+        "outfit_presence": true,
+        "size": true,
+        "status": true,
+        "parallel_overlap": true,
+        "stylist_after_discovery": true,
+        "real_llm": true,
+        "no_fallback": false,
+        "required_model_stages": true
+      },
+      "latency_ms": 105289,
+      "judged": true,
+      "degraded": true,
+      "warnings": [
+        "personal_stylist: model choice failed (ValueError); feasible outfit used."
+      ],
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "deterministic": false
+      },
+      "model_usage": {
+        "model": "atlas-local",
+        "calls": 8,
+        "failed_calls": 0,
+        "prompt_tokens": 10827,
+        "completion_tokens": 497,
+        "usage_complete": true,
+        "estimated_cost_usd": 0.0,
+        "events": [
+          {
+            "run_id": "e4ff0813-f2cf-4e4c-a882-98bdf88af990",
+            "stage": "Plan",
+            "ok": true,
+            "prompt_tokens": 557,
+            "completion_tokens": 99,
+            "usage_reported": true,
+            "duration_ms": 4587
+          },
+          {
+            "run_id": "e4ff0813-f2cf-4e4c-a882-98bdf88af990",
+            "stage": "order_tracking",
+            "ok": true,
+            "prompt_tokens": 420,
+            "completion_tokens": 40,
+            "usage_reported": true,
+            "duration_ms": 1477
+          },
+          {
+            "run_id": "e4ff0813-f2cf-4e4c-a882-98bdf88af990",
+            "stage": "product_discovery",
+            "ok": true,
+            "prompt_tokens": 430,
+            "completion_tokens": 71,
+            "usage_reported": true,
+            "duration_ms": 4084
+          },
+          {
+            "run_id": "e4ff0813-f2cf-4e4c-a882-98bdf88af990",
+            "stage": "order_tracking",
+            "ok": true,
+            "prompt_tokens": 1166,
+            "completion_tokens": 49,
+            "usage_reported": true,
+            "duration_ms": 10942
+          },
+          {
+            "run_id": "e4ff0813-f2cf-4e4c-a882-98bdf88af990",
+            "stage": "order_tracking",
+            "ok": true,
+            "prompt_tokens": 1427,
+            "completion_tokens": 15,
+            "usage_reported": true,
+            "duration_ms": 3508
+          },
+          {
+            "run_id": "e4ff0813-f2cf-4e4c-a882-98bdf88af990",
+            "stage": "OutfitDecision",
+            "ok": true,
+            "prompt_tokens": 1473,
+            "completion_tokens": 106,
+            "usage_reported": true,
+            "duration_ms": 17761
+          },
+          {
+            "run_id": "e4ff0813-f2cf-4e4c-a882-98bdf88af990",
+            "stage": "AnswerSchema",
+            "ok": true,
+            "prompt_tokens": 2549,
+            "completion_tokens": 103,
+            "usage_reported": true,
+            "duration_ms": 34965
+          },
+          {
+            "run_id": "e4ff0813-f2cf-4e4c-a882-98bdf88af990",
+            "stage": "JudgeVerdict",
+            "ok": true,
+            "prompt_tokens": 2805,
+            "completion_tokens": 14,
+            "usage_reported": true,
+            "duration_ms": 32013
+          }
+        ]
+      },
+      "embedding_usage": {
+        "model": "all-minilm",
+        "calls": 3,
+        "failed_calls": 0,
+        "reported_tokens": 50,
+        "events": [
+          {
+            "run_id": "e4ff0813-f2cf-4e4c-a882-98bdf88af990",
+            "ok": true,
+            "texts": 1,
+            "tokens": 19,
+            "duration_ms": 13
+          },
+          {
+            "run_id": "e4ff0813-f2cf-4e4c-a882-98bdf88af990",
+            "ok": true,
+            "texts": 1,
+            "tokens": 19,
+            "duration_ms": 16
+          },
+          {
+            "run_id": "e4ff0813-f2cf-4e4c-a882-98bdf88af990",
+            "ok": true,
+            "texts": 1,
+            "tokens": 12,
+            "duration_ms": 16
+          }
+        ]
+      },
+      "trace": [
+        {
+          "agent": "orchestrator",
+          "role": "Classify customer goals, plan dependencies and aggregate grounded results.",
+          "plan": [
+            "Track order O1001 and build a smart casual outfit under EUR 150, size M."
+          ],
+          "started_ms": 26622908.263,
+          "ended_ms": 26627497.745,
+          "duration_ms": 4589,
+          "sources": []
+        },
+        {
+          "agent": "order_tracking",
+          "role": "Look up verified shipment status and report source freshness.",
+          "plan": [
+            "policy_search",
+            "shipment",
+            "shipment"
+          ],
+          "started_ms": 26627498.604,
+          "ended_ms": 26643448.084,
+          "duration_ms": 15949,
+          "sources": [
+            "styling.md#0",
+            "returns.md#0",
+            "shipping.md#0"
+          ],
+          "execution": "llm_tools",
+          "tool_calls": [
+            {
+              "tool": "policy_search",
+              "arguments": {
+                "query": "Track O1001 and build a smart casual outfit under EUR 150, size M"
+              },
+              "status": "ok"
+            },
+            {
+              "tool": "shipment",
+              "status": "invalid_arguments"
+            },
+            {
+              "tool": "shipment",
+              "arguments": {},
+              "status": "ok"
+            }
+          ]
+        },
+        {
+          "agent": "product_discovery",
+          "role": "Find available products respecting size and budget.",
+          "plan": [
+            "policy_search",
+            "product_search"
+          ],
+          "started_ms": 26627499.278,
+          "ended_ms": 26631639.867,
+          "duration_ms": 4140,
+          "sources": [
+            "styling.md#0",
+            "returns.md#0",
+            "shipping.md#0"
+          ],
+          "execution": "llm_tools",
+          "tool_calls": [
+            {
+              "tool": "policy_search",
+              "arguments": {
+                "query": "Track O1001 and build a smart casual outfit under EUR 150, size M"
+              },
+              "status": "ok"
+            },
+            {
+              "tool": "product_search",
+              "arguments": {
+                "query": "smart casual outfit under EUR 150, size M"
+              },
+              "status": "ok"
+            }
+          ]
+        },
+        {
+          "agent": "personal_stylist",
+          "role": "Assemble compatible pieces respecting the total outfit budget.",
+          "plan": [
+            "Feasible complete outfit ranked by discovery relevance and total budget.",
+            "Validate exact variants, size, compatibility and total budget"
+          ],
+          "started_ms": 26643449.299,
+          "ended_ms": 26661213.82,
+          "duration_ms": 17764,
+          "sources": [],
+          "execution": "fallback"
+        }
+      ],
+      "draft_answer": "Shipment status: delivered (cached mock carrier record). Suggested outfit: Atlas Olive Knitwear 048 (EUR 39.00), Atlas Navy Trousers 090 (EUR 79.00), Atlas Blue Shoes 069 (EUR 29.00). Total: EUR 147.00. Sources: returns.md#0, shipping.md#0, styling.md#0.",
+      "answer": "Shipment status: delivered (cached mock carrier record). Suggested outfit: Atlas Olive Knitwear 048 (EUR 39.00), Atlas Navy Trousers 090 (EUR 79.00), Atlas Blue Shoes 069 (EUR 29.00). Total: EUR 147.00. Sources: returns.md#0, shipping.md#0, styling.md#0."
+    },
+    {
+      "id": "return_high_value",
+      "iteration": 2,
+      "passed": true,
+      "checks": {
+        "exact_roles": true,
+        "quality": true,
+        "review": true,
+        "proposal": true,
+        "premature_approval_blocked": true,
+        "customer_confirmation": true,
+        "review_queue": true,
+        "human_approval": true,
+        "simulated_completion": true,
+        "idempotent_drain": true,
+        "audit_trail": true,
+        "real_llm": true,
+        "no_fallback": true,
+        "required_model_stages": true
+      },
+      "latency_ms": 33245,
+      "judged": true,
+      "degraded": false,
+      "warnings": [],
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "deterministic": false
+      },
+      "model_usage": {
+        "model": "atlas-local",
+        "calls": 6,
+        "failed_calls": 0,
+        "prompt_tokens": 5912,
+        "completion_tokens": 250,
+        "usage_complete": true,
+        "estimated_cost_usd": 0.0,
+        "events": [
+          {
+            "run_id": "3f1af413-ac3e-439b-a820-a42441df8d68",
+            "stage": "Plan",
+            "ok": true,
+            "prompt_tokens": 543,
+            "completion_tokens": 81,
+            "usage_reported": true,
+            "duration_ms": 4089
+          },
+          {
+            "run_id": "3f1af413-ac3e-439b-a820-a42441df8d68",
+            "stage": "returns_investigation",
+            "ok": true,
+            "prompt_tokens": 393,
+            "completion_tokens": 21,
+            "usage_reported": true,
+            "duration_ms": 969
+          },
+          {
+            "run_id": "3f1af413-ac3e-439b-a820-a42441df8d68",
+            "stage": "returns_investigation",
+            "ok": true,
+            "prompt_tokens": 1115,
+            "completion_tokens": 16,
+            "usage_reported": true,
+            "duration_ms": 7349
+          },
+          {
+            "run_id": "3f1af413-ac3e-439b-a820-a42441df8d68",
+            "stage": "ResolutionDecision",
+            "ok": true,
+            "prompt_tokens": 1101,
+            "completion_tokens": 62,
+            "usage_reported": true,
+            "duration_ms": 3153
+          },
+          {
+            "run_id": "3f1af413-ac3e-439b-a820-a42441df8d68",
+            "stage": "AnswerSchema",
+            "ok": true,
+            "prompt_tokens": 1269,
+            "completion_tokens": 56,
+            "usage_reported": true,
+            "duration_ms": 3016
+          },
+          {
+            "run_id": "3f1af413-ac3e-439b-a820-a42441df8d68",
+            "stage": "JudgeVerdict",
+            "ok": true,
+            "prompt_tokens": 1491,
+            "completion_tokens": 14,
+            "usage_reported": true,
+            "duration_ms": 14627
+          }
+        ]
+      },
+      "embedding_usage": {
+        "model": "all-minilm",
+        "calls": 1,
+        "failed_calls": 0,
+        "reported_tokens": 4,
+        "events": [
+          {
+            "run_id": "3f1af413-ac3e-439b-a820-a42441df8d68",
+            "ok": true,
+            "texts": 1,
+            "tokens": 4,
+            "duration_ms": 13
+          }
+        ]
+      },
+      "trace": [
+        {
+          "agent": "orchestrator",
+          "role": "Classify customer goals, plan dependencies and aggregate grounded results.",
+          "plan": [
+            "Refund request for order O1002. No previous plan provided, so no further action needed."
+          ],
+          "started_ms": 26731934.056,
+          "ended_ms": 26736026.783,
+          "duration_ms": 4092,
+          "sources": []
+        },
+        {
+          "agent": "returns_investigation",
+          "role": "Verify order ownership, return window, condition and review signals.",
+          "plan": [
+            "policy_search",
+            "investigate"
+          ],
+          "started_ms": 26736027.648,
+          "ended_ms": 26744367.757,
+          "duration_ms": 8340,
+          "sources": [
+            "returns.md#0",
+            "governance.md#0",
+            "shipping.md#0"
+          ],
+          "execution": "llm_tools",
+          "tool_calls": [
+            {
+              "tool": "policy_search",
+              "arguments": {
+                "query": "Refund"
+              },
+              "status": "ok"
+            },
+            {
+              "tool": "investigate",
+              "arguments": {},
+              "status": "ok"
+            }
+          ]
+        },
+        {
+          "agent": "resolution",
+          "role": "Propose a policy-compliant resolution; never execute a payment.",
+          "plan": [
+            "Confirm refund request with customer",
+            "Evaluate policy exception",
+            "Initiate human review",
+            "Process refund via warehouse inspection"
+          ],
+          "started_ms": 26744368.409,
+          "ended_ms": 26747524.17,
+          "duration_ms": 3155,
+          "sources": [],
+          "execution": "llm_decision"
+        }
+      ],
+      "draft_answer": "The requested refund for order O1002 is pending human review due to the refund amount exceeding EUR 150. The refund is not yet processed, and a warehouse inspection is required. The outfit for this case is empty.",
+      "answer": "The requested refund for order O1002 is pending human review due to the refund amount exceeding EUR 150. The refund is not yet processed, and a warehouse inspection is required. The outfit for this case is empty."
+    },
+    {
+      "id": "parallel_tracking_styling",
+      "iteration": 2,
+      "passed": false,
+      "checks": {
+        "exact_roles": true,
+        "quality": true,
+        "budget_extracted": true,
+        "budget": true,
+        "stock": true,
+        "outfit_presence": true,
+        "size": true,
+        "status": true,
+        "parallel_overlap": true,
+        "stylist_after_discovery": true,
+        "real_llm": true,
+        "no_fallback": false,
+        "required_model_stages": true
+      },
+      "latency_ms": 71307,
+      "judged": true,
+      "degraded": true,
+      "warnings": [
+        "personal_stylist: model choice failed (ValueError); feasible outfit used."
+      ],
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "deterministic": false
+      },
+      "model_usage": {
+        "model": "atlas-local",
+        "calls": 8,
+        "failed_calls": 0,
+        "prompt_tokens": 10812,
+        "completion_tokens": 504,
+        "usage_complete": true,
+        "estimated_cost_usd": 0.0,
+        "events": [
+          {
+            "run_id": "023977b9-c86e-49cf-a82e-77f996bfe4b9",
+            "stage": "Plan",
+            "ok": true,
+            "prompt_tokens": 557,
+            "completion_tokens": 99,
+            "usage_reported": true,
+            "duration_ms": 4867
+          },
+          {
+            "run_id": "023977b9-c86e-49cf-a82e-77f996bfe4b9",
+            "stage": "order_tracking",
+            "ok": true,
+            "prompt_tokens": 420,
+            "completion_tokens": 40,
+            "usage_reported": true,
+            "duration_ms": 2008
+          },
+          {
+            "run_id": "023977b9-c86e-49cf-a82e-77f996bfe4b9",
+            "stage": "product_discovery",
+            "ok": true,
+            "prompt_tokens": 430,
+            "completion_tokens": 71,
+            "usage_reported": true,
+            "duration_ms": 4813
+          },
+          {
+            "run_id": "023977b9-c86e-49cf-a82e-77f996bfe4b9",
+            "stage": "order_tracking",
+            "ok": true,
+            "prompt_tokens": 1166,
+            "completion_tokens": 49,
+            "usage_reported": true,
+            "duration_ms": 11381
+          },
+          {
+            "run_id": "023977b9-c86e-49cf-a82e-77f996bfe4b9",
+            "stage": "order_tracking",
+            "ok": true,
+            "prompt_tokens": 1427,
+            "completion_tokens": 15,
+            "usage_reported": true,
+            "duration_ms": 3574
+          },
+          {
+            "run_id": "023977b9-c86e-49cf-a82e-77f996bfe4b9",
+            "stage": "OutfitDecision",
+            "ok": true,
+            "prompt_tokens": 1473,
+            "completion_tokens": 128,
+            "usage_reported": true,
+            "duration_ms": 7378
+          },
+          {
+            "run_id": "023977b9-c86e-49cf-a82e-77f996bfe4b9",
+            "stage": "AnswerSchema",
+            "ok": true,
+            "prompt_tokens": 2549,
+            "completion_tokens": 88,
+            "usage_reported": true,
+            "duration_ms": 7482
+          },
+          {
+            "run_id": "023977b9-c86e-49cf-a82e-77f996bfe4b9",
+            "stage": "JudgeVerdict",
+            "ok": true,
+            "prompt_tokens": 2790,
+            "completion_tokens": 14,
+            "usage_reported": true,
+            "duration_ms": 34570
+          }
+        ]
+      },
+      "embedding_usage": {
+        "model": "all-minilm",
+        "calls": 3,
+        "failed_calls": 0,
+        "reported_tokens": 50,
+        "events": [
+          {
+            "run_id": "023977b9-c86e-49cf-a82e-77f996bfe4b9",
+            "ok": true,
+            "texts": 1,
+            "tokens": 19,
+            "duration_ms": 18
+          },
+          {
+            "run_id": "023977b9-c86e-49cf-a82e-77f996bfe4b9",
+            "ok": true,
+            "texts": 1,
+            "tokens": 19,
+            "duration_ms": 14
+          },
+          {
+            "run_id": "023977b9-c86e-49cf-a82e-77f996bfe4b9",
+            "ok": true,
+            "texts": 1,
+            "tokens": 12,
+            "duration_ms": 40
+          }
+        ]
+      },
+      "trace": [
+        {
+          "agent": "orchestrator",
+          "role": "Classify customer goals, plan dependencies and aggregate grounded results.",
+          "plan": [
+            "Track order O1001 and build a smart casual outfit under EUR 150, size M."
+          ],
+          "started_ms": 26765233.676,
+          "ended_ms": 26770104.418,
+          "duration_ms": 4870,
+          "sources": []
+        },
+        {
+          "agent": "order_tracking",
+          "role": "Look up verified shipment status and report source freshness.",
+          "plan": [
+            "policy_search",
+            "shipment",
+            "shipment"
+          ],
+          "started_ms": 26770105.422,
+          "ended_ms": 26787098.483,
+          "duration_ms": 16993,
+          "sources": [
+            "styling.md#0",
+            "returns.md#0",
+            "shipping.md#0"
+          ],
+          "execution": "llm_tools",
+          "tool_calls": [
+            {
+              "tool": "policy_search",
+              "arguments": {
+                "query": "Track O1001 and build a smart casual outfit under EUR 150, size M"
+              },
+              "status": "ok"
+            },
+            {
+              "tool": "shipment",
+              "status": "invalid_arguments"
+            },
+            {
+              "tool": "shipment",
+              "arguments": {},
+              "status": "ok"
+            }
+          ]
+        },
+        {
+          "agent": "product_discovery",
+          "role": "Find available products respecting size and budget.",
+          "plan": [
+            "policy_search",
+            "product_search"
+          ],
+          "started_ms": 26770108.125,
+          "ended_ms": 26775020.514,
+          "duration_ms": 4912,
+          "sources": [
+            "styling.md#0",
+            "returns.md#0",
+            "shipping.md#0"
+          ],
+          "execution": "llm_tools",
+          "tool_calls": [
+            {
+              "tool": "policy_search",
+              "arguments": {
+                "query": "Track O1001 and build a smart casual outfit under EUR 150, size M"
+              },
+              "status": "ok"
+            },
+            {
+              "tool": "product_search",
+              "arguments": {
+                "query": "smart casual outfit under EUR 150, size M"
+              },
+              "status": "ok"
+            }
+          ]
+        },
+        {
+          "agent": "personal_stylist",
+          "role": "Assemble compatible pieces respecting the total outfit budget.",
+          "plan": [
+            "Feasible complete outfit ranked by discovery relevance and total budget.",
+            "Validate exact variants, size, compatibility and total budget"
+          ],
+          "started_ms": 26787099.685,
+          "ended_ms": 26794482.422,
+          "duration_ms": 7382,
+          "sources": [],
+          "execution": "fallback"
+        }
+      ],
+      "draft_answer": "The suggested outfit is Atlas Olive Knitwear 048 (EUR 39.00), Atlas Navy Trousers 090 (EUR 79.00), and Atlas Blue Shoes 069 (EUR 29.00). Total: EUR 147.00. Shipment status: delivered (cached mock carrier record).",
+      "answer": "The suggested outfit is Atlas Olive Knitwear 048 (EUR 39.00), Atlas Navy Trousers 090 (EUR 79.00), and Atlas Blue Shoes 069 (EUR 29.00). Total: EUR 147.00. Shipment status: delivered (cached mock carrier record)."
+    }
+  ]
+}

@@ -50,17 +50,22 @@ def test_carrier_timeout_falls_back(client, monkeypatch):
 
 
 def test_judge_failure_blocks_action(client):
-    from atlas.schemas import Plan, AgentPlan, JudgeVerdict
+    from atlas.schemas import Plan, ResolutionDecision, JudgeVerdict
     model = client.app.state.pipeline.model
     model.client = object()
     def structured(schema,system,payload):
         if schema is Plan:
             return Plan(intents=['returns_investigation'],order_id='O1002')
-        if schema is AgentPlan:
-            return AgentPlan(steps=['Verify evidence'])
+        if schema is ResolutionDecision:
+            return ResolutionDecision(recommendation='review_exception',reason='High-value return',
+                                      next_steps=['Customer confirmation','Human review'])
         if schema is JudgeVerdict:
             raise TimeoutError()
     model.structured = structured
+    def tool_loop(role,payload,registry,required):
+        return {name:entry['call'](**({'query':'return policy'} if name=='policy_search' else {}))
+                for name,entry in registry.items()}, []
+    model.tool_loop = tool_loop
     model.compose = lambda *args:'Refund proposal, pending review.'
     r = chat(client,login(client),'Refund O1002')
     assert r['judged']
@@ -69,7 +74,7 @@ def test_judge_failure_blocks_action(client):
 
 
 def test_protected_customer_session_bootstrap(tmp_path):
-    config = Settings(database_url='sqlite:///'+str(tmp_path/'secure.db'),
+    config = Settings(_env_file=None, database_url='sqlite:///'+str(tmp_path/'secure.db'),
         chroma_path=str(tmp_path/'chroma'),data_dir=str(Path('data').resolve()),
         demo_access=False,customer_tokens={'customer-secret':'C0001'})
     with TestClient(create_app(config)) as c:

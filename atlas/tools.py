@@ -58,7 +58,7 @@ class Tools:
             review_reasons=reasons + (['Refund exceeds EUR 150'] if order['total_cents'] > 15000 else [])
             + (['Repeat-return review signal (not a fraud finding)'] if profile['previous_returns'] >= 3 else []))
 
-    def catalog(self, size, category=None, budget_cents=None, style=None):
+    def catalog(self, size, category=None, budget_cents=None, style=None, limit=30):
         query = select(db.products, db.variants.c.id.label('variant_id'), db.variants.c.size,
             db.variants.c.stock).join(db.variants).where(
                 and_(db.variants.c.size == size, db.variants.c.stock > 0))
@@ -69,7 +69,7 @@ class Tools:
         with self.engine.connect() as c:
             rows = [dict(x) for x in c.execute(query).mappings()]
         rows.sort(key=lambda p: (p['style'] != style, p['price_cents'], p['id']))
-        return rows[:30]
+        return rows if limit is None else rows[:limit]
 
     def shipment(self, customer_id, order_id):
         order = self.order(customer_id, order_id)
@@ -84,12 +84,14 @@ class Tools:
             try:
                 # Operator-configured origin only; order ID has already passed ownership validation.
                 r = httpx.get(self.config.carrier_base_url.rstrip('/')+'/shipments/'+record['id'],
-                    headers={'Authorization':'Bearer '+self.config.carrier_api_key}, timeout=5)
+                    headers={'Authorization':'Bearer '+self.config.carrier_api_key}
+                        if self.config.carrier_api_key else {}, timeout=5)
                 r.raise_for_status()
                 live = r.json()
-                if live.get('status') not in {'in_transit','delivered','delayed','lost'}:
+                if not isinstance(live, dict) or live.get('status') not in {'in_transit','delivered','delayed','lost'}:
                     raise ValueError('Invalid carrier payload')
-                cached.update(status=live['status'], source='live carrier API')
+                cached.update(status=live['status'], source='live mock carrier API'
+                              if live.get('provider') == 'simulation' else 'live carrier API')
                 return {'found':True, **cached}
             except (httpx.HTTPError, ValueError):
                 cached['warning'] = 'Carrier unavailable; showing last synchronized status'

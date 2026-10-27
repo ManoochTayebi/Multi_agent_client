@@ -20,6 +20,8 @@ The generator uses local pseudorandom sampling, stable IDs and a checksum manife
 
 Curated orders: O1001 is within 10 days of delivery (EUR 79), O1002 is within 5 days but EUR 249, O1003 is 55 days old, and O1004 belongs to a different customer and is delayed. C0001 owns O1001–O1003; C0002 owns O1004–O1006.
 
+For semantic indexing, `atlas/retrieval.py` adds factual garment-category definitions to the short synthetic descriptions. These explain construction/use, without asserting materials or fit. SQL remains authoritative for price and availability. This development enrichment was evaluated on disclosed development probes, not a held-out catalog.
+
 Limitations: sizes are apparel labels even for footwear; each order contains one line; shipping geography and tax are simplified; no actual fraud labels exist; previous returns are a review signal only. These records test software contracts and policy scenarios, not personalization effectiveness, real fraud detection or production fairness. Delivery records include a fixed estimate; only in-transit estimates are shown as non-guaranteed dates.
 
 To regenerate: `python -m atlas.dataset`. To use another seed: `python -m atlas.dataset --seed 43 --directory /path/to/new-data`. Copy the policy directory too and point `DATA_DIR` at that tree. Use a fresh SQL database and Chroma directory for a new experiment. Startup never deletes an existing customer database.

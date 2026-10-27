@@ -70,6 +70,9 @@ def create_app(config=None):
             c.execute(select(1))
         count = app.state.pipeline.knowledge.collection.count()
         return {'status':'ok', 'mode':config.atlas_mode, 'policy_chunks':count,
+                'indexed_products':app.state.pipeline.knowledge.product_collection.count(),
+                'retrieval':'semantic' if config.embedding_model else 'lexical',
+                'chat_model':config.openai_model if config.atlas_mode == 'llm' else None,
                 'synthetic_clock':str(config.as_of_date), 'demo_access':config.demo_access,
                 'payments':'simulation'}
 

@@ -13,11 +13,17 @@ The business case should be evaluated with measured handling time, resolution ra
 | Orchestrator | Current request, prior plan | Previous routing plans | Validated intent plan and dependency selection |
 | Returns investigation | Owned SQL order, condition, return history, policy RAG | Prior investigation evidence | Eligibility and human-review signals |
 | Resolution | Investigation evidence; current order revalidation | Prior resolution proposals | Bounded refund proposal or exception review |
-| Product discovery | Profile; catalog/variant SQL; policy RAG | Prior discovery evidence | Available products filtered by size, budget and category |
+| Product discovery | Profile; semantic product search constrained by catalog/variant SQL; policy RAG | Prior discovery evidence | Semantically ranked, diverse candidate set with live size, budget, category and stock checks |
 | Order tracking | Owned order; live carrier API or cache; shipping RAG | Prior shipment evidence | Status and source freshness |
-| Personal stylist | Discovery evidence and total budget | Prior outfit evidence | Complementary categories under total budget |
+| Personal stylist | Discovery variants, requested occasion and total budget | Prior outfit evidence | Model-selected exact variants, verified compatibility, size and total budget |
 
-In LLM mode each selected specialist creates a bounded plan using its own prior memory. The central orchestrator selects workers dynamically; the worker executes trusted domain tools. The execution sequence remains constrained by business dependencies. Discovery ranks products using explicit style/price rules, and the stylist uses a transparent greedy baseline. Neither is a trained recommender.
+In LLM mode the orchestrator extracts structured semantic intent and constraints. Explicit budget, size, category and order-ID literals are bound by trusted parsing before downstream tools run; model-value corrections are traced. This prevents a model from changing a stated EUR 1 cap into EUR 150. These input guards are separate from semantic intent selection. Independent evidence agents select native function calls and search queries from separate registries. Each specialist can make up to three model rounds/six tool calls; invalid arguments are returned as tool errors so it can correct them. Minimum evidence contracts require both a domain lookup and policy retrieval. Missing evidence, including an attempted early answer, prompts the specialist to call the missing tools within the same three-round budget. Denied tools or an exhausted budget trigger an explicit degraded fallback. SQL identity, order ID and commerce constraints are bound by the server, never accepted as tool arguments.
+
+Discovery retrieves semantic relevance from Chroma, restricts IDs to the authoritative SQL-eligible variants, and keeps category diversity for outfit construction. Factual garment-category definitions enrich the repetitive fictional descriptions. SQL size, stock, price and category checks precede ranking, avoiding the old arbitrary top-30 lexical/style ordering. The stylist consumes this shortlist and chooses exact variants for complementary garments, with a brief customer-facing explanation. Validation rejects invented/duplicate variants, incorrect size, invalid combinations and excess total spend. The stylist gets one model repair attempt with explicit validation feedback; both choices are traced. Only exhausted or unavailable model decisions use a labeled fallback. The deterministic baseline enumerates feasible complete combinations rather than greedily choosing unaffordable separates. No complete combination produces a clear request to adjust constraints.
+
+Returns investigation establishes facts and review signals. Resolution consumes those facts and cited policy to decide a standard refund proposal, exception review or human support, with next steps. It cannot set money or waive required review. Human-support recommendations suppress automated proposals. The orchestrator combines results and synthesizes a grounded reply; it does not repeat specialist investigation. Model judgements of risky/financial or multi-intent replies run as a separate quality call after deterministic checks, with no additional business role.
+
+These remain bounded agents, not autonomous financial operators. Deterministic domain rules are intentional trust boundaries. Demo mode uses explicit fixed tool/decision baselines; it never simulates model calls. Traces distinguish `demo`, `llm_tools`, `llm_decision`, `fallback`, `failed` and `no_feasible_outfit` executions. Per-run usage is isolated across parallel worker contexts and saved with SQL run history.
 
 ## Persistence and state
 
@@ -27,11 +33,11 @@ SQLAlchemy supports SQLite locally and PostgreSQL in Compose. SQL stores domain 
 
 ## Trust boundaries
 
-User input and retrieved content are data. The model never selects customer identity, executes arbitrary SQL, sets refund amounts, or selects arbitrary API URLs. Parameterized SQL is scoped to the authenticated customer. State and model responses use Pydantic schemas. Session tokens expire after 24 hours.
+User input and retrieved content are data. The model never selects customer identity, executes arbitrary SQL, sets refund amounts, or selects arbitrary API URLs. Parameterized SQL is scoped to the authenticated customer. Model responses and public request bodies use Pydantic schemas; graph state uses a typed dictionary. Tool schemas forbid unknown arguments. Session tokens expire after 24 hours.
 
 Demo access is intentionally permissive because every account is fictional. Protected mode uses a minimal operator-configured token map; enterprise SSO and granular operator identity are future work. Operator audit currently identifies a shared operator role, not an individually authenticated employee.
 
-LLM text can still contain unsupported claims: structured validation covers domain evidence and proposals, and an independent model judge is applied only to complex/high-risk runs. A judge is not a proof of factual accuracy. A production rollout needs held-out evaluation, adversarial tests, citation-claim checks and operator sampling.
+LLM text can still contain unsupported claims: structured validation covers domain evidence and proposals, and an independent model judge is applied to financial and multi-intent runs. A judge is not a proof of factual accuracy. A production rollout needs held-out evaluation, adversarial tests, citation-claim checks and operator sampling.
 
 ## Scaling projection
 
@@ -41,7 +47,7 @@ Configuration and schema creation currently use `metadata.create_all`, not a ver
 
 ## Error behavior
 
-Provider routing/planning/synthesis failures use visible deterministic fallback. Tool failures produce missing-evidence markers and block quality validation. A judge timeout blocks proposals. Carrier failures use labeled cached data. Unexpected pipeline failures return 503 and persist a failed run. The UI offers retry without silently changing identities or claiming that an action completed.
+Provider routing/tool-selection/decision/synthesis failures use visible deterministic fallback. Tool failures produce missing-evidence markers and block quality validation. A judge timeout blocks proposals. Carrier failures use labeled cached data. Unexpected pipeline failures return 503 and persist a failed run. The UI offers retry without silently changing identities or claiming that an action completed.
 
 ## Technical references
 

@@ -13,6 +13,14 @@ services:
       OPENAI_MODEL: ${OPENAI_MODEL:-}
       OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.openai.com/v1}
       EMBEDDING_MODEL: ${EMBEDDING_MODEL:-}
+      LLM_TOKEN_PARAMETER: ${LLM_TOKEN_PARAMETER:-max_completion_tokens}
+      LLM_JSON_SCHEMA: ${LLM_JSON_SCHEMA:-true}
+      LLM_MAX_TOKENS: ${LLM_MAX_TOKENS:-800}
+      LLM_TIMEOUT_SECONDS: ${LLM_TIMEOUT_SECONDS:-180}
+      LLM_MAX_RETRIES: ${LLM_MAX_RETRIES:-0}
+      LLM_REASONING_EFFORT: ${LLM_REASONING_EFFORT:-}
+      INPUT_COST_PER_MILLION: ${INPUT_COST_PER_MILLION:-}
+      OUTPUT_COST_PER_MILLION: ${OUTPUT_COST_PER_MILLION:-}
       CARRIER_BASE_URL: http://carrier:8001
     volumes: ["atlas-runtime:/app/runtime"]
     depends_on:

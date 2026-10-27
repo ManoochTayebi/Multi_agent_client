@@ -2,11 +2,23 @@
 
 ## Verified local service
 
-Install with Python 3.12, run `python -m uvicorn atlas.api:app --host 127.0.0.1 --port 8000`, then check `/health`. The main UI, chat and operator endpoints share one service. Data initialization runs at startup. Runtime state is stored in `runtime/`, separate from version-controlled fixtures.
+Install with Python 3.12+ (the recorded Mac run uses Python 3.13.9), run `python -m uvicorn atlas.api:app --host 127.0.0.1 --port 8000`, then check `/health`. The main UI, chat and operator endpoints share one service. Data initialization runs at startup. Runtime state is stored in `runtime/`, separate from version-controlled fixtures.
+
+For local LLM setup, use [LOCAL_MODELS.md](LOCAL_MODELS.md). To exercise the included carrier over real HTTP in a second terminal:
+
+```bash
+python -m uvicorn atlas.mock_carrier:app --host 127.0.0.1 --port 8001
+# Start/restart the main API with this environment override:
+CARRIER_BASE_URL=http://127.0.0.1:8001 python -m uvicorn atlas.api:app --host 127.0.0.1 --port 8000
+```
+
+The adapter omits authorization when no carrier key is configured and labels the included simulator as `live mock carrier API`. With no origin configured, it uses `cached mock carrier record`. Neither is a real carrier integration.
 
 ## Docker Compose
 
 Copy `.env.example` to `.env`, set unique `POSTGRES_PASSWORD` and `ADMIN_API_KEY`, then `docker compose up --build -d`. Three services start: API, PostgreSQL 16, and a mock carrier HTTP API. Named volumes persist database and Chroma state. `docker compose logs -f api` shows operational logs. `docker compose down` stops services; do not add `-v` unless you intend to remove the stored state.
+
+When using Ollama on the host, `localhost` inside the API container refers to that container. Configure an explicitly reachable host origin (on Docker Desktop, commonly `http://host.docker.internal:11434/v1`) and the local token/reasoning settings; the native `.env.local.example` profile is intended for running Python directly. Compose does not download or run Ollama.
 
 The API binds the published port to localhost. Use a TLS reverse proxy for remote access. The container runs as UID 10001 and needs a writable `/app/runtime` mount. The image exposes port 8000 by default and honors `PORT` for hosted environments.
 
@@ -24,11 +36,11 @@ On pushes to main and pull requests, `ci.yml` runs lint, pytest, scenario evalua
 
 ## Operational checks
 
-1. `/health` must report SQL and policy availability.
+1. `/health` must report SQL, policy and catalog-index availability; semantic mode and configured model should be visible. This health endpoint does not make an inference call or prove model quality.
 2. Authenticated `/metrics` should show successful run growth; monitor failed/review runs and latency. Model counters are process-local and reset after restart.
 3. Review pending actions in Operations. Approval requires an explicit reason; no human review can precede customer confirmation.
 4. Drain the simulation outbox from Operations. There is intentionally no automatic real payment adapter.
-5. Back up both SQL and Chroma runtime storage. Rebuild Chroma from policy files if necessary.
+5. Back up both SQL and Chroma runtime storage. Rebuild Chroma from versioned policy files and the generated catalog if necessary.
 6. To roll back, deploy a previously validated image tag with a compatible database schema. There is no automated schema migration or downgrade tool in v1.
 
 ## Not yet production integrations

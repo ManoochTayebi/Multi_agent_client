@@ -7,7 +7,7 @@ from atlas.config import Settings
 
 @pytest.fixture
 def client(tmp_path):
-    config = Settings(database_url='sqlite:///'+str(tmp_path/'test.db'),
+    config = Settings(_env_file=None, database_url='sqlite:///'+str(tmp_path/'test.db'),
         chroma_path=str(tmp_path/'chroma'), data_dir=str(Path('data').resolve()),
         admin_api_key='test-operator-key', atlas_mode='demo', demo_access=True)
     with TestClient(create_app(config)) as c:

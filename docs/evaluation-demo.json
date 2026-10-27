@@ -1,146 +1,1596 @@
 {
   "mode": "demo",
-  "cases": 12,
-  "passed": 12,
+  "model": null,
+  "recorded_at_utc": "2026-10-26T22:15:25.116048+00:00",
+  "source_sha256": {
+    "atlas/__init__.py": "282d7bd75ee3661f2b64d69037ac142e2c33426a1e1ea47afa06d04c52fb86f4",
+    "atlas/actions.py": "c0104172323b41cca924f29dfbbb88260ff1bb2f7d3b3bd7a76531f1f1ace4ea",
+    "atlas/agents.py": "9ca3377137b31719cd9a9c97deeee632299147136d8b225e17e67a001636b0ad",
+    "atlas/api.py": "eeca255509fe56dd4aa2588e6f81e44b590e81e537e2a52c9120220a52eca814",
+    "atlas/config.py": "7ea7231257d6340e9bd7f3b26345a911277cf990c6fccb2c7247f739f9f3ab3a",
+    "atlas/dataset.py": "a197b1bc7b36dee6c20c8f7f266616081fe3455e5724620aaca2336666af5909",
+    "atlas/db.py": "e66f7874be3a0a00c43f3e10f8d4ddbd643755d7b24fa287b1e205e415ee10ff",
+    "atlas/mock_carrier.py": "0962e18b7a5afe44a9e405550e2134b6c8fe58cb172af8818a151621514979ee",
+    "atlas/model.py": "34e74d451570d86116f13d985cdec7719e086a8cc62caf3a96c6893a99d2a1fc",
+    "atlas/retrieval.py": "2c7ca2c6f09c4cad48835895563752cd6366aa671aca36ebe04094910fc67482",
+    "atlas/schemas.py": "530b6f3d13c027f020db8b14c63bd5d3c48d4f40d23a415724d7e11bc74f8e84",
+    "atlas/specialists.py": "fa067b38cb1f23e180ccd2276cae780524dd8475a7155e521f9b7dc5e6d24bd6",
+    "atlas/tools.py": "a3b670be1e016c51609bba2b2be88136a198371982e5d33396ff91e21bce3d51",
+    "models/Modelfile": "f7e7b8ec9d835cb5812d3fd441d5b299b90d0e431d27fc339f48c8eddd34f747",
+    "scripts/evaluate.py": "ba9f06a27cea974b9b6ecd7954f9329058ab0cdad88ffdebdf65f5d37a3e4053"
+  },
+  "embedding_model": "lexical-hash-512-v1",
+  "suite": "all",
+  "repeat": 1,
+  "cases": 13,
+  "passed": 13,
   "pass_rate": 1.0,
-  "retrieval_recall_at_2": 1.0,
-  "latency_p50_ms": 8.0,
-  "latency_p95_ms": 14,
-  "limitations": "Curated synthetic integration cases; not a held-out customer benchmark or production SLA.",
+  "degraded_runs": 0,
+  "literal_constraint_corrections": 0,
+  "model_calls": 0,
+  "model_tokens": 0,
+  "estimated_chat_cost_usd": null,
+  "retrieval_recall_at_2": 0.5,
+  "product_category_recall_at_3": 1.0,
+  "latency_p50_ms": 10,
+  "latency_p95_ms": 23,
+  "limitations": "Curated development cases, tuned during development; not held-out quality or an SLA. Independent judge call uses the same model; its errors may correlate. Latency includes model cold starts but excludes app/index startup. Cost excludes embeddings, hardware and operations; null means unknown. Local zero provider charges do not imply zero operating cost.",
+  "retrieval_probes": [
+    {
+      "query": "refund return window",
+      "expected": "returns.md",
+      "sources": [
+        "returns.md#0",
+        "governance.md#0"
+      ],
+      "hit": true
+    },
+    {
+      "query": "carrier shipping delayed",
+      "expected": "shipping.md",
+      "sources": [
+        "shipping.md#0",
+        "returns.md#0"
+      ],
+      "hit": true
+    },
+    {
+      "query": "outfit stock budget size",
+      "expected": "styling.md",
+      "sources": [
+        "styling.md#0",
+        "shipping.md#0"
+      ],
+      "hit": true
+    },
+    {
+      "query": "customer privacy SQL",
+      "expected": "governance.md",
+      "sources": [
+        "governance.md#0",
+        "returns.md#0"
+      ],
+      "hit": true
+    },
+    {
+      "query": "Can I send back something I wore yesterday?",
+      "expected": "returns.md",
+      "sources": [
+        "governance.md#0",
+        "styling.md#0"
+      ],
+      "hit": false
+    },
+    {
+      "query": "My parcel has not arrived and the courier is offline",
+      "expected": "shipping.md",
+      "sources": [
+        "returns.md#0",
+        "styling.md#0"
+      ],
+      "hit": false
+    },
+    {
+      "query": "Combine garments without spending more than my allowance",
+      "expected": "styling.md",
+      "sources": [
+        "shipping.md#0",
+        "governance.md#0"
+      ],
+      "hit": false
+    },
+    {
+      "query": "Someone asks to see a different shopper purchase history",
+      "expected": "governance.md",
+      "sources": [
+        "styling.md#0",
+        "returns.md#0"
+      ],
+      "hit": false
+    }
+  ],
+  "product_probes": [
+    {
+      "query": "Something to wear on my feet",
+      "expected_category": "shoes",
+      "categories": [
+        "shoes",
+        "shoes",
+        "shoes"
+      ],
+      "hit": true
+    },
+    {
+      "query": "A one-piece garment for a gala",
+      "expected_category": "dress",
+      "categories": [
+        "dress",
+        "dress",
+        "dress"
+      ],
+      "hit": true
+    }
+  ],
   "results": [
     {
       "id": "return_standard",
+      "iteration": 1,
       "passed": true,
       "checks": {
-        "expected_roles": true,
+        "exact_roles": true,
         "quality": true,
         "eligibility": true
       },
-      "latency_ms": 17,
-      "judged": false
+      "latency_ms": 23,
+      "judged": false,
+      "degraded": false,
+      "warnings": [],
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "deterministic": true
+      },
+      "plan": {
+        "intents": [
+          "returns_investigation"
+        ],
+        "order_id": "O1001",
+        "category": null,
+        "budget_cents": null,
+        "size": null,
+        "language": "en",
+        "rationale": "Route independent evidence tasks first; resolve and style after prerequisites."
+      },
+      "model_usage": {
+        "model": "atlas-local",
+        "calls": 0,
+        "failed_calls": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "usage_complete": false,
+        "estimated_cost_usd": null,
+        "events": []
+      },
+      "embedding_usage": {
+        "model": "lexical-hash-512-v1",
+        "calls": 0,
+        "failed_calls": 0,
+        "reported_tokens": 0,
+        "events": []
+      },
+      "trace": [
+        {
+          "agent": "orchestrator",
+          "role": "Classify customer goals, plan dependencies and aggregate grounded results.",
+          "plan": [
+            "Route independent evidence tasks first; resolve and style after prerequisites."
+          ],
+          "started_ms": 29511764.402,
+          "ended_ms": 29511769.411,
+          "duration_ms": 5,
+          "sources": [],
+          "constraint_corrections": [],
+          "bound_constraints": {
+            "order_id": "O1001"
+          }
+        },
+        {
+          "agent": "returns_investigation",
+          "role": "Verify order ownership, return window, condition and review signals.",
+          "plan": [
+            "investigate",
+            "policy_search"
+          ],
+          "started_ms": 29511770.27,
+          "ended_ms": 29511776.302,
+          "duration_ms": 6,
+          "sources": [
+            "returns.md#0",
+            "governance.md#0"
+          ],
+          "execution": "demo",
+          "tool_calls": [
+            {
+              "tool": "investigate",
+              "arguments": {},
+              "status": "ok"
+            },
+            {
+              "tool": "policy_search",
+              "arguments": {
+                "query": "return refund window unworn human approval"
+              },
+              "status": "ok"
+            }
+          ],
+          "failed_model_tool_calls": []
+        },
+        {
+          "agent": "resolution",
+          "role": "Propose a policy-compliant resolution; never execute a payment.",
+          "plan": [
+            "Customer confirmation",
+            "Warehouse inspection",
+            "Simulated original-method refund"
+          ],
+          "started_ms": 29511776.962,
+          "ended_ms": 29511777.902,
+          "duration_ms": 0,
+          "sources": [],
+          "execution": "demo"
+        }
+      ],
+      "draft_answer": "Order O1001: Within window with verified unworn condition. Proposed refund: EUR 79.00. Eligible under the standard return policy. Confirm the proposal using the confirmation button. Warehouse inspection is required. No payment has been executed.\n\nSources: governance.md#0, returns.md#0",
+      "answer": "Order O1001: Within window with verified unworn condition. Proposed refund: EUR 79.00. Eligible under the standard return policy. Confirm the proposal using the confirmation button. Warehouse inspection is required. No payment has been executed.\n\nSources: governance.md#0, returns.md#0"
     },
     {
       "id": "return_high_value",
+      "iteration": 1,
       "passed": true,
       "checks": {
-        "expected_roles": true,
+        "exact_roles": true,
         "quality": true,
-        "review": true
+        "review": true,
+        "proposal": true,
+        "premature_approval_blocked": true,
+        "customer_confirmation": true,
+        "review_queue": true,
+        "human_approval": true,
+        "simulated_completion": true,
+        "idempotent_drain": true,
+        "audit_trail": true
       },
-      "latency_ms": 10,
-      "judged": false
+      "latency_ms": 13,
+      "judged": false,
+      "degraded": false,
+      "warnings": [],
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "deterministic": true
+      },
+      "plan": {
+        "intents": [
+          "returns_investigation"
+        ],
+        "order_id": "O1002",
+        "category": null,
+        "budget_cents": null,
+        "size": null,
+        "language": "en",
+        "rationale": "Route independent evidence tasks first; resolve and style after prerequisites."
+      },
+      "model_usage": {
+        "model": "atlas-local",
+        "calls": 0,
+        "failed_calls": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "usage_complete": false,
+        "estimated_cost_usd": null,
+        "events": []
+      },
+      "embedding_usage": {
+        "model": "lexical-hash-512-v1",
+        "calls": 0,
+        "failed_calls": 0,
+        "reported_tokens": 0,
+        "events": []
+      },
+      "trace": [
+        {
+          "agent": "orchestrator",
+          "role": "Classify customer goals, plan dependencies and aggregate grounded results.",
+          "plan": [
+            "Route independent evidence tasks first; resolve and style after prerequisites."
+          ],
+          "started_ms": 29511798.741,
+          "ended_ms": 29511800.553,
+          "duration_ms": 1,
+          "sources": [],
+          "constraint_corrections": [],
+          "bound_constraints": {
+            "order_id": "O1002"
+          }
+        },
+        {
+          "agent": "returns_investigation",
+          "role": "Verify order ownership, return window, condition and review signals.",
+          "plan": [
+            "investigate",
+            "policy_search"
+          ],
+          "started_ms": 29511801.293,
+          "ended_ms": 29511805.54,
+          "duration_ms": 4,
+          "sources": [
+            "returns.md#0",
+            "governance.md#0"
+          ],
+          "execution": "demo",
+          "tool_calls": [
+            {
+              "tool": "investigate",
+              "arguments": {},
+              "status": "ok"
+            },
+            {
+              "tool": "policy_search",
+              "arguments": {
+                "query": "return refund window unworn human approval"
+              },
+              "status": "ok"
+            }
+          ],
+          "failed_model_tool_calls": []
+        },
+        {
+          "agent": "resolution",
+          "role": "Propose a policy-compliant resolution; never execute a payment.",
+          "plan": [
+            "Customer confirmation",
+            "Human approval",
+            "Simulated original-method refund"
+          ],
+          "started_ms": 29511805.971,
+          "ended_ms": 29511806.612,
+          "duration_ms": 0,
+          "sources": [],
+          "execution": "demo"
+        }
+      ],
+      "draft_answer": "Order O1002: Within window with verified unworn condition. Proposed refund: EUR 249.00. Human review is required before this can proceed. Confirm the proposal using the confirmation button. Warehouse inspection is required. No payment has been executed.\n\nSources: governance.md#0, returns.md#0",
+      "answer": "Order O1002: Within window with verified unworn condition. Proposed refund: EUR 249.00. Human review is required before this can proceed. Confirm the proposal using the confirmation button. Warehouse inspection is required. No payment has been executed.\n\nSources: governance.md#0, returns.md#0"
     },
     {
       "id": "return_late",
+      "iteration": 1,
       "passed": true,
       "checks": {
-        "expected_roles": true,
+        "exact_roles": true,
         "quality": true,
         "eligibility": true
       },
-      "latency_ms": 9,
-      "judged": false
+      "latency_ms": 11,
+      "judged": false,
+      "degraded": false,
+      "warnings": [],
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "deterministic": true
+      },
+      "plan": {
+        "intents": [
+          "returns_investigation"
+        ],
+        "order_id": "O1003",
+        "category": null,
+        "budget_cents": null,
+        "size": null,
+        "language": "en",
+        "rationale": "Route independent evidence tasks first; resolve and style after prerequisites."
+      },
+      "model_usage": {
+        "model": "atlas-local",
+        "calls": 0,
+        "failed_calls": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "usage_complete": false,
+        "estimated_cost_usd": null,
+        "events": []
+      },
+      "embedding_usage": {
+        "model": "lexical-hash-512-v1",
+        "calls": 0,
+        "failed_calls": 0,
+        "reported_tokens": 0,
+        "events": []
+      },
+      "trace": [
+        {
+          "agent": "orchestrator",
+          "role": "Classify customer goals, plan dependencies and aggregate grounded results.",
+          "plan": [
+            "Route independent evidence tasks first; resolve and style after prerequisites."
+          ],
+          "started_ms": 29511852.174,
+          "ended_ms": 29511853.553,
+          "duration_ms": 1,
+          "sources": [],
+          "constraint_corrections": [],
+          "bound_constraints": {
+            "order_id": "O1003"
+          }
+        },
+        {
+          "agent": "returns_investigation",
+          "role": "Verify order ownership, return window, condition and review signals.",
+          "plan": [
+            "investigate",
+            "policy_search"
+          ],
+          "started_ms": 29511854.054,
+          "ended_ms": 29511857.529,
+          "duration_ms": 3,
+          "sources": [
+            "returns.md#0",
+            "governance.md#0"
+          ],
+          "execution": "demo",
+          "tool_calls": [
+            {
+              "tool": "investigate",
+              "arguments": {},
+              "status": "ok"
+            },
+            {
+              "tool": "policy_search",
+              "arguments": {
+                "query": "return refund window unworn human approval"
+              },
+              "status": "ok"
+            }
+          ],
+          "failed_model_tool_calls": []
+        },
+        {
+          "agent": "resolution",
+          "role": "Propose a policy-compliant resolution; never execute a payment.",
+          "plan": [
+            "Customer confirmation",
+            "Human approval",
+            "Simulated original-method refund"
+          ],
+          "started_ms": 29511858.464,
+          "ended_ms": 29511859.278,
+          "duration_ms": 0,
+          "sources": [],
+          "execution": "demo"
+        }
+      ],
+      "draft_answer": "Order O1003: Outside the 30-day return window. Proposed refund: EUR 59.00. Human review is required before this can proceed. Confirm the proposal using the confirmation button. Warehouse inspection is required. No payment has been executed.\n\nSources: governance.md#0, returns.md#0",
+      "answer": "Order O1003: Outside the 30-day return window. Proposed refund: EUR 59.00. Human review is required before this can proceed. Confirm the proposal using the confirmation button. Warehouse inspection is required. No payment has been executed.\n\nSources: governance.md#0, returns.md#0"
     },
     {
       "id": "ownership_attack",
+      "iteration": 1,
       "passed": true,
       "checks": {
-        "expected_roles": true,
+        "exact_roles": true,
         "quality": true,
         "action": true
       },
-      "latency_ms": 6,
-      "judged": false
+      "latency_ms": 9,
+      "judged": false,
+      "degraded": false,
+      "warnings": [],
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "deterministic": true
+      },
+      "plan": {
+        "intents": [
+          "returns_investigation"
+        ],
+        "order_id": "O1004",
+        "category": null,
+        "budget_cents": null,
+        "size": null,
+        "language": "en",
+        "rationale": "Route independent evidence tasks first; resolve and style after prerequisites."
+      },
+      "model_usage": {
+        "model": "atlas-local",
+        "calls": 0,
+        "failed_calls": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "usage_complete": false,
+        "estimated_cost_usd": null,
+        "events": []
+      },
+      "embedding_usage": {
+        "model": "lexical-hash-512-v1",
+        "calls": 0,
+        "failed_calls": 0,
+        "reported_tokens": 0,
+        "events": []
+      },
+      "trace": [
+        {
+          "agent": "orchestrator",
+          "role": "Classify customer goals, plan dependencies and aggregate grounded results.",
+          "plan": [
+            "Route independent evidence tasks first; resolve and style after prerequisites."
+          ],
+          "started_ms": 29511872.559,
+          "ended_ms": 29511873.91,
+          "duration_ms": 1,
+          "sources": [],
+          "constraint_corrections": [],
+          "bound_constraints": {
+            "order_id": "O1004"
+          }
+        },
+        {
+          "agent": "returns_investigation",
+          "role": "Verify order ownership, return window, condition and review signals.",
+          "plan": [
+            "investigate",
+            "policy_search"
+          ],
+          "started_ms": 29511874.423,
+          "ended_ms": 29511878.304,
+          "duration_ms": 3,
+          "sources": [
+            "returns.md#0",
+            "governance.md#0"
+          ],
+          "execution": "demo",
+          "tool_calls": [
+            {
+              "tool": "investigate",
+              "arguments": {},
+              "status": "ok"
+            },
+            {
+              "tool": "policy_search",
+              "arguments": {
+                "query": "return refund window unworn human approval"
+              },
+              "status": "ok"
+            }
+          ],
+          "failed_model_tool_calls": []
+        }
+      ],
+      "draft_answer": "Provide an order ID belonging to your account.\n\nSources: governance.md#0, returns.md#0",
+      "answer": "Provide an order ID belonging to your account.\n\nSources: governance.md#0, returns.md#0"
     },
     {
       "id": "tracking",
+      "iteration": 1,
       "passed": true,
       "checks": {
-        "expected_roles": true,
+        "exact_roles": true,
         "quality": true,
         "status": true
       },
-      "latency_ms": 6,
-      "judged": false
+      "latency_ms": 8,
+      "judged": false,
+      "degraded": false,
+      "warnings": [],
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "deterministic": true
+      },
+      "plan": {
+        "intents": [
+          "order_tracking"
+        ],
+        "order_id": "O1004",
+        "category": null,
+        "budget_cents": null,
+        "size": null,
+        "language": "en",
+        "rationale": "Route independent evidence tasks first; resolve and style after prerequisites."
+      },
+      "model_usage": {
+        "model": "atlas-local",
+        "calls": 0,
+        "failed_calls": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "usage_complete": false,
+        "estimated_cost_usd": null,
+        "events": []
+      },
+      "embedding_usage": {
+        "model": "lexical-hash-512-v1",
+        "calls": 0,
+        "failed_calls": 0,
+        "reported_tokens": 0,
+        "events": []
+      },
+      "trace": [
+        {
+          "agent": "orchestrator",
+          "role": "Classify customer goals, plan dependencies and aggregate grounded results.",
+          "plan": [
+            "Route independent evidence tasks first; resolve and style after prerequisites."
+          ],
+          "started_ms": 29511893.524,
+          "ended_ms": 29511895.105,
+          "duration_ms": 1,
+          "sources": [],
+          "constraint_corrections": [],
+          "bound_constraints": {
+            "order_id": "O1004"
+          }
+        },
+        {
+          "agent": "order_tracking",
+          "role": "Look up verified shipment status and report source freshness.",
+          "plan": [
+            "shipment",
+            "policy_search"
+          ],
+          "started_ms": 29511895.678,
+          "ended_ms": 29511898.991,
+          "duration_ms": 3,
+          "sources": [
+            "shipping.md#0",
+            "returns.md#0"
+          ],
+          "execution": "demo",
+          "tool_calls": [
+            {
+              "tool": "shipment",
+              "arguments": {},
+              "status": "ok"
+            },
+            {
+              "tool": "policy_search",
+              "arguments": {
+                "query": "shipping delayed delivery carrier cached"
+              },
+              "status": "ok"
+            }
+          ],
+          "failed_model_tool_calls": []
+        }
+      ],
+      "draft_answer": "Shipment status: delayed (cached mock carrier record). \n\nSources: returns.md#0, shipping.md#0",
+      "answer": "Shipment status: delayed (cached mock carrier record). \n\nSources: returns.md#0, shipping.md#0"
     },
     {
       "id": "styling",
+      "iteration": 1,
       "passed": true,
       "checks": {
-        "expected_roles": true,
+        "exact_roles": true,
         "quality": true,
+        "budget_extracted": true,
         "budget": true,
-        "stock": true
+        "stock": true,
+        "outfit_presence": true
       },
-      "latency_ms": 8,
-      "judged": false
+      "latency_ms": 20,
+      "judged": false,
+      "degraded": false,
+      "warnings": [],
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "deterministic": true
+      },
+      "plan": {
+        "intents": [
+          "product_discovery",
+          "personal_stylist"
+        ],
+        "order_id": null,
+        "category": null,
+        "budget_cents": 15000,
+        "size": "M",
+        "language": "en",
+        "rationale": "Route independent evidence tasks first; resolve and style after prerequisites."
+      },
+      "model_usage": {
+        "model": "atlas-local",
+        "calls": 0,
+        "failed_calls": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "usage_complete": false,
+        "estimated_cost_usd": null,
+        "events": []
+      },
+      "embedding_usage": {
+        "model": "lexical-hash-512-v1",
+        "calls": 0,
+        "failed_calls": 0,
+        "reported_tokens": 0,
+        "events": []
+      },
+      "trace": [
+        {
+          "agent": "orchestrator",
+          "role": "Classify customer goals, plan dependencies and aggregate grounded results.",
+          "plan": [
+            "Route independent evidence tasks first; resolve and style after prerequisites."
+          ],
+          "started_ms": 29511909.406,
+          "ended_ms": 29511911.364,
+          "duration_ms": 1,
+          "sources": [],
+          "constraint_corrections": [],
+          "bound_constraints": {
+            "budget_cents": 15000,
+            "size": "M"
+          }
+        },
+        {
+          "agent": "product_discovery",
+          "role": "Find available products respecting size and budget.",
+          "plan": [
+            "product_search",
+            "policy_search"
+          ],
+          "started_ms": 29511911.915,
+          "ended_ms": 29511923.508,
+          "duration_ms": 11,
+          "sources": [
+            "styling.md#0",
+            "shipping.md#0"
+          ],
+          "execution": "demo",
+          "tool_calls": [
+            {
+              "tool": "product_search",
+              "arguments": {
+                "query": "Build a smart casual outfit under EUR 150 size M"
+              },
+              "status": "ok"
+            },
+            {
+              "tool": "policy_search",
+              "arguments": {
+                "query": "styling stock outfit budget size"
+              },
+              "status": "ok"
+            }
+          ],
+          "failed_model_tool_calls": []
+        },
+        {
+          "agent": "personal_stylist",
+          "role": "Assemble compatible pieces respecting the total outfit budget.",
+          "plan": [
+            "Feasible complete outfit ranked by discovery relevance and total budget.",
+            "Validate exact variants, size, compatibility and total budget"
+          ],
+          "started_ms": 29511924.255,
+          "ended_ms": 29511927.215,
+          "duration_ms": 2,
+          "sources": [],
+          "execution": "demo",
+          "model_choices": []
+        }
+      ],
+      "draft_answer": "Suggested outfit: Atlas Blue Knitwear 024 \u2014 EUR 29.00, size M; Atlas Black Skirt 087 \u2014 EUR 39.00, size M; Atlas Navy Shoes 045 \u2014 EUR 79.00, size M. Total: EUR 147.00.\n\nSources: shipping.md#0, styling.md#0",
+      "answer": "Suggested outfit: Atlas Blue Knitwear 024 \u2014 EUR 29.00, size M; Atlas Black Skirt 087 \u2014 EUR 39.00, size M; Atlas Navy Shoes 045 \u2014 EUR 79.00, size M. Total: EUR 147.00.\n\nSources: shipping.md#0, styling.md#0"
     },
     {
       "id": "small_budget",
+      "iteration": 1,
       "passed": true,
       "checks": {
-        "expected_roles": true,
+        "exact_roles": true,
         "quality": true,
+        "budget_extracted": true,
         "budget": true,
-        "stock": true
+        "stock": true,
+        "outfit_presence": true
       },
-      "latency_ms": 8,
-      "judged": false
+      "latency_ms": 9,
+      "judged": false,
+      "degraded": false,
+      "warnings": [],
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "deterministic": true
+      },
+      "plan": {
+        "intents": [
+          "product_discovery",
+          "personal_stylist"
+        ],
+        "order_id": null,
+        "category": null,
+        "budget_cents": 100,
+        "size": "M",
+        "language": "en",
+        "rationale": "Route independent evidence tasks first; resolve and style after prerequisites."
+      },
+      "model_usage": {
+        "model": "atlas-local",
+        "calls": 0,
+        "failed_calls": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "usage_complete": false,
+        "estimated_cost_usd": null,
+        "events": []
+      },
+      "embedding_usage": {
+        "model": "lexical-hash-512-v1",
+        "calls": 0,
+        "failed_calls": 0,
+        "reported_tokens": 0,
+        "events": []
+      },
+      "trace": [
+        {
+          "agent": "orchestrator",
+          "role": "Classify customer goals, plan dependencies and aggregate grounded results.",
+          "plan": [
+            "Route independent evidence tasks first; resolve and style after prerequisites."
+          ],
+          "started_ms": 29511939.715,
+          "ended_ms": 29511940.883,
+          "duration_ms": 1,
+          "sources": [],
+          "constraint_corrections": [],
+          "bound_constraints": {
+            "budget_cents": 100,
+            "size": "M"
+          }
+        },
+        {
+          "agent": "product_discovery",
+          "role": "Find available products respecting size and budget.",
+          "plan": [
+            "product_search",
+            "policy_search"
+          ],
+          "started_ms": 29511941.575,
+          "ended_ms": 29511945.406,
+          "duration_ms": 3,
+          "sources": [
+            "styling.md#0",
+            "shipping.md#0"
+          ],
+          "execution": "demo",
+          "tool_calls": [
+            {
+              "tool": "product_search",
+              "arguments": {
+                "query": "Build an outfit under EUR 1 size M"
+              },
+              "status": "ok"
+            },
+            {
+              "tool": "policy_search",
+              "arguments": {
+                "query": "styling stock outfit budget size"
+              },
+              "status": "ok"
+            }
+          ],
+          "failed_model_tool_calls": []
+        },
+        {
+          "agent": "personal_stylist",
+          "role": "Assemble compatible pieces respecting the total outfit budget.",
+          "plan": [
+            "Feasible complete outfit ranked by discovery relevance and total budget.",
+            "Validate exact variants, size, compatibility and total budget"
+          ],
+          "started_ms": 29511946.252,
+          "ended_ms": 29511947.116,
+          "duration_ms": 0,
+          "sources": [],
+          "execution": "demo",
+          "model_choices": []
+        }
+      ],
+      "draft_answer": "Available products: No matching in-stock products. Try a larger budget or another size.\n\nNo complete outfit fits these constraints. Please adjust the budget, size or occasion.\n\nSources: shipping.md#0, styling.md#0",
+      "answer": "Available products: No matching in-stock products. Try a larger budget or another size.\n\nNo complete outfit fits these constraints. Please adjust the budget, size or occasion.\n\nSources: shipping.md#0, styling.md#0"
     },
     {
       "id": "product",
+      "iteration": 1,
       "passed": true,
       "checks": {
-        "expected_roles": true,
-        "quality": true
+        "exact_roles": true,
+        "quality": true,
+        "products": true,
+        "size": true
       },
-      "latency_ms": 7,
-      "judged": false
+      "latency_ms": 10,
+      "judged": false,
+      "degraded": false,
+      "warnings": [],
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "deterministic": true
+      },
+      "plan": {
+        "intents": [
+          "product_discovery"
+        ],
+        "order_id": null,
+        "category": "shirt",
+        "budget_cents": 6000,
+        "size": "L",
+        "language": "en",
+        "rationale": "Route independent evidence tasks first; resolve and style after prerequisites."
+      },
+      "model_usage": {
+        "model": "atlas-local",
+        "calls": 0,
+        "failed_calls": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "usage_complete": false,
+        "estimated_cost_usd": null,
+        "events": []
+      },
+      "embedding_usage": {
+        "model": "lexical-hash-512-v1",
+        "calls": 0,
+        "failed_calls": 0,
+        "reported_tokens": 0,
+        "events": []
+      },
+      "trace": [
+        {
+          "agent": "orchestrator",
+          "role": "Classify customer goals, plan dependencies and aggregate grounded results.",
+          "plan": [
+            "Route independent evidence tasks first; resolve and style after prerequisites."
+          ],
+          "started_ms": 29511959.087,
+          "ended_ms": 29511960.506,
+          "duration_ms": 1,
+          "sources": [],
+          "constraint_corrections": [],
+          "bound_constraints": {
+            "budget_cents": 6000,
+            "size": "L",
+            "category": "shirt"
+          }
+        },
+        {
+          "agent": "product_discovery",
+          "role": "Find available products respecting size and budget.",
+          "plan": [
+            "product_search",
+            "policy_search"
+          ],
+          "started_ms": 29511961.049,
+          "ended_ms": 29511966.905,
+          "duration_ms": 5,
+          "sources": [
+            "styling.md#0",
+            "shipping.md#0"
+          ],
+          "execution": "demo",
+          "tool_calls": [
+            {
+              "tool": "product_search",
+              "arguments": {
+                "query": "Find a shirt under EUR 60 size L"
+              },
+              "status": "ok"
+            },
+            {
+              "tool": "policy_search",
+              "arguments": {
+                "query": "styling stock outfit budget size"
+              },
+              "status": "ok"
+            }
+          ],
+          "failed_model_tool_calls": []
+        }
+      ],
+      "draft_answer": "Available products: Atlas Cream Shirt 041 \u2014 EUR 29.00, size L; Atlas Navy Shirt 065 \u2014 EUR 59.00, size L; Atlas Olive Shirt 073 \u2014 EUR 29.00, size L\n\nSources: shipping.md#0, styling.md#0",
+      "answer": "Available products: Atlas Cream Shirt 041 \u2014 EUR 29.00, size L; Atlas Navy Shirt 065 \u2014 EUR 59.00, size L; Atlas Olive Shirt 073 \u2014 EUR 29.00, size L\n\nSources: shipping.md#0, styling.md#0"
     },
     {
       "id": "multi_intent",
+      "iteration": 1,
       "passed": true,
       "checks": {
-        "expected_roles": true,
+        "exact_roles": true,
         "quality": true,
+        "budget_extracted": true,
         "budget": true,
-        "stock": true
+        "stock": true,
+        "outfit_presence": true
       },
-      "latency_ms": 14,
-      "judged": false
+      "latency_ms": 22,
+      "judged": false,
+      "degraded": false,
+      "warnings": [],
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "deterministic": true
+      },
+      "plan": {
+        "intents": [
+          "returns_investigation",
+          "product_discovery",
+          "personal_stylist"
+        ],
+        "order_id": "O1001",
+        "category": null,
+        "budget_cents": 15000,
+        "size": null,
+        "language": "en",
+        "rationale": "Route independent evidence tasks first; resolve and style after prerequisites."
+      },
+      "model_usage": {
+        "model": "atlas-local",
+        "calls": 0,
+        "failed_calls": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "usage_complete": false,
+        "estimated_cost_usd": null,
+        "events": []
+      },
+      "embedding_usage": {
+        "model": "lexical-hash-512-v1",
+        "calls": 0,
+        "failed_calls": 0,
+        "reported_tokens": 0,
+        "events": []
+      },
+      "trace": [
+        {
+          "agent": "orchestrator",
+          "role": "Classify customer goals, plan dependencies and aggregate grounded results.",
+          "plan": [
+            "Route independent evidence tasks first; resolve and style after prerequisites."
+          ],
+          "started_ms": 29511978.219,
+          "ended_ms": 29511980.032,
+          "duration_ms": 1,
+          "sources": [],
+          "constraint_corrections": [],
+          "bound_constraints": {
+            "budget_cents": 15000,
+            "order_id": "O1001"
+          }
+        },
+        {
+          "agent": "returns_investigation",
+          "role": "Verify order ownership, return window, condition and review signals.",
+          "plan": [
+            "investigate",
+            "policy_search"
+          ],
+          "started_ms": 29511980.848,
+          "ended_ms": 29511985.768,
+          "duration_ms": 4,
+          "sources": [
+            "returns.md#0",
+            "governance.md#0"
+          ],
+          "execution": "demo",
+          "tool_calls": [
+            {
+              "tool": "investigate",
+              "arguments": {},
+              "status": "ok"
+            },
+            {
+              "tool": "policy_search",
+              "arguments": {
+                "query": "return refund window unworn human approval"
+              },
+              "status": "ok"
+            }
+          ],
+          "failed_model_tool_calls": []
+        },
+        {
+          "agent": "product_discovery",
+          "role": "Find available products respecting size and budget.",
+          "plan": [
+            "product_search",
+            "policy_search"
+          ],
+          "started_ms": 29511981.39,
+          "ended_ms": 29511993.772,
+          "duration_ms": 12,
+          "sources": [
+            "styling.md#0",
+            "shipping.md#0"
+          ],
+          "execution": "demo",
+          "tool_calls": [
+            {
+              "tool": "product_search",
+              "arguments": {
+                "query": "Return O1001 and build an outfit under EUR 150"
+              },
+              "status": "ok"
+            },
+            {
+              "tool": "policy_search",
+              "arguments": {
+                "query": "styling stock outfit budget size"
+              },
+              "status": "ok"
+            }
+          ],
+          "failed_model_tool_calls": []
+        },
+        {
+          "agent": "resolution",
+          "role": "Propose a policy-compliant resolution; never execute a payment.",
+          "plan": [
+            "Customer confirmation",
+            "Warehouse inspection",
+            "Simulated original-method refund"
+          ],
+          "started_ms": 29511994.35,
+          "ended_ms": 29511995.075,
+          "duration_ms": 0,
+          "sources": [],
+          "execution": "demo"
+        },
+        {
+          "agent": "personal_stylist",
+          "role": "Assemble compatible pieces respecting the total outfit budget.",
+          "plan": [
+            "Feasible complete outfit ranked by discovery relevance and total budget.",
+            "Validate exact variants, size, compatibility and total budget"
+          ],
+          "started_ms": 29511995.457,
+          "ended_ms": 29511996.676,
+          "duration_ms": 1,
+          "sources": [],
+          "execution": "demo",
+          "model_choices": []
+        }
+      ],
+      "draft_answer": "Order O1001: Within window with verified unworn condition. Proposed refund: EUR 79.00. Eligible under the standard return policy. Confirm the proposal using the confirmation button. Warehouse inspection is required. No payment has been executed.\n\nSuggested outfit: Atlas Cream Knitwear 016 \u2014 EUR 59.00, size M; Atlas Black Skirt 007 \u2014 EUR 29.00, size M; Atlas Cream Shoes 101 \u2014 EUR 59.00, size M. Total: EUR 147.00.\n\nSources: governance.md#0, returns.md#0, shipping.md#0, styling.md#0",
+      "answer": "Order O1001: Within window with verified unworn condition. Proposed refund: EUR 79.00. Eligible under the standard return policy. Confirm the proposal using the confirmation button. Warehouse inspection is required. No payment has been executed.\n\nSuggested outfit: Atlas Cream Knitwear 016 \u2014 EUR 59.00, size M; Atlas Black Skirt 007 \u2014 EUR 29.00, size M; Atlas Cream Shoes 101 \u2014 EUR 59.00, size M. Total: EUR 147.00.\n\nSources: governance.md#0, returns.md#0, shipping.md#0, styling.md#0"
+    },
+    {
+      "id": "parallel_tracking_styling",
+      "iteration": 1,
+      "passed": true,
+      "checks": {
+        "exact_roles": true,
+        "quality": true,
+        "budget_extracted": true,
+        "budget": true,
+        "stock": true,
+        "outfit_presence": true,
+        "size": true,
+        "status": true,
+        "parallel_overlap": true,
+        "stylist_after_discovery": true
+      },
+      "latency_ms": 20,
+      "judged": false,
+      "degraded": false,
+      "warnings": [],
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "deterministic": true
+      },
+      "plan": {
+        "intents": [
+          "order_tracking",
+          "product_discovery",
+          "personal_stylist"
+        ],
+        "order_id": "O1001",
+        "category": null,
+        "budget_cents": 15000,
+        "size": "M",
+        "language": "en",
+        "rationale": "Route independent evidence tasks first; resolve and style after prerequisites."
+      },
+      "model_usage": {
+        "model": "atlas-local",
+        "calls": 0,
+        "failed_calls": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "usage_complete": false,
+        "estimated_cost_usd": null,
+        "events": []
+      },
+      "embedding_usage": {
+        "model": "lexical-hash-512-v1",
+        "calls": 0,
+        "failed_calls": 0,
+        "reported_tokens": 0,
+        "events": []
+      },
+      "trace": [
+        {
+          "agent": "orchestrator",
+          "role": "Classify customer goals, plan dependencies and aggregate grounded results.",
+          "plan": [
+            "Route independent evidence tasks first; resolve and style after prerequisites."
+          ],
+          "started_ms": 29512011.428,
+          "ended_ms": 29512012.762,
+          "duration_ms": 1,
+          "sources": [],
+          "constraint_corrections": [],
+          "bound_constraints": {
+            "budget_cents": 15000,
+            "size": "M",
+            "order_id": "O1001"
+          }
+        },
+        {
+          "agent": "order_tracking",
+          "role": "Look up verified shipment status and report source freshness.",
+          "plan": [
+            "shipment",
+            "policy_search"
+          ],
+          "started_ms": 29512013.42,
+          "ended_ms": 29512017.387,
+          "duration_ms": 3,
+          "sources": [
+            "shipping.md#0",
+            "returns.md#0"
+          ],
+          "execution": "demo",
+          "tool_calls": [
+            {
+              "tool": "shipment",
+              "arguments": {},
+              "status": "ok"
+            },
+            {
+              "tool": "policy_search",
+              "arguments": {
+                "query": "shipping delayed delivery carrier cached"
+              },
+              "status": "ok"
+            }
+          ],
+          "failed_model_tool_calls": []
+        },
+        {
+          "agent": "product_discovery",
+          "role": "Find available products respecting size and budget.",
+          "plan": [
+            "product_search",
+            "policy_search"
+          ],
+          "started_ms": 29512013.873,
+          "ended_ms": 29512027.057,
+          "duration_ms": 13,
+          "sources": [
+            "styling.md#0",
+            "shipping.md#0"
+          ],
+          "execution": "demo",
+          "tool_calls": [
+            {
+              "tool": "product_search",
+              "arguments": {
+                "query": "Track O1001 and build a smart casual outfit under EUR 150, size M"
+              },
+              "status": "ok"
+            },
+            {
+              "tool": "policy_search",
+              "arguments": {
+                "query": "styling stock outfit budget size"
+              },
+              "status": "ok"
+            }
+          ],
+          "failed_model_tool_calls": []
+        },
+        {
+          "agent": "personal_stylist",
+          "role": "Assemble compatible pieces respecting the total outfit budget.",
+          "plan": [
+            "Feasible complete outfit ranked by discovery relevance and total budget.",
+            "Validate exact variants, size, compatibility and total budget"
+          ],
+          "started_ms": 29512028.043,
+          "ended_ms": 29512030.081,
+          "duration_ms": 2,
+          "sources": [],
+          "execution": "demo",
+          "model_choices": []
+        }
+      ],
+      "draft_answer": "Shipment status: delivered (cached mock carrier record). \n\nSuggested outfit: Atlas Blue Knitwear 024 \u2014 EUR 29.00, size M; Atlas Olive Trousers 018 \u2014 EUR 39.00, size M; Atlas Navy Shoes 045 \u2014 EUR 79.00, size M. Total: EUR 147.00.\n\nSources: returns.md#0, shipping.md#0, styling.md#0",
+      "answer": "Shipment status: delivered (cached mock carrier record). \n\nSuggested outfit: Atlas Blue Knitwear 024 \u2014 EUR 29.00, size M; Atlas Olive Trousers 018 \u2014 EUR 39.00, size M; Atlas Navy Shoes 045 \u2014 EUR 79.00, size M. Total: EUR 147.00.\n\nSources: returns.md#0, shipping.md#0, styling.md#0"
     },
     {
       "id": "unknown",
+      "iteration": 1,
       "passed": true,
       "checks": {
-        "expected_roles": true,
+        "exact_roles": true,
         "quality": true,
         "action": true
       },
-      "latency_ms": 2,
-      "judged": false
+      "latency_ms": 4,
+      "judged": false,
+      "degraded": false,
+      "warnings": [],
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "deterministic": true
+      },
+      "plan": {
+        "intents": [],
+        "order_id": null,
+        "category": null,
+        "budget_cents": null,
+        "size": null,
+        "language": "en",
+        "rationale": "Route independent evidence tasks first; resolve and style after prerequisites."
+      },
+      "model_usage": {
+        "model": "atlas-local",
+        "calls": 0,
+        "failed_calls": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "usage_complete": false,
+        "estimated_cost_usd": null,
+        "events": []
+      },
+      "embedding_usage": {
+        "model": "lexical-hash-512-v1",
+        "calls": 0,
+        "failed_calls": 0,
+        "reported_tokens": 0,
+        "events": []
+      },
+      "trace": [
+        {
+          "agent": "orchestrator",
+          "role": "Classify customer goals, plan dependencies and aggregate grounded results.",
+          "plan": [
+            "Route independent evidence tasks first; resolve and style after prerequisites."
+          ],
+          "started_ms": 29512043.296,
+          "ended_ms": 29512044.733,
+          "duration_ms": 1,
+          "sources": [],
+          "constraint_corrections": [],
+          "bound_constraints": {}
+        }
+      ],
+      "draft_answer": "I can help with returns, order tracking, product discovery and styling. Please provide your goal and, for an order question, the order ID.",
+      "answer": "I can help with returns, order tracking, product discovery and styling. Please provide your goal and, for an order question, the order ID."
     },
     {
       "id": "missing_order",
+      "iteration": 1,
       "passed": true,
       "checks": {
-        "expected_roles": true,
+        "exact_roles": true,
         "quality": true,
         "action": true
       },
-      "latency_ms": 6,
-      "judged": false
+      "latency_ms": 7,
+      "judged": false,
+      "degraded": false,
+      "warnings": [],
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "deterministic": true
+      },
+      "plan": {
+        "intents": [
+          "returns_investigation"
+        ],
+        "order_id": null,
+        "category": null,
+        "budget_cents": null,
+        "size": null,
+        "language": "en",
+        "rationale": "Route independent evidence tasks first; resolve and style after prerequisites."
+      },
+      "model_usage": {
+        "model": "atlas-local",
+        "calls": 0,
+        "failed_calls": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "usage_complete": false,
+        "estimated_cost_usd": null,
+        "events": []
+      },
+      "embedding_usage": {
+        "model": "lexical-hash-512-v1",
+        "calls": 0,
+        "failed_calls": 0,
+        "reported_tokens": 0,
+        "events": []
+      },
+      "trace": [
+        {
+          "agent": "orchestrator",
+          "role": "Classify customer goals, plan dependencies and aggregate grounded results.",
+          "plan": [
+            "Route independent evidence tasks first; resolve and style after prerequisites."
+          ],
+          "started_ms": 29512054.737,
+          "ended_ms": 29512055.927,
+          "duration_ms": 1,
+          "sources": [],
+          "constraint_corrections": [],
+          "bound_constraints": {}
+        },
+        {
+          "agent": "returns_investigation",
+          "role": "Verify order ownership, return window, condition and review signals.",
+          "plan": [
+            "investigate",
+            "policy_search"
+          ],
+          "started_ms": 29512056.38,
+          "ended_ms": 29512059.558,
+          "duration_ms": 3,
+          "sources": [
+            "returns.md#0",
+            "governance.md#0"
+          ],
+          "execution": "demo",
+          "tool_calls": [
+            {
+              "tool": "investigate",
+              "arguments": {},
+              "status": "ok"
+            },
+            {
+              "tool": "policy_search",
+              "arguments": {
+                "query": "return refund window unworn human approval"
+              },
+              "status": "ok"
+            }
+          ],
+          "failed_model_tool_calls": []
+        }
+      ],
+      "draft_answer": "Provide an order ID belonging to your account.\n\nSources: governance.md#0, returns.md#0",
+      "answer": "Provide an order ID belonging to your account.\n\nSources: governance.md#0, returns.md#0"
     },
     {
       "id": "french_return",
+      "iteration": 1,
       "passed": true,
       "checks": {
-        "expected_roles": true,
+        "exact_roles": true,
         "quality": true,
         "eligibility": true
       },
-      "latency_ms": 8,
-      "judged": false
+      "latency_ms": 10,
+      "judged": false,
+      "degraded": false,
+      "warnings": [],
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "deterministic": true
+      },
+      "plan": {
+        "intents": [
+          "returns_investigation"
+        ],
+        "order_id": "O1001",
+        "category": null,
+        "budget_cents": null,
+        "size": null,
+        "language": "fr",
+        "rationale": "Route independent evidence tasks first; resolve and style after prerequisites."
+      },
+      "model_usage": {
+        "model": "atlas-local",
+        "calls": 0,
+        "failed_calls": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "usage_complete": false,
+        "estimated_cost_usd": null,
+        "events": []
+      },
+      "embedding_usage": {
+        "model": "lexical-hash-512-v1",
+        "calls": 0,
+        "failed_calls": 0,
+        "reported_tokens": 0,
+        "events": []
+      },
+      "trace": [
+        {
+          "agent": "orchestrator",
+          "role": "Classify customer goals, plan dependencies and aggregate grounded results.",
+          "plan": [
+            "Route independent evidence tasks first; resolve and style after prerequisites."
+          ],
+          "started_ms": 29512070.282,
+          "ended_ms": 29512071.742,
+          "duration_ms": 1,
+          "sources": [],
+          "constraint_corrections": [],
+          "bound_constraints": {
+            "order_id": "O1001"
+          }
+        },
+        {
+          "agent": "returns_investigation",
+          "role": "Verify order ownership, return window, condition and review signals.",
+          "plan": [
+            "investigate",
+            "policy_search"
+          ],
+          "started_ms": 29512072.234,
+          "ended_ms": 29512075.678,
+          "duration_ms": 3,
+          "sources": [
+            "returns.md#0",
+            "governance.md#0"
+          ],
+          "execution": "demo",
+          "tool_calls": [
+            {
+              "tool": "investigate",
+              "arguments": {},
+              "status": "ok"
+            },
+            {
+              "tool": "policy_search",
+              "arguments": {
+                "query": "return refund window unworn human approval"
+              },
+              "status": "ok"
+            }
+          ],
+          "failed_model_tool_calls": []
+        },
+        {
+          "agent": "resolution",
+          "role": "Propose a policy-compliant resolution; never execute a payment.",
+          "plan": [
+            "Customer confirmation",
+            "Warehouse inspection",
+            "Simulated original-method refund"
+          ],
+          "started_ms": 29512076.138,
+          "ended_ms": 29512076.796,
+          "duration_ms": 0,
+          "sources": [],
+          "execution": "demo"
+        }
+      ],
+      "draft_answer": "Order O1001: Within window with verified unworn condition. Proposed refund: EUR 79.00. Eligible under the standard return policy. Confirm the proposal using the confirmation button. Warehouse inspection is required. No payment has been executed.\n\nSources: governance.md#0, returns.md#0",
+      "answer": "Order O1001: Within window with verified unworn condition. Proposed refund: EUR 79.00. Eligible under the standard return policy. Confirm the proposal using the confirmation button. Warehouse inspection is required. No payment has been executed.\n\nSources: governance.md#0, returns.md#0"
     }
   ]
 }
