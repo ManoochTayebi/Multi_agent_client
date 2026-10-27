@@ -39,7 +39,7 @@ docker compose up --build -d
 
 The Compose port binds to localhost. Put an HTTPS reverse proxy in front when deploying on a server. Keep one API process/replica with the current embedded Chroma and in-process session locks. The [deployment guide](docs/DEPLOYMENT.md) explains hosting and scaling boundaries.
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ManoochTayebi/Multi_agent_clinet)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ManoochTayebi/Multi_agent_client)
 
 The Render blueprint is optional and requires your hosting account; its persistent-disk plan may incur charges. Adding deployment configuration does not mean a public service has been deployed.
 
@@ -75,13 +75,16 @@ flowchart TD
     A --> Q{High risk or multi-intent?}
     Q -->|LLM mode| L[Independent LLM judge]
     Q -->|otherwise| F[Grounded response and proposal]
-    L --> F
+    L -->|passed| F
+    L -->|failed or unavailable| Z[Human support: no new action]
     F --> C[Customer confirmation]
     C --> H{Human review required?}
     H -->|yes| V[Operator approval or rejection]
     H -->|no| B[Transactional simulated outbox]
     V -->|approved| B
 ```
+
+All independent workers join before dependent stages; the stylist waits for discovery and may also wait for tracking. Agent timings, measured overlapping intervals, guardrail results and Judge verdicts are exposed in the UI.
 
 The actual graph uses dynamic `Send` workers and a reducer to join evidence. The six business roles are the orchestrator, returns investigator, resolution agent, discovery agent, tracking agent and stylist; the judge is a quality gate. The resolution and stylist nodes skip when irrelevant. Native tool calls and bounded customer-facing decisions are recorded, without private chain-of-thought. Returns investigation establishes eligibility; resolution chooses the next action. Discovery finds candidates; styling chooses a compatible complete outfit. Validated input literals bind explicit budgets, sizes, categories and order IDs; traces expose corrected model values. Domain tools enforce ownership and money/stock rules independently of model output. See [architecture and trade-offs](docs/ARCHITECTURE.md).
 
@@ -147,7 +150,7 @@ python -m scripts.evaluate --mode llm --output reports/evaluation-llm.json
 
 Evaluation measures exact role routing, nonempty/empty result expectations, business correctness, full approval/payment-simulation journeys, measured worker overlap, real model stages without fallback, policy/product retrieval probes, token usage, configured chat cost and p50/p95 latency. These are smoke/integration measures, not a held-out quality benchmark or production SLA. See [evaluation protocol](docs/EVALUATION.md) and [recorded development validation](docs/VALIDATION.md).
 
-**Recorded review results:** 35 offline tests passed; deterministic scenarios 13/13; the two real-LLM journeys repeated twice passed 4/4 without fallback. The full local-LLM suite passed 11/13 strictly: standalone tracking and a missing-order refund request used visible bounded-tool fallback after invalid model arguments. These remaining small-model limits are retained in the reports. The repeated journeys measured 43.3 s median and 64.1 s p95 on the Intel CPU; these are development observations, not service guarantees.
+**Current finalization:** the non-editable package import regression is fixed and tested outside the checkout. Current deterministic runs, browser rehearsals and environment limitations are recorded in [validation](docs/VALIDATION.md). Use the [step-by-step demo runbook](docs/DEMO_RUNBOOK.md) for the two journeys and real-model commands. The earlier 4/4 local-model journey report and 11/13 full-model report are historical evidence for their recorded source hashes; they do not validate this changed commit. No live model endpoint or credentials were available in the current workspace.
 
 CI is configured to run lint, tests, deterministic evaluation and a Docker startup smoke test; inspect the workflow runs for remote results. A manually triggered release workflow publishes a container to GHCR. It does not provision hosting.
 
@@ -161,4 +164,4 @@ CI is configured to run lint, tests, deterministic evaluation and a Docker start
 - Carrier calls use an operator-configured origin, a five-second timeout and a labeled cached fallback.
 - Production requires SSO/RBAC, distributed session locking and admission control, managed vector storage, migration tooling, privacy retention jobs and a real payment adapter with provider idempotency. These are documented operationalization work, not completed integrations.
 
-A consulting-oriented [six-slide French presentation](docs/PRESENTATION_FR.md) explains the value, responsibilities, two journeys, measured evidence and pilot path. Existing hosting links preserve the remote repository spelling `Multi_agent_clinet`; the local folder is `Multi_agent_client`.
+A consulting-oriented [six-slide French presentation](docs/PRESENTATION_FR.md) explains the value, responsibilities, two journeys, measured evidence and pilot path. The canonical repository is `ManoochTayebi/Multi_agent_client`. Hosting is optional for this case study.

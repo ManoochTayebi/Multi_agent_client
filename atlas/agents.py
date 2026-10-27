@@ -38,6 +38,8 @@ class State(TypedDict, total=False):
     warnings: Annotated[list[str], operator.add]
     quality: dict
     judged: bool
+    guardrails: dict
+    judge_evaluation: dict
     action: dict | None
 
 
@@ -135,7 +137,8 @@ class Pipeline:
         plan['intents'] = list(dict.fromkeys(plan['intents']))
         self.tools.remember(s['session_id'], 'orchestrator', 'plan', {'plan':plan})
         trace = self.trace('orchestrator', [plan['rationale']], start)
-        trace.update(constraint_corrections=corrections, bound_constraints=literal)
+        trace.update(constraint_corrections=corrections, bound_constraints=literal,
+                     execution='fallback' if warnings else 'llm_route' if self.model.client else 'demo')
         return {'plan':plan, 'trace':[trace],
                 'warnings':warnings, 'findings':[], 'judged':False}
 
@@ -365,13 +368,17 @@ class Pipeline:
             issues.append('Outfit exceeds total budget')
         if any('error' in f['evidence'] for f in s.get('findings', [])):
             issues.append('Incomplete evidence')
+        if s.get('outfit'):
+            evidence = self.finding(s, 'product_discovery') or {}
+            issues.extend(self.tools.validate_variants(s['outfit'], evidence.get('size')))
         # Customer identity and financial values come only from scoped domain tools.
         r = s.get('resolution', {})
         if r:
             order = self.tools.order(s['customer_id'], r['order_id'])
             if not order or order['total_cents'] != r['amount_cents']:
                 issues.append('Resolution does not match owned order')
-        return {'quality':{'passed':not issues, 'issues':issues, 'deterministic':True}}
+        checks = {'passed':not issues, 'issues':issues, 'deterministic':True}
+        return {'quality':checks, 'guardrails':checks}
 
     def judge_route(self, s):
         # Separate judging covers financial proposals and multi-intent requests.
@@ -379,6 +386,7 @@ class Pipeline:
         return 'judge' if self.model.client and risk else 'finalize'
 
     def judge(self, s):
+        start = time.perf_counter()
         try:
             verdict = self.model.structured(JudgeVerdict,
                 'You are an evidence auditor, not a business approver. Audit the DRAFT reply only. '
@@ -387,6 +395,8 @@ class Pipeline:
                 'quote the erroneous claim in issues. Do not reject because a request needs review: '
                 'a PROPOSAL pending customer confirmation and required human approval is allowed. '
                 'A budget is a MAXIMUM: totals below the cap are valid, not a violation. '
+                'For multiple requested goals, the reply must address each goal supported by the evidence: '
+                'both shipment status and the outfit result when both are requested. '
                 'The reply need not narrate internal discovery, list stock counts or mention unrelated policies. '
                 'A delivered shipment can retain an old estimate in the database; judge only dates '
                 'actually claimed in the reply. Cached status must be labeled. Reject invented variants, '
@@ -403,10 +413,15 @@ class Pipeline:
             judge_issues = verdict.issues or ([] if verdict.passed else ['LLM judge rejected the response'])
             quality = {'passed':s['quality']['passed'] and verdict.passed and not judge_issues,
                        'issues':s['quality']['issues']+judge_issues, 'deterministic':False}
-            return {'quality':quality, 'judged':True}
+            return {'quality':quality, 'judged':True, 'judge_evaluation':{
+                'invoked':True, 'passed':verdict.passed and not judge_issues, 'issues':judge_issues,
+                'duration_ms':int((time.perf_counter()-start)*1000),
+                'reason':'Financial proposal or multiple requested business goals'}}
         except Exception:
             return {'quality':{'passed':False, 'issues':['Quality judge unavailable'], 'deterministic':False},
-                    'judged':True, 'warnings':['Quality check unavailable; human review required.']}
+                    'judged':True, 'warnings':['Quality check unavailable; human review required.'],
+                    'judge_evaluation':{'invoked':True, 'passed':False, 'issues':['Judge unavailable'],
+                                        'duration_ms':int((time.perf_counter()-start)*1000)}}
 
     def finalize(self, s):
         action = None
@@ -418,7 +433,10 @@ class Pipeline:
             answer = answer.replace('Confirm the proposal using the confirmation button. ', '')
             answer += '\n\nThe resolution agent requests human support; no automated proposal was published.'
         if not s['quality']['passed']:
-            answer = self.deterministic_answer({**s, 'resolution':{}})
+            if not s.get('guardrails', {'passed':True})['passed'] and s.get('outfit'):
+                answer = 'The recommendation could not be verified against current stock, size and prices.'
+            else:
+                answer = self.deterministic_answer({**s, 'resolution':{}})
             # Suppress the confirmation instruction because no executable proposal is published.
             answer = answer.replace('Confirm the proposal using the confirmation button. ', '')
             answer += '\n\nThis request requires human support; automated action is blocked.'
@@ -432,6 +450,19 @@ class Pipeline:
             result['model_usage'] = self.model.usage(run_id)
             result['embedding_usage'] = self.knowledge.usage(run_id)
             result['degraded'] = bool(result['warnings'])
+            result.setdefault('judge_evaluation', {'invoked':False, 'reason':
+                'Deterministic demo mode' if not self.model.client else 'No financial or multi-intent risk'})
+            workers = [t for t in result['trace'] if t['agent'] in
+                       {'returns_investigation','product_discovery','order_tracking'}]
+            result['execution_summary'] = {
+                'parallel_pairs':[{'agents':[a['agent'],b['agent']],
+                    'overlap_ms':round(min(a['ended_ms'],b['ended_ms'])-
+                                       max(a['started_ms'],b['started_ms']),3)}
+                    for i,a in enumerate(workers) for b in workers[i+1:]
+                    if max(a['started_ms'],b['started_ms']) < min(a['ended_ms'],b['ended_ms'])],
+                'dependencies':{'resolution':'returns_investigation',
+                                'personal_stylist':'product_discovery'},
+                'timing_clock':'process monotonic milliseconds; compare within one run only'}
             return result
         finally:
             self.model.usage(run_id)

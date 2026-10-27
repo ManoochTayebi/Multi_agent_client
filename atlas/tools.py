@@ -71,6 +71,23 @@ class Tools:
         rows.sort(key=lambda p: (p['style'] != style, p['price_cents'], p['id']))
         return rows if limit is None else rows[:limit]
 
+    def validate_variants(self, selected, size):
+        """Recheck current SQL commerce facts after model selection, before publishing."""
+        if not selected:
+            return []
+        ids = [p['variant_id'] for p in selected]
+        query = select(db.products.c.id, db.products.c.price_cents, db.variants.c.id.label('variant_id'),
+            db.variants.c.size, db.variants.c.stock).join(db.variants).where(db.variants.c.id.in_(ids))
+        with self.engine.connect() as c:
+            live = {r['variant_id']:dict(r) for r in c.execute(query).mappings()}
+        issues = []
+        for p in selected:
+            row = live.get(p['variant_id'])
+            if (not row or row['id'] != p['id'] or row['size'] != size or row['stock'] <= 0
+                    or row['price_cents'] != p['price_cents']):
+                issues.append('Variant no longer matches live SQL: '+p['variant_id'])
+        return issues
+
     def shipment(self, customer_id, order_id):
         order = self.order(customer_id, order_id)
         if not order:

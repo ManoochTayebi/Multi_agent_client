@@ -21,7 +21,7 @@ CASES = [
     {'id':'small_budget','customer':'C0001','text':'Build an outfit under EUR 1 size M','roles':['product_discovery','personal_stylist'],'budget':100,'outfit':False},
     {'id':'product','customer':'C0001','text':'Find a shirt under EUR 60 size L','roles':['product_discovery'],'products':True,'size':'L'},
     {'id':'multi_intent','customer':'C0001','text':'Return O1001 and build an outfit under EUR 150','roles':['returns_investigation','resolution','product_discovery','personal_stylist'],'budget':15000,'outfit':True},
-    {'id':'parallel_tracking_styling','customer':'C0001','text':'Track O1001 and build a smart casual outfit under EUR 150, size M','roles':['order_tracking','product_discovery','personal_stylist'],'budget':15000,'outfit':True,'size':'M','status':'delivered','journey':'parallel'},
+    {'id':'parallel_tracking_styling','customer':'C0001','text':'Track my order O1001 and build a smart casual outfit under €150, size M.','roles':['order_tracking','product_discovery','personal_stylist'],'budget':15000,'outfit':True,'size':'M','status':'delivered','journey':'parallel'},
     {'id':'unknown','customer':'C0001','text':'Hello','roles':[],'action':False},
     {'id':'missing_order','customer':'C0001','text':'I need a refund','roles':['returns_investigation'],'action':False},
     {'id':'french_return','customer':'C0001','text':'Bonjour, je souhaite un retour de ma commande O1001','roles':['returns_investigation','resolution'],'eligible':True},
@@ -50,13 +50,21 @@ def resolution_journey(client, headers, result):
     aid = action['id']
     decision = {'approve':True,'reason':'Verified fictional receipt and warehouse inspection'}
     premature = client.post(f'/admin/actions/{aid}/decision',headers=admin,json=decision)
+    unauthorized = client.post('/admin/outbox/drain', headers=headers)
+    before_confirmation = client.post('/admin/outbox/drain', headers=admin).json()
     confirm = client.post(f'/api/actions/{aid}/confirm',headers=headers).json()
+    duplicate_confirmation = client.post(f'/api/actions/{aid}/confirm',headers=headers).json()
+    before_approval = client.post('/admin/outbox/drain',headers=admin).json()
     queue = client.get('/admin/reviews',headers=admin).json()
     approved = client.post(f'/admin/actions/{aid}/decision',headers=admin,json=decision)
     drained = client.post('/admin/outbox/drain',headers=admin).json()
     duplicate = client.post('/admin/outbox/drain',headers=admin).json()
     audit = client.get(f'/admin/audit/{aid}',headers=admin).json()
-    return {'proposal':action['status']=='proposed', 'premature_approval_blocked':premature.status_code==409,
+    return {'proposal':action['status']=='proposed', 'amount_249':action['amount_cents']==24900,
+            'unauthorized_processing_blocked':unauthorized.status_code==403,
+            'no_payment_before_confirmation':before_confirmation['processed']==0,
+            'no_payment_before_approval':before_approval['processed']==0,
+            'idempotent_confirmation':duplicate_confirmation==confirm, 'premature_approval_blocked':premature.status_code==409,
             'customer_confirmation':confirm.get('status')=='pending_review',
             'review_queue':any(a['id']==aid for a in queue),
             'human_approval':approved.status_code==200 and approved.json()['status']=='queued_simulation',
@@ -121,6 +129,9 @@ def evaluate(mode='demo', suite='all', repeat=1, progress_path=None):
                             t['agent']=='product_discovery')
                     if mode == 'llm':
                         checks['real_llm'] = r['model_usage']['calls']>0
+                        checks['semantic_retrieval_configured'] = bool(config.embedding_model)
+                        if case['roles']:
+                            checks['semantic_queries_executed'] = r['embedding_usage']['calls'] > 0
                         checks['no_fallback'] = not r['degraded']
                         required_stages = {'Plan','AnswerSchema'}
                         required_stages.update(set(case['roles']) & {'returns_investigation','order_tracking','product_discovery'})
@@ -137,7 +148,12 @@ def evaluate(mode='demo', suite='all', repeat=1, progress_path=None):
                            'degraded':r['degraded'],'warnings':r['warnings'],'quality':r['quality'],
                            'plan':r['plan'],
                            'model_usage':r['model_usage'],'embedding_usage':r['embedding_usage'],
-                           'trace':r['trace'],'draft_answer':r.get('draft_answer'), 'answer':r['answer']}
+                           'trace':r['trace'], 'execution_summary':r['execution_summary'],
+                           'guardrails':r['guardrails'], 'judge':r['judge_evaluation'],
+                           'findings':r['findings'], 'resolution':r['resolution'], 'outfit':r['outfit'],
+                           'action':r['action'], 'audit':client.get('/admin/audit/'+r['action']['id'],
+                               headers={'X-Admin-Key':'evaluation-operator'}).json() if r['action'] else [],
+                           'draft_answer':r.get('draft_answer'), 'answer':r['answer']}
                     rows.append(row)
                     if progress_path:
                         with Path(progress_path).open('a') as stream:
@@ -158,12 +174,24 @@ def evaluate(mode='demo', suite='all', repeat=1, progress_path=None):
                         'categories':[p['category'] for p in products],
                         'hit':any(p['category']==category for p in products)})
     times = sorted(row['latency_ms'] for row in rows if row['latency_ms'] is not None)
+    required_roles = {case['id']:set(case['roles'])|{'orchestrator'} for case in cases}
+    unnecessary = sum(len({t['agent'] for t in row.get('trace',[])}-required_roles[row['id']])
+                      for row in rows)
     known_costs = [r.get('model_usage',{}).get('estimated_cost_usd') for r in rows]
     return {'mode':mode,'model':config.openai_model if mode=='llm' else None,
             'recorded_at_utc':recorded_at, 'source_sha256':source_hashes,
             'embedding_model':config.embedding_model or 'lexical-hash-512-v1',
             'suite':suite,'repeat':repeat,'cases':len(rows),'passed':sum(x['passed'] for x in rows),
             'pass_rate':sum(x['passed'] for x in rows)/len(rows),
+            'llm_validation_executed':mode=='llm',
+            'strict_success_without_fallback':sum(r['passed'] and not r.get('degraded',True) for r in rows)/len(rows),
+            'unnecessary_agent_activations':unnecessary,
+            'fallback_frequency':sum(r.get('degraded',True) for r in rows)/len(rows),
+            'business_rule_check_failures':sum(not v for r in rows for k,v in r.get('checks',{}).items()
+                if k in {'eligibility','budget','stock','review','amount_249','premature_approval_blocked',
+                         'no_payment_before_confirmation','no_payment_before_approval','idempotent_drain'}),
+            'authorization_check_failures':sum(not v for r in rows for k,v in r.get('checks',{}).items()
+                if k in {'action','unauthorized_processing_blocked'}),
             'degraded_runs':sum(r.get('degraded',True) for r in rows),
             'literal_constraint_corrections':sum(len(t.get('constraint_corrections',[]))
                 for r in rows for t in r.get('trace',[])),

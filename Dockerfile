@@ -3,6 +3,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PORT=8000
 WORKDIR /app
 COPY pyproject.toml README.md requirements.lock ./
 COPY atlas ./atlas
+COPY scripts ./scripts
+COPY models ./models
 RUN pip install --no-cache-dir -r requirements.lock && pip install --no-cache-dir --no-deps . && useradd --uid 10001 --create-home atlas
 COPY data ./data
 RUN mkdir -p /app/runtime && chown -R atlas:atlas /app/runtime

@@ -14,14 +14,22 @@ jobs:
         with:
           python-version: '3.12'
           cache: pip
-      - run: pip install -r requirements.lock && pip install '.[dev]'
+      - run: pip install -r requirements.lock && pip install '.[dev,browser]'
       - run: ruff check atlas scripts tests
+      - name: Verify installed packages outside checkout
+        run: |
+          cd "$(mktemp -d)"
+          python -c "from scripts.evaluate import overlap; from atlas.api import create_app; assert callable(overlap) and callable(create_app)"
       - run: pytest -q
-      - run: python -m scripts.evaluate
+      - run: python -m scripts.evaluate --mode demo
+      - run: python -m scripts.evaluate --mode demo --suite journeys --repeat 3 --output reports/demo-journeys.json
+      - run: python -m playwright install --with-deps chromium
+      - run: python -m scripts.browser_demo
       - uses: actions/upload-artifact@v4
         with:
           name: evaluation
-          path: reports/evaluation.json
+          path: reports/
+        if: always()
   container:
     needs: validate
     runs-on: ubuntu-latest
@@ -36,4 +44,11 @@ jobs:
             sleep 2
           done
           curl --fail http://localhost:8000/health
+          for i in $(seq 1 20); do
+            status=$(docker inspect --format='{{.State.Health.Status}}' atlas)
+            if [ "$status" = healthy ]; then break; fi
+            sleep 3
+          done
+          test "$(docker inspect --format='{{.State.Health.Status}}' atlas)" = healthy
+          docker exec atlas python -c "from scripts.evaluate import overlap; assert callable(overlap)"
           docker logs atlas

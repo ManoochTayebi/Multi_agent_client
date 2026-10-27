@@ -1,3 +1,32 @@
+# Finalization validation — 27 October 2026
+
+This section describes the current finalization. Everything under **Historical validation** below describes earlier code/model runs and is retained as provenance; it must not be attributed to the current source without matching hashes.
+
+| Check | Current observed result |
+|---|---|
+| Non-editable packaging | `atlas` and `scripts` installed; isolated import outside checkout passes |
+| Ruff | Passed |
+| Pytest | 42 passed; original overlap regression remains enabled |
+| Full deterministic API evaluation | 13/13; exact role coverage, no fallback/extra agents |
+| Two demo journeys, three repetitions | 6/6 against fresh SQL/Chroma stores per repetition |
+| Real Chromium UI/HTTP rehearsal | Passed refund/approval/audit, duplicate drain, updated customer status, tracking/styling, mock carrier and mobile overflow checks; no JavaScript errors |
+| Live model and semantic inference | Not executed in this workspace: no Ollama executable/reachable endpoint or provider credentials |
+| Local Docker execution | Unavailable: no Docker executable. Actual build, startup and Docker HEALTHCHECK verification run in the GitHub Actions container job |
+
+Current evidence: [full API report](validation/finalization-demo.json), [repeated journeys](validation/finalization-journeys.json), [browser evidence](validation/finalization-browser.json), [environment availability](validation/finalization-environment.json). Reports contain actual source hashes and execution evidence. Screenshots and full CI reports are uploaded as Actions artifacts; they are not synthetic illustrations.
+
+The repeated deterministic journeys measured p50 36.5 ms / p95 97 ms in this workspace, with zero model calls, zero observed business/authorization check failures, zero fallback and zero unnecessary agent activations. These timings exclude model/index startup and do not describe LLM performance. Lexical policy recall@2 was **4/8** (including difficult paraphrases); category recall@3 was **2/2**. Semantic relevance and current strict LLM success/tokens/cost are unverified, not inferred from those scores.
+
+Native provider tool calls, resolution/styling decisions, Judge invocation, argument repair, bounded provider retry and error handling are covered through controlled HTTP/model fixtures in the automated tests. Those protocol tests are not live-model inference. Earlier real-model results below remain historical evidence with their own source hashes. PostgreSQL support is preserved; this review's API/browser reports use SQLite.
+
+The customer/operator UI now exposes actual overlap intervals, dependencies, selected tools, policy/SQL evidence, guardrail and Judge outcomes, audit transitions and simulated payment status. A final live SQL check rejects stale variant IDs, size, stock or prices before publishing a recommendation. No real financial connector was added.
+
+Rehearsal instructions: [DEMO_RUNBOOK.md](DEMO_RUNBOOK.md). CI installs non-editably, checks imports outside checkout, runs all tests/evaluations, rehearses actual Chromium UI journeys, builds the image and requires Docker health status `healthy`. The final commit's Actions run is the authoritative remote result; no remote result is inferred from local checks.
+
+## Historical validation — prior implementation
+
+All uses of “final” in this historical record refer to that earlier review only.
+
 # Recorded validation — 26 October 2026
 
 This record supersedes the original demo-only validation. Reports below describe development runs against fictional data, not a held-out benchmark, real customer operations or a production SLA.
