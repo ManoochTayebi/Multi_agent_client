@@ -1,63 +1,107 @@
-# Architecture and implementation boundaries
+# Atlas CustomerAI architecture
 
-## Business goal
+Atlas combines retail service and advice in one conversation. A customer can ask for a return, shipment tracking and styling without repeating context across disconnected assistants. The implementation keeps **six business roles**, a single FastAPI application and explicit LangGraph dependencies. The data and financial/warehouse/carrier operations are fictional.
 
-Reduce the handoffs needed to resolve retail requests while making useful product recommendations. A customer can combine a return, a delivery question and a styling request in one message. The workflow shares verified evidence rather than asking the customer to repeat information to multiple bots.
+## Roles and decisions
 
-The business case should be evaluated with measured handling time, resolution rate, escalation appropriateness, CSAT, return-to-exchange conversion and recommendation conversion. This implementation does not claim measured ROI. A pilot estimate is: monthly eligible contacts × minutes saved per contact × loaded hourly cost / 60, minus platform, provider and operator costs. Keep recommendation uplift separate to avoid double counting.
-
-## Six roles
-
-| Role | Inputs / allowlisted tools | Session memory | Output |
+| Business agent | Responsibility | Inputs and bounded tools | Persistent memory |
 |---|---|---|---|
-| Orchestrator | Current request, prior plan | Previous routing plans | Validated intent plan and dependency selection |
-| Returns investigation | Owned SQL order, condition, return history, policy RAG | Prior investigation evidence | Eligibility and human-review signals |
-| Resolution | Investigation evidence; current order revalidation | Prior resolution proposals | Bounded refund proposal or exception review |
-| Product discovery | Profile; semantic product search constrained by catalog/variant SQL; policy RAG | Prior discovery evidence | Semantically ranked, diverse candidate set with live size, budget, category and stock checks |
-| Order tracking | Owned order; live carrier API or cache; shipping RAG | Prior shipment evidence | Status and source freshness |
-| Personal stylist | Discovery variants, requested occasion and total budget | Prior outfit evidence | Model-selected exact variants, verified compatibility, size and total budget |
+| Central Orchestrator | Select the requested goals and coordinate the response | Current request, previous session plan; structured model routing | Prior routing plans |
+| Returns Investigation | Establish ownership, eligibility and review signals | Owned order/history/current refund state in SQL; policy RAG | Prior investigation evidence |
+| Resolution | Choose the next resolution step without changing money or mandatory review | Investigation, policies; structured resolution decision | Prior resolutions |
+| Product Discovery | Find relevant available candidates | SQL size/stock/price/category filters; Chroma product ranking; policy RAG | Prior discovery evidence |
+| Order Tracking | Report verified delivery status and freshness | Owned SQL shipment; configured carrier API with labeled cache fallback; policy RAG | Prior shipment evidence |
+| Personal Stylist | Choose compatible exact variants under the total budget | Discovery shortlist, request and prior outfit; structured variant selection | Prior outfits and customer-facing reasons |
 
-In LLM mode the orchestrator extracts structured semantic intent and constraints. Explicit budget, size, category and order-ID literals are bound by trusted parsing before downstream tools run; model-value corrections are traced. This prevents a model from changing a stated EUR 1 cap into EUR 150. These input guards are separate from semantic intent selection. Independent evidence agents select native function calls and search queries from separate registries. Each specialist can make up to three model rounds/six tool calls; invalid arguments are returned as tool errors so it can correct them. Minimum evidence contracts require both a domain lookup and policy retrieval. Missing evidence, including an attempted early answer, prompts the specialist to call the missing tools within the same three-round budget. Denied tools or an exhausted budget trigger an explicit degraded fallback. SQL identity, order ID and commerce constraints are bound by the server, never accepted as tool arguments.
+In `llm` mode the model selects native function calls and queries within each specialist's role-specific registry. Operational decisions, tool calls and evidence are inspectable; private chain-of-thought is not requested or persisted. Resolution, styling, synthesis and judging use structured model outputs. In `demo` mode routing, tool execution and decisions use transparent deterministic baselines; no model calls or Judge verdicts are fabricated.
 
-Discovery retrieves semantic relevance from Chroma, restricts IDs to the authoritative SQL-eligible variants, and keeps category diversity for outfit construction. Factual garment-category definitions enrich the repetitive fictional descriptions. SQL size, stock, price and category checks precede ranking, avoiding the old arbitrary top-30 lexical/style ordering. The stylist consumes this shortlist and chooses exact variants for complementary garments, with a brief customer-facing explanation. Before publication, a second SQL lookup rechecks selected variant/product IDs, requested size, current positive stock and unchanged prices. A failed recheck suppresses the stale recommendation and blocks automated action. Validation rejects invented/duplicate variants, incorrect size, invalid combinations and excess total spend. The stylist gets one model repair attempt with explicit validation feedback; both choices are traced. Only exhausted or unavailable model decisions use a labeled fallback. The deterministic baseline enumerates feasible complete combinations rather than greedily choosing unaffordable separates. No complete combination produces a clear request to adjust constraints.
+## Orchestration and quality gates
 
-Returns investigation establishes facts and review signals. Resolution consumes those facts and cited policy to decide a standard refund proposal, exception review or human support, with next steps. It cannot set money or waive required review. Human-support recommendations suppress automated proposals. The orchestrator combines results and synthesizes a grounded reply; it does not repeat specialist investigation. Model judgements of risky/financial or multi-intent replies run as a separate quality call after deterministic checks, with no additional business role.
+```mermaid
+flowchart TD
+    O[Central Orchestrator] -->|selected| R[Returns Investigation]
+    O -->|selected| P[Product Discovery]
+    O -->|selected| T[Order Tracking]
+    O -->|no specialist task| J[Join evidence]
+    R --> J
+    P --> J
+    T --> J
+    J --> X[Resolution if return evidence exists]
+    X --> S[Personal Stylist if requested]
+    S --> A[Aggregate response]
+    A --> V[Deterministic validation]
+    V --> Q{"LLM mode and financial or multiple intents?"}
+    Q -->|yes| L[Separate LLM Judge call]
+    Q -->|no| F[Finalize]
+    L --> F
+    F --> G{"All quality checks pass?"}
+    G -->|no| B[Human support; no new action]
+    G -->|yes| C[Response and optional refund proposal]
+```
 
-These remain bounded agents, not autonomous financial operators. Deterministic domain rules are intentional trust boundaries. Demo mode uses explicit fixed tool/decision baselines; it never simulates model calls. Traces distinguish `demo`, `llm_tools`, `llm_decision`, `fallback`, `failed` and `no_feasible_outfit` executions. The UI exposes the selected routing plan, tool evidence, actual overlapping monotonic intervals, downstream dependencies, deterministic guardrails and the separately recorded Judge decision. The current graph joins all independent workers before downstream nodes; it does not optimize for the earliest possible stylist start.
+**Implementation mapping:** `atlas/agents.py` builds the StateGraph. The Orchestrator emits dynamic `Send` tasks to a shared `worker` node, each with a role-specific tool registry from `atlas/specialists.py`. Findings, traces and warnings use list reducers. Resolution and Stylist run after the worker superstep and skip when irrelevant; a no-task request bypasses workers and traverses those no-op stages. Judge is a quality node, not a seventh business role.
 
-Per-run usage is isolated across parallel worker contexts and saved with SQL run history.
+The graph joins **all selected independent workers** before downstream stages. It does not start the Stylist immediately when Discovery finishes if Tracking is still running. Trace intervals record process-monotonic start/end times; compare them only within a single run. `execution_summary.parallel_pairs` measures real worker overlap. A local model server may serialize inference even while graph workers overlap.
 
-## Persistence and state
+The Judge condition is `bool(resolution) or len(plan.intents) > 1` in LLM mode. An outfit request itself produces Discovery and Stylist intents, so it is judged even without a separate tracking/return request.
 
-SQLAlchemy supports SQLite locally and PostgreSQL in Compose. SQL stores domain entities, session credentials as hashes, messages grouped by agent, run traces, proposals, audit events and an outbox. Session history supplies durable memory between completed requests; individual LangGraph supersteps are not durably checkpointed. A crash can be retried as a new run, and proposal uniqueness prevents duplicate financial actions.
+An explicit empty intent list is valid for a greeting; a missing `intents` field or malformed model response is not a valid route and triggers visible fallback. Trusted parsing binds explicit budget/size/category/order literals before tools run and records corrections of model values. Intent selection remains model-driven in LLM mode.
 
-`actions` has a unique order/kind constraint. Customer confirmation rechecks current order state. Conditional SQL updates and a unique action/outbox relation prevent duplicate enqueueing, including concurrent confirmations. Operator decisions apply only to confirmed pending-review actions. Outbox draining records simulated completion atomically; no external payment is called.
+## SQL and RAG evidence
 
-## Trust boundaries
+SQLAlchemy supports SQLite locally and PostgreSQL in the existing Compose configuration. Domain lookups use parameterized SQL and the authenticated customer ID. Models cannot submit identity, arbitrary SQL, prices, refund amounts or arbitrary API URLs as tool arguments.
 
-User input and retrieved content are data. The model never selects customer identity, executes arbitrary SQL, sets refund amounts, or selects arbitrary API URLs. Parameterized SQL is scoped to the authenticated customer. Model responses and public request bodies use Pydantic schemas; graph state uses a typed dictionary. Tool schemas forbid unknown arguments. Session tokens expire after 24 hours.
+Chroma keeps separate, versioned collections for policy chunks and product descriptions. Policy results include source filename/chunk, digest, text and distance. Catalog descriptions include factual category definitions; ranking is restricted to SQL-eligible IDs and keeps category diversity for complete outfits. SQL remains authoritative for prices, size and stock. Index initialization rebuilds changed documents; embedding model/endpoint changes select separate collections.
 
-Demo access is intentionally permissive because every account is fictional. Protected mode uses a minimal operator-configured token map; enterprise SSO and granular operator identity are future work. Operator audit currently identifies a shared operator role, not an individually authenticated employee.
+With `EMBEDDING_MODEL` unset, retrieval uses deterministic normalized lexical hash vectors. With a configured encoder it uses actual provider embeddings. This is a visible configuration choice, not silent semantic fallback. Embedding failure at startup fails initialization. Semantic relevance must be measured separately from software correctness; the development probes are not held out.
 
-LLM text can still contain unsupported claims: structured validation covers domain evidence and proposals, and an independent model judge is applied to financial and multi-intent runs. A judge is not a proof of factual accuracy. A production rollout needs held-out evaluation, adversarial tests, citation-claim checks and operator sampling.
+The Stylist selects exact variant IDs from Discovery. Python checks provenance, duplicate IDs, compatible categories and the total outfit budget. A second SQL lookup rechecks current product/variant IDs, size, positive stock and unchanged prices before publication. A failed check suppresses the stale recommendation. The deterministic outfit baseline searches feasible complete combinations; it does not claim to be a trained recommender.
 
-## Scaling projection
+## Refund lifecycle and authorization
 
-The tested deployment is a single API process with embedded Chroma, SQL persistence, a bounded request semaphore and per-session thread locks. PostgreSQL is available for server deployment; it does not alone make the app horizontally scalable. Before increasing replicas, move embeddings to a shared vector service, introduce distributed session locks, serialize initial data migrations and seeding, add queue-based admission control, and centralize model usage and tracing. Keep financial execution in a separate idempotent worker with a real provider adapter.
+```mermaid
+stateDiagram-v2
+    [*] --> proposed: Verified and quality-approved proposal
+    proposed --> pending_review: Customer confirms; review required
+    proposed --> queued_simulation: Customer confirms; standard policy path
+    pending_review --> queued_simulation: Operator approves with a nonblank reason
+    pending_review --> rejected: Operator rejects with a nonblank reason
+    queued_simulation --> completed_simulation: Operator drains simulated outbox
+    rejected --> [*]
+    completed_simulation --> [*]
+```
 
-Configuration and schema creation currently use `metadata.create_all`, not a versioned migration system. Rollout requires adding Alembic migrations, backups and restore rehearsals. Avoid running multiple initializers against an empty database.
+Amounts above EUR 150, policy exceptions and repeat-return review signals require a human. A review signal is not a fraud finding. Confirmation rechecks the current order facts and escalates changed conditions/amounts to human review. An operator cannot decide a proposal before customer confirmation. The warehouse inspection step is represented by the fictional approval scenario; no real warehouse is integrated.
 
-## Error behavior
+`atlas/actions.py` creates proposals and enforces transitions through conditional SQL updates. A unique order/kind constraint reuses the existing refund action. A unique action/outbox constraint and transactional updates prevent duplicate simulated transactions. Repeated requests retrieve the owned action's current lifecycle so replies can distinguish proposed, awaiting review, queued, rejected and completed simulation states. They do not reopen rejected/completed actions.
 
-Provider routing/tool-selection/decision/synthesis failures use visible deterministic fallback. Tool failures produce missing-evidence markers and block quality validation. A judge timeout blocks proposals. Carrier failures use labeled cached data. Unexpected pipeline failures return 503 and persist a failed run. The UI offers retry without silently changing identities or claiming that an action completed.
+The customer session token and operator key have different permissions. Admin decisions require a reason after trimming whitespace. All payment completion is explicitly simulation; there is no payment provider call. The audit records proposal, customer confirmation, reasoned operator decision and simulated completion.
 
-## Technical references
+## Persistence, concurrency and observability
 
-- [LangGraph Send](https://reference.langchain.com/python/langgraph/types/Send)
-- [Chroma](https://docs.trychroma.com/)
-- [Render blueprint reference](https://render.com/docs/blueprint-spec)
-- [Docker Compose interpolation](https://docs.docker.com/compose/how-tos/environment-variables/variable-interpolation/)
+| Store or boundary | Contents and behavior |
+|---|---|
+| SQL | Business entities, hashed session credentials, per-agent messages, completed/failed run evidence, actions, audit and outbox |
+| Chroma | Policy/catalog vectors and document provenance; initialized from versioned fixtures |
+| LangGraph state | Current request, role plan, reduced findings/traces/warnings, resolution/outfit, checks, Judge verdict and response |
+| Request admission | At most eight concurrent chats per process; conflicting requests in the same session return 409 |
+| Session deletion | Shares the chat lock; active-chat deletion returns 409, otherwise removes messages/runs/session. Existence is rechecked after lock acquisition to reject an already deleted session |
+| Financial history | Retained independently of deleted conversational memory |
 
-## Demonstration and packaging contracts
+Agent memory survives application restarts through SQL, but individual graph supersteps are **not** durably checkpointed. A crashed request is retried as a new run; financial uniqueness constraints protect its action lifecycle. Session locks and admission limits are process-local. Use one API process/replica with embedded Chroma; this is not a distributed execution system.
 
-`atlas` and `scripts` are both installed packages. CI tests their imports outside the checkout after a non-editable installation, preserving the real overlap test without path manipulation. Docker copies both packages before building the wheel. CI also rehearses both real browser journeys against isolated HTTP services and checks the actual Docker HEALTHCHECK status, not just an HTTP response. See [DEMO_RUNBOOK.md](DEMO_RUNBOOK.md) for exact setup, prompts, resets, evidence inspection and limitations. Browser automation is an optional development dependency, not another business service.
+The UI shows completed execution traces, actual worker overlap/dependencies, policy/catalog/SQL facts, native tool calls, model choices, separate guardrail/Judge results and audit events. It does not stream each internal step live. Per-run model/embedding usage is attributed across worker contexts; unknown costs remain null. Initial index creation is excluded from contact inference usage. SDK retries are bounded by configuration, and usage events count application-level calls rather than each internal retry attempt.
+
+`/health` checks SQL/index access and exposes the configured mode/model/retrieval/clock. It does not perform a model inference request. Operator-authenticated `/metrics` exposes aggregate run counts, latency sums and process-local model usage without raw customer messages.
+
+## Errors and demonstrated boundaries
+
+- Specialist tool choice is bounded to three model rounds and six tool calls. Unknown tools are denied; invalid arguments are returned for bounded correction. Missing required evidence cannot silently count as success.
+- The Stylist has one repair attempt after an invalid selection. Exhausted/unavailable choices use a labeled feasible fallback. Routing, tool, decision or synthesis fallback sets warnings/degraded status and fails strict LLM acceptance.
+- Carrier failures return the labeled last synchronized mock record. Missing SQL evidence fails validation. A required Judge rejection/timeout blocks a new action and requests human support.
+- Judge is a separate prompt to the same configured model. It cannot override deterministic checks and is not proof of groundedness. Current prompts/tests do not replace independently annotated quality evaluation.
+- Synthetic account switching is intentionally open when `DEMO_ACCESS=true`. Protected mode uses an operator-configured token map; it is not enterprise SSO/RBAC.
+
+CI installs `atlas` and `scripts` non-editably and verifies imports outside the checkout. It runs lint, tests, API evaluation, repeated journeys, a real Chromium/HTTP rehearsal, Docker build/startup and actual container health verification. Browser automation is an optional development dependency. Historical reports apply only to their recorded source hashes; see [current review](REVIEW.md), [evaluation protocol](EVALUATION.md) and [demo runbook](DEMO_RUNBOOK.md).
+
+A production pilot would additionally need versioned migrations (current setup is `create_all`), retention/backups, enterprise identity, distributed locks/admission, shared vector storage and real business connectors where authorized. Load, independent model quality, production readiness, measured ROI and a public deployment are not claimed.

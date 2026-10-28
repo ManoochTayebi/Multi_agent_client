@@ -1,11 +1,11 @@
-from typing import Literal
-from pydantic import BaseModel, Field
+from typing import Annotated, Literal
+from pydantic import BaseModel, Field, StringConstraints
 
 Intent = Literal['returns_investigation', 'product_discovery', 'order_tracking', 'personal_stylist']
 
 
 class Plan(BaseModel):
-    intents: list[Intent] = Field(default_factory=list, max_length=4)
+    intents: list[Intent] = Field(max_length=4)
     order_id: str | None = Field(default=None, pattern=r'^O\d{4,8}$')
     category: Literal['shirt','trousers','dress','jacket','shoes','top','skirt','knitwear'] | None = None
     budget_cents: int | None = Field(default=None, ge=0, le=1000000)
@@ -40,4 +40,4 @@ class ChatRequest(BaseModel):
 
 class Decision(BaseModel):
     approve: bool
-    reason: str = Field(min_length=3, max_length=500)
+    reason: Annotated[str, StringConstraints(strip_whitespace=True, min_length=3, max_length=500)]

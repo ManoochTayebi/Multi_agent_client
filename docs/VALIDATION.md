@@ -1,8 +1,12 @@
-# Finalization validation — 27 October 2026
+# Validation history
 
-This section describes the current finalization. Everything under **Historical validation** below describes earlier code/model runs and is retained as provenance; it must not be attributed to the current source without matching hashes.
+For the latest repository review and checks, see [REVIEW.md](REVIEW.md). The dated results below remain historical records tied to their own source hashes.
 
-| Check | Current observed result |
+## Finalization validation — 27 October 2026
+
+This section records the 27 October finalization. Everything under **Historical validation** below describes earlier code/model runs and is retained as provenance; it must not be attributed to the current source without matching hashes.
+
+| Check | Observed on 27 October |
 |---|---|
 | Non-editable packaging | `atlas` and `scripts` installed; isolated import outside checkout passes |
 | Ruff | Passed |

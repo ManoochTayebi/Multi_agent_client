@@ -137,7 +137,10 @@ class Model:
             'Never promise payment, invent products, prices or delivery dates. Use only the selected outfit '
             'when supplied. If discovery is empty say no matches. Label cached shipment status. '
             'Refunds are proposals requiring explicit confirmation, warehouse inspection and possibly '
-            'human review. Never say a proposal has been approved or payment processed. '
+            'human review. Do not claim a new proposal was approved or processed. When supplied '
+            'existing_action records a confirmed/rejected/queued/completed_simulation lifecycle, '
+            'describe that recorded state instead of requesting confirmation again. A completed '
+            'simulation must be explicitly labeled; it never moves real money. '
             'Use the safe_baseline facts; do not add actions or dates absent from that baseline. '
             'For delivered shipments omit obsolete delivery estimates. '
             'Cite supplied source filenames. Include the outfit total. Reply in '+language+'.',

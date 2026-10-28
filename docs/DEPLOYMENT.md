@@ -16,7 +16,7 @@ The adapter omits authorization when no carrier key is configured and labels the
 
 ## Docker Compose
 
-Copy `.env.example` to `.env`, set unique `POSTGRES_PASSWORD` and `ADMIN_API_KEY`, then `docker compose up --build -d`. Three services start: API, PostgreSQL 16, and a mock carrier HTTP API. Named volumes persist database and Chroma state. `docker compose logs -f api` shows operational logs. `docker compose down` stops services; do not add `-v` unless you intend to remove the stored state.
+For a fresh checkout, copy `.env.example` to `.env`, set unique `POSTGRES_PASSWORD` and `ADMIN_API_KEY`, then `docker compose up --build -d`. Use a URL-safe password (for example `secrets.token_urlsafe(32)`), because Compose places it in the SQLAlchemy connection URL. Keep any existing configured `.env` rather than overwriting it. Three services start: API, PostgreSQL 16, and a mock carrier HTTP API. Named volumes persist database and Chroma state. `docker compose logs -f api` shows operational logs. `docker compose down` stops services; do not add `-v` unless you intend to remove the stored state.
 
 When using Ollama on the host, `localhost` inside the API container refers to that container. Configure an explicitly reachable host origin (on Docker Desktop, commonly `http://host.docker.internal:11434/v1`) and the local token/reasoning settings; the native `.env.local.example` profile is intended for running Python directly. Compose does not download or run Ollama.
 
@@ -32,7 +32,7 @@ The supplied blueprint uses persistent SQLite and Chroma for the single-instance
 
 ## CI and image release
 
-On pushes to main and pull requests, `ci.yml` runs lint, pytest, scenario evaluation and a Docker health smoke test. Evaluation results are uploaded as an Actions artifact. `release.yml` can be manually started to publish `ghcr.io/<owner>/<repository>:<commit>` and `:latest`. Publishing an image does not start an application server. Use immutable commit tags for promotion/rollback.
+On pushes to main and pull requests, `ci.yml` runs lint, installed-package import checks outside checkout, pytest, scenario evaluation, repeated API journeys and a real Chromium customer/operator rehearsal. Its container job builds the image, checks startup, and requires the Docker HEALTHCHECK status to become `healthy`. Evaluation results are uploaded as an Actions artifact. `release.yml` can be manually started to publish `ghcr.io/<owner>/<repository>:<commit>` and `:latest`. Publishing an image does not start an application server. Use immutable commit tags for promotion/rollback.
 
 ## Operational checks
 

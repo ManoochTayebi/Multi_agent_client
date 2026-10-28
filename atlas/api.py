@@ -107,17 +107,30 @@ def create_app(config=None):
         return {'profile':tools.profile(identity['customer_id']),
                 'orders':tools.recent_orders(identity['customer_id'])}
 
-    @app.post('/api/chat')
-    def chat(body: ChatRequest, identity=Depends(bearer)):
+    def acquire_session(identity):
+        # Serialize deletion and chat; acquiring under the map guard also makes pruning safe.
         with lock_guard:
             if len(session_locks) > 10000:
-                # Idle locks are safe to discard; active ones remain to preserve serialization.
                 for key in list(session_locks):
                     if not session_locks[key].locked():
                         session_locks.pop(key)
-            session_lock = session_locks.setdefault(identity['id'], threading.Lock())
-        if not session_lock.acquire(blocking=False):
-            raise HTTPException(409, 'Another message is running in this session')
+            lock = session_locks.setdefault(identity['id'], threading.Lock())
+            if not lock.acquire(blocking=False):
+                raise HTTPException(409, 'Another request is running in this session; wait and retry')
+        try:
+            # Authentication may have completed just before another request deleted the session.
+            with app.state.engine.connect() as c:
+                exists = c.scalar(select(db.sessions.c.id).where(db.sessions.c.id == identity['id']))
+            if not exists:
+                raise HTTPException(401, 'Session is invalid or expired')
+        except Exception:
+            lock.release()
+            raise
+        return lock
+
+    @app.post('/api/chat')
+    def chat(body: ChatRequest, identity=Depends(bearer)):
+        session_lock = acquire_session(identity)
         if not gate.acquire(blocking=False):
             session_lock.release()
             raise HTTPException(429, 'Capacity reached; retry shortly', headers={'Retry-After':'3'})
@@ -199,12 +212,16 @@ def create_app(config=None):
 
     @app.delete('/api/session', status_code=204)
     def delete_session(identity=Depends(bearer)):
-        # Financial audit records remain; they do not contain session message text.
-        with app.state.engine.begin() as c:
-            c.execute(db.messages.delete().where(db.messages.c.session_id == identity['id']))
-            c.execute(db.runs.delete().where(db.runs.c.session_id == identity['id']))
-            c.execute(db.sessions.delete().where(db.sessions.c.id == identity['id']))
-        return Response(status_code=204)
+        session_lock = acquire_session(identity)
+        try:
+            # Financial audit records remain; they do not contain session message text.
+            with app.state.engine.begin() as c:
+                c.execute(db.messages.delete().where(db.messages.c.session_id == identity['id']))
+                c.execute(db.runs.delete().where(db.runs.c.session_id == identity['id']))
+                c.execute(db.sessions.delete().where(db.sessions.c.id == identity['id']))
+            return Response(status_code=204)
+        finally:
+            session_lock.release()
 
     return app
 

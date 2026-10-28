@@ -1,6 +1,6 @@
 # Local LLM and semantic retrieval
 
-The development machine is an Intel Mac with 16 GiB RAM, so inference runs on CPU. No Ollama CLI, running endpoint, or model directories were found at the start of this review. Ollama and small models were installed for actual provider validation. Model files are outside Git, in `~/.ollama/models`; the Python virtual environment is also ignored.
+Historical model experiments were recorded on an Intel Mac with 16 GiB RAM and CPU inference. Those reports describe their own model digests and source hashes; they do not imply Ollama or its models are installed on your machine or in a new execution workspace. Install the runtime and models below for each machine. Model files and virtual environments remain outside version control. See [current review](REVIEW.md) for what was actually reverified.
 
 ## Reproduce
 

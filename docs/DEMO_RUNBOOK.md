@@ -105,7 +105,7 @@ Expected business evidence and behavior:
 7. After approval, click **Process simulated payments**. One simulated transaction completes; repeat processing must report zero.
 8. Inspect “Audit events — last selected request.” It shows proposal, customer confirmation, reasoned operator decision and simulated completion. “View audit trail” is also available on pending requests.
 
-Rejection must produce no transaction. Approval before customer confirmation, unauthorized admin calls and duplicate confirmations are checked automatically by the API integration suite. A rejected action remains rejected. A repeat request reuses the existing action; reset state to rehearse a fresh lifecycle.
+Rejection must produce no transaction. Approval before customer confirmation, unauthorized admin calls and duplicate confirmations are checked automatically by the API integration suite. A rejected action remains rejected. A repeat request reuses the existing action and reports its pending/rejected/queued/completed simulation status; reset state to rehearse a fresh lifecycle.
 
 **Failure conditions:** no owned order; wrong amount; missing policy evidence; Judge unavailable/rejecting; action published despite failed guardrails; approval before customer confirmation; processing before approval; duplicate transaction; a statement that real money moved. A blocked Judge result must show human support and no new proposal, not a claimed success.
 
@@ -171,6 +171,7 @@ Read failed checks and warnings, not only aggregate pass rate. These curated sce
 - **Slow inference:** warm the model with a genuine rehearsal before the interview; use the two focused journeys. Keep a saved successful trace as an explicitly recorded backup, separate from the live request. If necessary, demonstrate the complete deterministic workflow and explain the real-model evidence and latency limitations. Never label a recording or fallback as live strict LLM success.
 - **Startup/index errors:** inspect the terminal for embedding/model availability, missing `data/`, file checksums and incompatible dependencies. Use the pinned Python dependencies; do not silently disable semantic retrieval to make an LLM report pass.
 - **Database locked/wrong scenario:** use one API process and a fresh SQLite path, avoid sharing rehearsal files across parallel processes, and verify fixed `AS_OF_DATE`. PostgreSQL is supported via Compose but is not required for the interview.
+- **Session deletion returns 409:** a chat is still active. Wait for it to finish and retry deletion; the server prevents deletion racing with memory writes.
 - **401/403:** reconnect an expired customer session, verify the operator key and use the correct header. Protected mode also requires configured `CUSTOMER_TOKENS`; synthetic demo mode intentionally permits account selection.
 - **No refund button:** inspect guardrails/Judge and `human_support` recommendations. Do not bypass them. Check whether an existing action was already approved/rejected/completed.
 - **Carrier offline:** start terminal 2, check `http://localhost:8001/health`; cached records remain clearly labeled.

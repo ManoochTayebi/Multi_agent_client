@@ -32,6 +32,15 @@ class Tools:
             return [dict(x) for x in c.execute(select(db.orders).where(
                 db.orders.c.customer_id == customer_id).order_by(db.orders.c.id.desc()).limit(10)).mappings()]
 
+    def refund_action(self, customer_id, order_id):
+        """Return the owned lifecycle without leaking credentials or non-JSON timestamps."""
+        with self.engine.connect() as c:
+            row = c.execute(select(db.actions.c.id, db.actions.c.status, db.actions.c.amount_cents,
+                db.actions.c.requires_human, db.actions.c.customer_confirmed).where(and_(
+                db.actions.c.customer_id == customer_id, db.actions.c.order_id == order_id,
+                db.actions.c.kind == 'refund'))).mappings().first()
+        return dict(row) if row else None
+
     def investigate(self, customer_id, order_id):
         order = self.order(customer_id, order_id)
         if not order:
@@ -53,6 +62,7 @@ class Tools:
             reasons.append('Item condition requires review')
         review = not eligible or order['total_cents'] > 15000 or profile['previous_returns'] >= 3
         return dict(found=True, order=order, age_days=age, eligible=eligible, needs_review=review,
+            existing_action=self.refund_action(customer_id, order_id),
             reason='; '.join(reasons) or 'Within window with verified unworn condition',
             previous_returns=profile['previous_returns'],
             review_reasons=reasons + (['Refund exceeds EUR 150'] if order['total_cents'] > 15000 else [])
