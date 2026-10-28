@@ -12,6 +12,7 @@ from langgraph.types import Send
 from atlas.schemas import Plan, JudgeVerdict, ResolutionDecision, OutfitDecision
 from atlas.specialists import registry, baseline_outfit, valid_outfit
 from atlas.model import RUN_ID
+from atlas.support import Support
 
 ROLES = {
     'orchestrator':'Classify customer goals, plan dependencies and aggregate grounded results.',
@@ -41,6 +42,24 @@ class State(TypedDict, total=False):
     guardrails: dict
     judge_evaluation: dict
     action: dict | None
+    request_human: bool
+    support: dict | None
+    support_mode: bool
+
+
+def requests_human(message):
+    """Recognize explicit EN/FR handoff requests independently of model availability."""
+    text = message.lower().replace('’', "'")
+    person = (r'(?:human(?!\s+(?:approval|review|oversight))(?:\s+(?:agent|support|representative))?'
+              r'|(?:real|live)\s+(?:person|agent)|person|conseiller(?:\s+humain)?'
+              r'|agent\s+(?:humain|réel)|une?\s+personne)')
+    # Do not turn a negated request or a question about approval policy into a handoff.
+    if re.search(r"(?:don't|do not|not|ne\s+\w+\s+pas|pas besoin de).{0,35}(?:talk|speak|human|parler|humain)", text):
+        return False
+    contact = r'\b(?:talk|speak|chat|connect|transfer|contact|parler|discuter|contacter|transférer).{0,45}\b'
+    return bool(re.search(contact+person+r'\b', text)
+        or re.search(r'\b(?:want|need|prefer|veux|voudrais|souhaite).{0,25}\b'+person+r'\b', text)
+        or re.fullmatch(r'\s*'+person+r'(?:\s+(?:please|s\s*[\'’]il vous plaît))?[.!?\s]*', text))
 
 
 def rule_plan(message, previous=None):
@@ -68,6 +87,7 @@ def rule_plan(message, previous=None):
     category = next((cat for cat in ['shirt','trousers','dress','jacket','shoes','top','skirt','knitwear']
                      if re.search(r'\b'+cat+r'\b', text)), None)
     return Plan(intents=list(dict.fromkeys(intents)), order_id=order_id,
+        handoff_requested=requests_human(message),
         budget_cents=int(round(float(budget.group(1).replace(',','.'))*100)) if budget else None,
         size=size.group(1).upper() if size else None, category=category,
         language='fr' if re.search(r'\b(bonjour|je|mon|ma|une|retour|commande|tenue)\b', text) else 'en',
@@ -77,6 +97,7 @@ def rule_plan(message, previous=None):
 class Pipeline:
     def __init__(self, tools, knowledge, model, actions):
         self.tools, self.knowledge, self.model, self.actions = tools, knowledge, model, actions
+        self.support = Support(tools.engine)
         graph = StateGraph(State)
         graph.add_node('orchestrator', self.route)
         graph.add_node('worker', self.worker)
@@ -86,6 +107,7 @@ class Pipeline:
         graph.add_node('validate', self.validate)
         graph.add_node('judge', self.judge)
         graph.add_node('finalize', self.finalize)
+        graph.add_node('human_handoff', self.handoff)
         graph.add_edge(START, 'orchestrator')
         graph.add_conditional_edges('orchestrator', self.dispatch)
         graph.add_edge('worker', 'resolution')
@@ -95,6 +117,7 @@ class Pipeline:
         graph.add_conditional_edges('validate', self.judge_route)
         graph.add_edge('judge', 'finalize')
         graph.add_edge('finalize', END)
+        graph.add_edge('human_handoff', END)
         self.graph = graph.compile()
 
     def trace(self, role, steps, start, sources=None):
@@ -111,7 +134,14 @@ class Pipeline:
         if re.search(r'\bO\d{4,8}\b', s['message'], re.I):
             literal['order_id'] = plan['order_id']
         warnings = []
-        if self.model.client:
+        thread = self.support.for_session(s['session_id'])
+        open_thread = thread and thread['status'] != 'closed'
+        direct = s.get('request_human', False) or plan['handoff_requested']
+        if open_thread or direct:
+            plan.update(handoff_requested=True, intents=[], rationale=
+                'Continue the open human conversation; AI business actions are paused.' if open_thread else
+                'The customer explicitly requested a person; bypass AI specialists and queue human support.')
+        elif self.model.client:
             try:
                 plan = self.model.structured(Plan,
                     'Select ONLY the business goals requested in the CURRENT message. '
@@ -124,7 +154,10 @@ class Pipeline:
                     'Use the server-supplied explicit_constraints exactly; prices are integer EUR cents. '
                     'For other constraints extract size, category and reply language. '
                     'A greeting alone (Hello, Hi, Bonjour) requests no business task: intents MUST be []. '
-                    'Do not proactively create outfits or track orders for greetings. Unknown goal: intents=[].',
+                    'Do not proactively create outfits or track orders for greetings. Unknown goal: intents=[]. '
+                    'If the customer asks to speak directly to a human/person/live agent, set '
+                    'handoff_requested=true and intents=[]. Human approval of a refund alone is NOT '
+                    'a request for a human conversation. Do not claim a person is already connected.',
                     {'message':s['message'], 'previous_plan':previous, 'explicit_constraints':literal}).model_dump()
             except Exception:
                 warnings.append('Model routing unavailable; deterministic routing used.')
@@ -132,20 +165,54 @@ class Pipeline:
                        for k,v in literal.items() if plan[k] != v]
         # Currency/identity/size literals are validated input, not model-generated business facts.
         plan.update(literal)
+        if plan['handoff_requested']:
+            plan['intents'] = []
         if 'personal_stylist' in plan['intents'] and 'product_discovery' not in plan['intents']:
             plan['intents'].append('product_discovery')
         plan['intents'] = list(dict.fromkeys(plan['intents']))
         self.tools.remember(s['session_id'], 'orchestrator', 'plan', {'plan':plan})
         trace = self.trace('orchestrator', [plan['rationale']], start)
         trace.update(constraint_corrections=corrections, bound_constraints=literal,
-                     execution='fallback' if warnings else 'llm_route' if self.model.client else 'demo')
+                     execution='human_override' if direct or open_thread else
+                     'fallback' if warnings else 'llm_route' if self.model.client else 'demo')
         return {'plan':plan, 'trace':[trace],
                 'warnings':warnings, 'findings':[], 'judged':False}
 
     @staticmethod
     def dispatch(s):
+        if s['plan'].get('handoff_requested'):
+            return 'human_handoff'
         workers = [x for x in s['plan']['intents'] if x != 'personal_stylist']
         return [Send('worker', {**s, 'worker_role':x}) for x in workers] or 'resolution'
+
+    def handoff(self, s):
+        start = time.perf_counter()
+        thread = self.support.for_session(s['session_id'])
+        if thread and thread['status'] != 'closed':
+            self.support.post(thread['id'], 'customer', s['message'])
+            thread = self.support.get(thread['id'])
+        else:
+            thread = self.support.request(s['session_id'], s['customer_id'], 'customer_request', s['message'])
+        return self.handoff_result(thread, s['plan']['language'], start)
+
+    def handoff_result(self, thread, language, start):
+        waiting = thread['status'] == 'waiting'
+        if language == 'fr':
+            answer = ('Votre demande est dans la file du support humain. Aucun conseiller n’a encore pris la conversation.'
+                      if waiting else 'Votre message a été transmis à la conversation prise en charge par un conseiller humain.')
+            answer += ' Vous pouvez écrire ici ou revenir au concierge IA. Les actions automatiques sont suspendues.'
+        else:
+            answer = ('Your request is in the human support queue. An operator has not taken over yet.' if waiting else
+                      'Your message was added to the conversation taken over by a human operator.')
+            answer += ' You can keep messaging here or return to the AI concierge. Automated business actions are paused.'
+        checks = {'passed':True, 'issues':[], 'deterministic':True, 'business_actions_suspended':True}
+        trace = self.trace('orchestrator', ['Persist human conversation', 'Pause automated business actions'], start)
+        trace.update(node='human_handoff', execution='support_queue', tool_calls=[{
+            'tool':'human_support_queue', 'status':'ok', 'thread_id':thread['id']}])
+        return {'support':thread, 'support_mode':True, 'resolution':{}, 'outfit':[], 'action':None,
+                'answer':answer, 'draft_answer':answer, 'quality':checks, 'guardrails':checks,
+                'judged':False, 'judge_evaluation':{'invoked':False, 'reason':'Human conversation; no AI business decision'},
+                'trace':[trace]}
 
     def worker(self, s):
         role, start = s['worker_role'], time.perf_counter()
@@ -464,13 +531,24 @@ class Pipeline:
             # Suppress the confirmation instruction because no executable proposal is published.
             answer = answer.replace('Confirm the proposal using the confirmation button. ', '')
             answer += '\n\nThis request requires human support; automated action is blocked.'
-        return {'action':action, 'answer':answer}
+        result = {'action':action, 'answer':answer, 'support':None, 'support_mode':False}
+        if (not s['quality']['passed'] or s.get('resolution', {}).get('recommendation') == 'human_support') and s.get('session_id'):
+            start = time.perf_counter()
+            reason = 'quality_gate' if not s['quality']['passed'] else 'resolution_escalation'
+            thread = self.support.request(s['session_id'], s['customer_id'], reason, s['message'])
+            trace = self.trace('orchestrator', ['Queue human support: '+reason], start)
+            trace.update(node='finalize', operation='human_handoff', execution='support_queue', tool_calls=[{
+                'tool':'human_support_queue', 'status':'ok', 'thread_id':thread['id']}])
+            result.update(support=thread, support_mode=True,
+                trace=[trace],
+                answer=answer+'\n\nA human support request has been queued. No operator has taken over yet.')
+        return result
 
-    def run(self, message, customer_id, session_id, run_id):
+    def run(self, message, customer_id, session_id, run_id, request_human=False):
         token = RUN_ID.set(run_id)
         try:
             result = self.graph.invoke({'message':message, 'customer_id':customer_id, 'session_id':session_id,
-                'run_id':run_id, 'findings':[], 'trace':[], 'warnings':[]}, {'recursion_limit':20})
+                'run_id':run_id, 'request_human':request_human, 'findings':[], 'trace':[], 'warnings':[]}, {'recursion_limit':20})
             result['model_usage'] = self.model.usage(run_id)
             result['embedding_usage'] = self.knowledge.usage(run_id)
             result['degraded'] = bool(result['warnings'])

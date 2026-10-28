@@ -1,0 +1,237 @@
+{
+  "recorded_at_utc": "2026-10-28T12:59:38.573230+00:00",
+  "mode": "demo",
+  "live_llm_executed": false,
+  "source_sha256": {
+    "atlas/__init__.py": "282d7bd75ee3661f2b64d69037ac142e2c33426a1e1ea47afa06d04c52fb86f4",
+    "atlas/actions.py": "c0104172323b41cca924f29dfbbb88260ff1bb2f7d3b3bd7a76531f1f1ace4ea",
+    "atlas/agents.py": "70360ba1c3b7555986ac7bc5d46c6f44d4a4274b01b63a68d4477418c0a7dc63",
+    "atlas/api.py": "e39f7a294f8ea4fadcda1b846f5a8355f3e814e8809d4a8d94a65a089eea42c3",
+    "atlas/config.py": "7ea7231257d6340e9bd7f3b26345a911277cf990c6fccb2c7247f739f9f3ab3a",
+    "atlas/dataset.py": "a197b1bc7b36dee6c20c8f7f266616081fe3455e5724620aaca2336666af5909",
+    "atlas/db.py": "61ce24077e529e512b9fb993677f8a57d97252a67a3d84da04dc58f70480ddec",
+    "atlas/mock_carrier.py": "0962e18b7a5afe44a9e405550e2134b6c8fe58cb172af8818a151621514979ee",
+    "atlas/model.py": "4060cd81affd9775c11812a83bb792e2734f94a471886f372b8202a75c72e236",
+    "atlas/retrieval.py": "2c7ca2c6f09c4cad48835895563752cd6366aa671aca36ebe04094910fc67482",
+    "atlas/schemas.py": "73964353322b4062fdb6d271f55e245e54de70b089f13a5488a1d10f35fc262d",
+    "atlas/specialists.py": "fa067b38cb1f23e180ccd2276cae780524dd8475a7155e521f9b7dc5e6d24bd6",
+    "atlas/support.py": "8d82101bebe7b0010ca2a2d1601cd08f7bbabe9b1bd3ef19ee34084af53a0d2d",
+    "atlas/tools.py": "5b251a3ebe498df06934c8fc3d6b919462618a91e87ceb01b148368c96ad162b",
+    "models/Modelfile": "f7e7b8ec9d835cb5812d3fd441d5b299b90d0e431d27fc339f48c8eddd34f747",
+    "scripts/evaluate.py": "2bc8fad65dcfee6d63002ef44b1d0e4895f491c3b1b9320c5e258c6c668a9de6",
+    "atlas/static/index.html": "afedede7cd5f4ecae01de406b891f7e3b36a950d0d5d1099e591b20a98422df3",
+    "atlas/static/support.js": "c0d6369543bc3a7723921b9d6a4463390dcba4d300241904d6aaf8aaec1b2303",
+    "scripts/browser_demo.py": "698bdf82dd2fa82d4b9722160ebcc4e656ba2e1a07b7493494d98d4fa4ff8b7b",
+    "tests/test_support.py": "5b787d91d5161512578f82bbf3f1080ec03fe9d0d0262b4cd4198188e0cf29a8"
+  },
+  "checks": {
+    "ruff": "passed",
+    "pytest_passed": 66,
+    "pip_check": "passed",
+    "mermaid_diagrams_passed": 7,
+    "relative_documentation_links": "passed",
+    "full_api_cases_passed": 13,
+    "full_api_cases": 13,
+    "repeated_journeys_passed": 6,
+    "repeated_journeys": 6,
+    "browser_passed": true,
+    "browser_checks": {
+      "refund_approval_and_audit": true,
+      "duplicate_processing": true,
+      "customer_payment_status_updated": true,
+      "both_tracking_and_outfit": true,
+      "worker_overlap": true,
+      "live_mock_carrier": true,
+      "budget_size_stock": true,
+      "direct_human_handoff": true,
+      "operator_cannot_reply_before_takeover": true,
+      "operator_context_and_evidence": true,
+      "real_operator_reply_delivered": true,
+      "human_mode_suspends_specialists": true,
+      "human_session_survives_reload": true,
+      "human_audit_and_closure": true,
+      "ai_resumes_after_closure": true,
+      "mobile_no_horizontal_overflow": true
+    },
+    "javascript_errors": []
+  },
+  "direct_handoff": {
+    "plan": {
+      "intents": [],
+      "handoff_requested": true,
+      "order_id": null,
+      "category": null,
+      "budget_cents": null,
+      "size": null,
+      "language": "en",
+      "rationale": "The customer explicitly requested a person; bypass AI specialists and queue human support."
+    },
+    "support": {
+      "id": "4b66ce61-43db-4c7f-86ad-f1befc268f44",
+      "session_id": "1a990604-124e-4eb9-a113-0276c92775f0",
+      "customer_id": "C0001",
+      "status": "waiting",
+      "reason": "customer_request",
+      "created_at": "2026-10-28T12:58:53.931206",
+      "updated_at": "2026-10-28T12:58:53.931208"
+    },
+    "support_mode": true,
+    "trace": [
+      {
+        "agent": "orchestrator",
+        "role": "Classify customer goals, plan dependencies and aggregate grounded results.",
+        "plan": [
+          "The customer explicitly requested a person; bypass AI specialists and queue human support."
+        ],
+        "started_ms": 1586117.79,
+        "ended_ms": 1586120.268,
+        "duration_ms": 2,
+        "sources": [],
+        "constraint_corrections": [],
+        "bound_constraints": {},
+        "execution": "human_override"
+      },
+      {
+        "agent": "orchestrator",
+        "role": "Classify customer goals, plan dependencies and aggregate grounded results.",
+        "plan": [
+          "Persist human conversation",
+          "Pause automated business actions"
+        ],
+        "started_ms": 1586120.999,
+        "ended_ms": 1586279.02,
+        "duration_ms": 158,
+        "sources": [],
+        "node": "human_handoff",
+        "execution": "support_queue",
+        "tool_calls": [
+          {
+            "tool": "human_support_queue",
+            "status": "ok",
+            "thread_id": "4b66ce61-43db-4c7f-86ad-f1befc268f44"
+          }
+        ]
+      }
+    ],
+    "evidence": [],
+    "outfit": [],
+    "quality": {
+      "passed": true,
+      "issues": [],
+      "deterministic": true,
+      "business_actions_suspended": true
+    },
+    "action": null,
+    "degraded": false,
+    "model_usage": {
+      "model": null,
+      "calls": 0,
+      "failed_calls": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "usage_complete": false,
+      "estimated_cost_usd": null,
+      "events": []
+    },
+    "embedding_usage": {
+      "model": "lexical-hash-512-v1",
+      "calls": 0,
+      "failed_calls": 0,
+      "reported_tokens": 0,
+      "events": []
+    },
+    "execution_summary": {
+      "parallel_pairs": [],
+      "dependencies": {
+        "resolution": "returns_investigation",
+        "personal_stylist": "product_discovery"
+      },
+      "timing_clock": "process monotonic milliseconds; compare within one run only"
+    },
+    "guardrails": {
+      "passed": true,
+      "issues": [],
+      "deterministic": true,
+      "business_actions_suspended": true
+    },
+    "judge": {
+      "invoked": false,
+      "reason": "Human conversation; no AI business decision"
+    }
+  },
+  "human_transcript": [
+    {
+      "id": 1,
+      "thread_id": "4b66ce61-43db-4c7f-86ad-f1befc268f44",
+      "sender": "customer",
+      "text": "I would like to speak to a human support agent.",
+      "created_at": "2026-10-28T12:58:54.086406"
+    },
+    {
+      "id": 2,
+      "thread_id": "4b66ce61-43db-4c7f-86ad-f1befc268f44",
+      "sender": "operator",
+      "text": "Hello, I am your human support operator. I can review order O1002.",
+      "created_at": "2026-10-28T12:58:54.404905"
+    },
+    {
+      "id": 3,
+      "thread_id": "4b66ce61-43db-4c7f-86ad-f1befc268f44",
+      "sender": "customer",
+      "text": "Please help with O1002; do not create another refund.",
+      "created_at": "2026-10-28T12:58:54.527315"
+    }
+  ],
+  "human_thread": {
+    "id": "4b66ce61-43db-4c7f-86ad-f1befc268f44",
+    "session_id": "1a990604-124e-4eb9-a113-0276c92775f0",
+    "customer_id": "C0001",
+    "status": "closed",
+    "reason": "customer_request",
+    "created_at": "2026-10-28T12:58:53.931206",
+    "updated_at": "2026-10-28T12:58:55.021772"
+  },
+  "human_events": [
+    {
+      "id": 1,
+      "thread_id": "4b66ce61-43db-4c7f-86ad-f1befc268f44",
+      "actor": "customer",
+      "event": "requested",
+      "reason": "customer_request",
+      "created_at": "2026-10-28T12:58:54.085747"
+    },
+    {
+      "id": 2,
+      "thread_id": "4b66ce61-43db-4c7f-86ad-f1befc268f44",
+      "actor": "human_operator",
+      "event": "claimed",
+      "reason": "Operator took over the conversation",
+      "created_at": "2026-10-28T12:58:54.325296"
+    },
+    {
+      "id": 3,
+      "thread_id": "4b66ce61-43db-4c7f-86ad-f1befc268f44",
+      "actor": "human_operator",
+      "event": "closed",
+      "reason": "Customer question answered; resume the AI concierge",
+      "created_at": "2026-10-28T12:58:55.022390"
+    }
+  ],
+  "regression_summary": {
+    "pass_rate": 1.0,
+    "fallback_frequency": 0.0,
+    "unnecessary_agent_activations": 0,
+    "business_rule_check_failures": 0,
+    "authorization_check_failures": 0,
+    "retrieval_recall_at_2": 0.5,
+    "product_category_recall_at_3": 1.0
+  },
+  "limitations": [
+    "No local Docker executable; final GitHub Actions container job verifies image startup and actual HEALTHCHECK.",
+    "No local Ollama executable/reachable endpoint or configured model credentials; live inference was not executed.",
+    "Model-routed handoff is covered by controlled fixtures, not new live-model quality measurements.",
+    "Human messages use the built-in operator interface; no external helpdesk, staffing or response-time guarantee.",
+    "Shared operator-key access and session locks retain the documented single-process scope.",
+    "Business data, carrier and financial processing remain synthetic or simulated."
+  ]
+}

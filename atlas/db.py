@@ -46,6 +46,19 @@ audit = Table('audit', metadata, Column('id', String, primary_key=True),
 outbox = Table('outbox', metadata, Column('id', String, primary_key=True),
     Column('action_id', ForeignKey('actions.id'), unique=True), Column('payload', JSON),
     Column('status', String), Column('created_at', DateTime(timezone=True)))
+support_threads = Table('support_threads', metadata, Column('id', String, primary_key=True),
+    Column('session_id', ForeignKey('sessions.id'), nullable=False, unique=True),
+    Column('customer_id', ForeignKey('customers.id'), nullable=False),
+    Column('status', String, nullable=False), Column('reason', String, nullable=False),
+    Column('created_at', DateTime(timezone=True)), Column('updated_at', DateTime(timezone=True)))
+support_messages = Table('support_messages', metadata, Column('id', Integer, primary_key=True),
+    Column('thread_id', ForeignKey('support_threads.id'), nullable=False),
+    Column('sender', String, nullable=False), Column('text', Text, nullable=False),
+    Column('created_at', DateTime(timezone=True)))
+support_events = Table('support_events', metadata, Column('id', Integer, primary_key=True),
+    Column('thread_id', ForeignKey('support_threads.id'), nullable=False),
+    Column('actor', String, nullable=False), Column('event', String, nullable=False),
+    Column('reason', Text, nullable=False), Column('created_at', DateTime(timezone=True)))
 
 
 def now():

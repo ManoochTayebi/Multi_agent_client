@@ -6,6 +6,7 @@ Intent = Literal['returns_investigation', 'product_discovery', 'order_tracking',
 
 class Plan(BaseModel):
     intents: list[Intent] = Field(max_length=4)
+    handoff_requested: bool = False
     order_id: str | None = Field(default=None, pattern=r'^O\d{4,8}$')
     category: Literal['shirt','trousers','dress','jacket','shoes','top','skirt','knitwear'] | None = None
     budget_cents: int | None = Field(default=None, ge=0, le=1000000)
@@ -36,8 +37,17 @@ class SessionRequest(BaseModel):
 
 class ChatRequest(BaseModel):
     message: str = Field(min_length=1, max_length=4000)
+    request_human: bool = False
 
 
 class Decision(BaseModel):
     approve: bool
+    reason: Annotated[str, StringConstraints(strip_whitespace=True, min_length=3, max_length=500)]
+
+
+class SupportMessage(BaseModel):
+    message: Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=4000)]
+
+
+class SupportClose(BaseModel):
     reason: Annotated[str, StringConstraints(strip_whitespace=True, min_length=3, max_length=500)]

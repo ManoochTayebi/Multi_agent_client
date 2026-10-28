@@ -12,6 +12,7 @@ The reference implementation models the fictional **Atlas Fashion Group**. Custo
 
 - **Context-aware orchestration:** identify the customer's goals, delegate to relevant specialists and execute independent evidence-gathering tasks in parallel.
 - **Policy-grounded resolution:** investigate owned orders, retrieve applicable return policies and propose a resolution subject to customer confirmation and required human approval.
+- **Direct human assistance:** let customers request a person, queue a persistent conversation and exchange messages with an operator while AI business actions are paused.
 - **Product discovery and styling:** combine catalog retrieval with authoritative SQL constraints, then validate exact variants, availability, size and total outfit budget.
 - **Persistent context:** retain session-specific plans and agent evidence across requests and application restarts.
 - **Inspectable execution:** expose routing decisions, native tool calls, retrieval sources, timing, validation results, Judge outcomes and audit events.
@@ -23,6 +24,8 @@ The six business agents are **Central Orchestrator, Returns Investigation, Resol
 
 ```mermaid
 flowchart TD
+    O -->|human requested or conversation open| HS[Human support conversation]
+    HS --> HQ[Operator takeover and replies]
     O[Central Orchestrator] -->|selected tasks| I[Returns Investigation]
     O -->|selected tasks| D[Product Discovery]
     O -->|selected tasks| T[Order Tracking]
@@ -35,7 +38,8 @@ flowchart TD
     A --> V[Deterministic validation]
     V --> Q[Selective LLM Judge]
     Q --> F{"Quality checks pass?"}
-    F -->|no| H[Support response; no new action]
+    F -->|no| H[Support queue; no new financial action]
+    H --> HS
     F -->|yes| C[Customer response and optional proposal]
     C -->|financial proposal| P[Customer confirmation and approval workflow]
 ```
@@ -86,8 +90,19 @@ Startup seeds an empty database from checksum-verified fixtures and initializes 
 |---|---|---|
 | High-value refund | **C0001:** “I would like a refund for order O1002.” | Investigate the owned EUR 249 order and return policy; propose a resolution; require customer confirmation and operator review because the amount exceeds EUR 150; record simulated processing and audit events. |
 | Delivery enquiry with styling | **C0001:** “Track my order O1001 and build a smart casual outfit under €150, size M.” | Run Tracking and Discovery concurrently, then compose a validated outfit. Return both delivery information and existing variants with positive stock, size M and a combined price no greater than EUR 150. |
+| Direct human assistance | Any authenticated customer: “I want to speak to a real agent.” or **Talk to a person** | Bypass AI specialists, open a human conversation and show its waiting/active status. An operator takes over, reads prior context and evidence, replies and closes the conversation. |
 
 The evidence inspector provides the execution trace and supporting records. Repeated refund requests reuse the existing action and report its lifecycle; repeated confirmations or processing do not create duplicate transactions.
+
+### Human support
+
+Customers can select **Talk to a person** at any point between requests, or ask for human assistance in chat. The Orchestrator routes explicit English/French requests directly, without depending on a model call. LLM routing can also recognize other phrasings. A queued request clearly says that an operator has not taken over yet.
+
+In **Operations**, enter the operator key, select **Load support queue**, open the conversation and choose **Take over conversation**. The operator can inspect prior customer/assistant exchanges, execution reports, SQL/RAG evidence and support events before replying. Messages refresh every three seconds. While the thread is waiting or active, customer messages stay in that conversation and do not activate AI specialists.
+
+The operator closes with a summary, or the customer selects **Return to AI concierge**. The next message can then use the six-agent pipeline again. Threads, messages and transitions survive application restarts; the browser retains its bearer session in tab-scoped session storage. Repeated requests reuse one thread per session. Session deletion removes the conversation and agent memory while preserving financial audit records.
+
+Human conversation and financial approval remain separate permissions: takeover or a chat reply cannot confirm, approve or execute a refund. Existing proposals still require the normal explicit confirmation/review controls. A Resolution `human_support` decision or a failed quality gate also creates an operator-visible support request. Human support is provided through the built-in operator interface; no external helpdesk, telephone integration, staffing or response-time guarantee is implied.
 
 Tracking uses a labeled cached mock record by default. To exercise the HTTP adapter, start the mock service separately and configure the main API accordingly:
 

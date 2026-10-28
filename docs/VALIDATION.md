@@ -1,6 +1,25 @@
 # Validation history
 
-For the latest repository review and checks, see [REVIEW.md](REVIEW.md). The dated results below remain historical records tied to their own source hashes.
+The latest human-support verification is recorded below. The earlier reliability review remains in [REVIEW.md](REVIEW.md); older results apply only to their recorded source hashes.
+
+## Human-support validation — 28 October 2026
+
+[Recorded checks, actual handoff trace, operator/customer transcript and transition events](validation/human-support-20261028.json).
+
+| Check | Observed locally |
+|---|---|
+| Ruff and installed dependencies | Passed; `pip check` reports no broken requirements |
+| Pytest | 66 passed, including 17 human-support regression cases; existing tests retained |
+| Full deterministic API suite | 13/13, zero observed fallback, extra-agent activation, business-rule or authorization check failures |
+| Existing refund and parallel-styling journeys | 6/6 across three isolated SQL/Chroma repetitions |
+| Actual HTTP/Chromium journeys | All 16 checks passed; human queue, takeover, typed reply, persisted transcript, browser refresh, reasoned closure and restored AI routing; no JavaScript errors |
+| Documentation | All seven Mermaid diagrams parsed; relative links verified |
+| Live-model inference | Not executed: no local/reachable Ollama service or configured model credentials |
+| Local Docker | Not executed: Docker is unavailable; GitHub Actions builds the final image and verifies its actual health status |
+
+Explicit handoff intentionally bypasses model calls and all business specialists. Controlled fixtures separately verify the typed model routing flag. Waiting/active conversations suspend AI business routing until operator closure or customer return to AI. Tests cover session/customer isolation, operator authentication and takeover before reply, transactionally recorded transitions, duplicate/reopened threads, application restart, conversation deletion, concurrent mutation conflicts and handoff while all eight AI slots are occupied. A failed quality gate now creates an inspectable operator case. A human chat reply never substitutes for financial confirmation or approval.
+
+These checks use the fictional dataset, lexical retrieval and simulated carrier/payments. They do not establish new live-model quality, semantic relevance, staffing availability or production readiness. Full JSON reports and screenshots are CI artifacts; the final commit's Actions run is the authoritative remote result. [Human-support operating instructions](DEMO_RUNBOOK.md#6-direct-human-assistance).
 
 ## Finalization validation — 27 October 2026
 

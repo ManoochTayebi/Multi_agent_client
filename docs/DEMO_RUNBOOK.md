@@ -134,7 +134,40 @@ These are measurements, not added sleeps in the real demo. The concurrency unit 
 
 **Failure conditions:** wrong/extra routing; absent tracking or outfit answer; missing dependencies; no overlapping workers; invented/stale variants; wrong size; zero stock; budget exceeded; unlabeled fallback. A recovered answer may still be usable, but a fallback fails **strict real-LLM acceptance**.
 
-## 6. Inspect and record real interfaces
+## 6. Direct human assistance
+
+Use an authenticated customer such as **C0001**. Select **Talk to a person** or enter:
+
+> I want to speak to a real agent.
+
+The explicit request works in demo and LLM modes without requiring model inference. It is intentional control routing, not a deterministic recovery after a failed model call. French example: “Je veux parler à un conseiller humain.”
+
+1. Verify **Waiting for a human operator**. The trace shows the Orchestrator and its `human_handoff` control step, with a persisted support-thread ID, no specialist findings, no new financial action and zero model calls for the explicit request.
+2. Open **Operations**, enter `ADMIN_API_KEY`, then select **Load support queue** → **Open conversation**. Inspect **Conversation context, evidence & support audit** for prior customer/assistant messages, run reports, SQL/RAG evidence and requested events.
+3. Verify **Send human reply** is disabled while waiting. Choose **Take over conversation**. The state becomes `active` and records a `claimed` event.
+4. Type a real operator response in **Reply to customer**, then select **Send human reply**. Return to Customer workspace; within the three-second polling interval the message appears labeled **Human operator**.
+5. Send another customer message in the composer, including an order/refund request if desired. It appears in the human transcript and stays on the human route. It must not activate specialists, create a new proposal or authorize payment.
+6. Refresh the browser. The same tab-scoped session and saved human conversation should return. SQL also preserves the conversation across an application restart.
+7. Close from Operations with a nonblank **Closing summary**, or select **Return to AI concierge** as the customer. A `closed` event and system summary are recorded. Send “Track O1001”; normal AI routing should resume on this next request.
+
+The queue is separate from **Load review queue** for confirmed financial proposals. A human message saying “approved” cannot replace the confirmation, approval and simulation controls. A Resolution `human_support` decision or failed quality gate opens the same support queue with its recorded escalation reason.
+
+API equivalents are documented in [Architecture §6](ARCHITECTURE.md#6-human-conversation-lifecycle). Direct handoff uses the existing authenticated interface:
+
+```bash
+curl --fail http://localhost:8000/api/chat \
+  -H "Authorization: Bearer ${ATLAS_SESSION_TOKEN}" \
+  -H 'Content-Type: application/json' \
+  -d '{"message":"I want to speak to a real agent.","request_human":true}'
+curl --fail http://localhost:8000/api/support \
+  -H "Authorization: Bearer ${ATLAS_SESSION_TOKEN}"
+```
+
+Set `ATLAS_SESSION_TOKEN` privately to the token returned by `/api/sessions`; do not commit it or include it in reports. Operator endpoints require `X-Admin-Key` and cannot be called with the customer bearer alone.
+
+Failure conditions: a queued request claimed as already connected, an operator reply accepted before takeover, another session seeing the transcript, continued specialist execution while waiting/active, a handoff authorizing payment, or lost messages after refresh/restart. No operator notification, external helpdesk or guaranteed response time is implemented. During an in-flight request, another same-session mutation returns 409; wait for it to finish before requesting takeover.
+
+## 7. Inspect and record real interfaces
 
 Customer UI trace JSON includes plan/routing reasons, tool calls, order/product facts, retrieval text/source hashes, separate guardrails and Judge verdict, model/embedding calls and usage, and measured parallel/dependency evidence. Traces describe completed execution; the interface does not stream internal steps live.
 
@@ -142,7 +175,7 @@ For API use, create a session via `POST /api/sessions` with `{"customer_id":"C00
 
 Customer confirmation is `POST /api/actions/<id>/confirm`. Admin endpoints require `X-Admin-Key`: `GET /admin/reviews`, `POST /admin/actions/<id>/decision` with `{"approve":true,"reason":"verified synthetic inspection"}`, `POST /admin/outbox/drain`, and `GET /admin/audit/<id>`. Aggregate monitoring: `GET /metrics` with the same operator header. The automated runner below exercises these endpoints without exposing credentials.
 
-## 7. Automated rehearsals and reports
+## 8. Automated rehearsals and reports
 
 ```bash
 ruff check atlas scripts tests
@@ -152,7 +185,7 @@ python -m scripts.evaluate --mode demo --suite journeys --repeat 3 --output repo
 python -m scripts.browser_demo --output reports/browser-demo.json
 ```
 
-The API runner starts the actual application through its test transport and uses isolated SQL/index stores for each repeat. It does not fake graph nodes. The Chromium runner starts isolated real HTTP API and mock-carrier processes, exercises both UI journeys, verifies audit/idempotency/overlap and records JSON plus desktop/mobile screenshots. It always labels its mode **demo** and stops its subprocesses afterward. Run browser rehearsals from the repo after a **non-editable install** as above; it also verifies installed code works outside the checkout.
+The API runner starts the actual application through its test transport and uses isolated SQL/index stores for each repeat. It does not fake graph nodes. The Chromium runner starts isolated real HTTP API and mock-carrier processes, exercises the refund and parallel-styling journeys plus human takeover/reply/closure and session restoration, verifies audit/idempotency/overlap and records JSON plus desktop/mobile screenshots. It always labels its mode **demo** and stops its subprocesses afterward. Run browser rehearsals from the repo after a **non-editable install** as above; it also verifies installed code works outside the checkout.
 
 For real inference with `.env.local.example` settings configured:
 
@@ -164,7 +197,10 @@ Strict success requires exact roles, relevant actual model stages/native tool ca
 
 Read failed checks and warnings, not only aggregate pass rate. These curated scenarios are not an independent benchmark or proof of production safety. Historical reports in `docs/validation/evaluation-llm*.json` describe earlier executions; compare source hashes before attributing them to the current code.
 
-## 8. Reset, troubleshoot and present honestly
+## 9. Reset, troubleshoot and present honestly
+
+- **Every message stays in human support:** close the waiting/active conversation or choose **Return to AI concierge**. This is intentional suspension, not a routing failure.
+- **No operator reply arrives:** verify the request appears in **Load support queue**, take it over, send a reply and check the operator key/network. Waiting alone does not mean a person has joined.
 
 - **Reset:** stop the API with Ctrl+C, run section 3 again with a new rehearsal timestamp, restart the API and reconnect C0001. Stop an automated/browser runner before starting another on the same explicit port. Existing rehearsals remain available for inspection.
 - **Model unavailable:** check `ollama list`, `/api/tags`, model name and server port. Verify `atlas-local` was created and the embedding model was pulled. Remote providers need their actual credentials. No current endpoint means live validation is unavailable, not passed.
