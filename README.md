@@ -2,15 +2,62 @@
 
 [![CI](https://github.com/ManoochTayebi/Multi_agent_client/actions/workflows/ci.yml/badge.svg)](https://github.com/ManoochTayebi/Multi_agent_client/actions/workflows/ci.yml)
 
-A **six-agent retail customer assistant** for the Saegus AI Engineer case study. One conversation can combine a return, shipment tracking and a personalized outfit request. Agents share verified SQL, policy and catalog evidence; financial actions remain subject to customer confirmation and human review.
+**An agentic customer-assistance platform for omnichannel fashion retail.**
 
-**Stack:** Python · LangGraph · FastAPI · SQLAlchemy (SQLite/PostgreSQL) · Chroma · OpenAI-compatible model API · Docker.
+Atlas CustomerAI coordinates six specialized agents to handle returns, delivery enquiries, product discovery and personal styling within a single conversation. The system combines language-model decisions with SQL-backed business facts, retrieval-augmented generation, deterministic validation and explicit approval workflows.
 
-The customer and operator interfaces run in the same FastAPI application. All business data, policies, carrier responses and payments are fictional. **No real money moves.** Public hosting is optional for this case study.
+The reference implementation models the fictional **Atlas Fashion Group**. Customer records, product data, policies, carrier responses and financial processing are synthetic or simulated; no real payment transactions are executed.
 
-## Start here
+## Capabilities
 
-Use Python 3.12+ and run from the repository root:
+- **Context-aware orchestration:** identify the customer's goals, delegate to relevant specialists and execute independent evidence-gathering tasks in parallel.
+- **Policy-grounded resolution:** investigate owned orders, retrieve applicable return policies and propose a resolution subject to customer confirmation and required human approval.
+- **Product discovery and styling:** combine catalog retrieval with authoritative SQL constraints, then validate exact variants, availability, size and total outfit budget.
+- **Persistent context:** retain session-specific plans and agent evidence across requests and application restarts.
+- **Inspectable execution:** expose routing decisions, native tool calls, retrieval sources, timing, validation results, Judge outcomes and audit events.
+- **Reproducible validation:** provide seeded datasets, isolated workflow evaluations, browser tests and container health checks in CI.
+
+## Architecture
+
+The six business agents are **Central Orchestrator, Returns Investigation, Resolution, Product Discovery, Order Tracking and Personal Stylist**. A separate LLM Judge is a quality gate rather than an additional business agent.
+
+```mermaid
+flowchart TD
+    O[Central Orchestrator] -->|selected tasks| I[Returns Investigation]
+    O -->|selected tasks| D[Product Discovery]
+    O -->|selected tasks| T[Order Tracking]
+    I --> J[Join selected evidence workers]
+    D --> J
+    T --> J
+    J --> R[Resolution when applicable]
+    R --> S[Personal Stylist when requested]
+    S --> A[Grounded response synthesis]
+    A --> V[Deterministic validation]
+    V --> Q[Selective LLM Judge]
+    Q --> F{"Quality checks pass?"}
+    F -->|no| H[Support response; no new action]
+    F -->|yes| C[Customer response and optional proposal]
+    C -->|financial proposal| P[Customer confirmation and approval workflow]
+```
+
+Independent evidence workers use LangGraph `Send` delegation and shared-state reducers. All selected workers join before dependent stages: Resolution consumes the investigation, and Stylist consumes Discovery results. SQL controls identity, amounts, availability and commerce constraints independently of model output.
+
+The [architecture specification](docs/ARCHITECTURE.md) details runtime components, agent contracts, graph state, retrieval, approval transitions, persistence and failure handling.
+
+### Technology stack
+
+| Layer | Implementation |
+|---|---|
+| Orchestration | Python, LangGraph conditional routing and parallel workers |
+| Model integration | OpenAI-compatible API, native function calls, Pydantic output validation |
+| Business data | SQLAlchemy with SQLite or PostgreSQL |
+| Retrieval | Chroma policy and catalog collections; configurable semantic embeddings |
+| Application | FastAPI, customer workspace and operator interface |
+| Operations | Audit trail, aggregate metrics, Docker, GitHub Actions |
+
+## Quick start
+
+Requires **Python 3.12+**. Run commands from the repository root.
 
 ```bash
 git clone https://github.com/ManoochTayebi/Multi_agent_client.git
@@ -21,87 +68,71 @@ pip install -r requirements.lock
 pip install '.[dev]'
 ```
 
-For a fresh checkout, copy `.env.example` to `.env`. If `.env` already exists, keep it and review its configuration. Set a private random `ADMIN_API_KEY` to enable Operations; `.env` is ignored by Git.
+For a fresh checkout, copy `.env.example` to `.env` and replace the `ADMIN_API_KEY` placeholder with a private random value. Preserve any existing configured `.env`.
 
 ```bash
 cp .env.example .env  # fresh checkout only
-# Replace the ADMIN_API_KEY placeholder in .env.
+# Configure ADMIN_API_KEY before using the operator interface.
 python -m uvicorn atlas.api:app --host 127.0.0.1 --port 8000
 ```
 
-Open **[http://localhost:8000](http://localhost:8000)**. Startup seeds an empty database from checksum-verified fixtures and builds the policy/product indexes. Existing business state is preserved.
+Open the [customer workspace](http://localhost:8000). The **Operations** tab uses the configured operator key. Interactive API documentation is available at [http://localhost:8000/docs](http://localhost:8000/docs), with readiness information at [http://localhost:8000/health](http://localhost:8000/health).
 
-- Customer workspace: select **C0001** and use the Demo A/B buttons.
-- Operations: enter `ADMIN_API_KEY` to inspect confirmed requests, approve/reject with a reason, inspect audit events and process simulated transactions.
-- API reference: [http://localhost:8000/docs](http://localhost:8000/docs).
-- Health: [http://localhost:8000/health](http://localhost:8000/health). This reports storage/index configuration, not live model quality.
+Startup seeds an empty database from checksum-verified fixtures and initializes the policy and product indexes. Existing business state is preserved. Keep `AS_OF_DATE=2026-10-26`, the fixed reference date for the included scenarios. The [operational runbook](docs/DEMO_RUNBOOK.md) covers fresh-state initialization, service startup and troubleshooting.
 
-Keep **`AS_OF_DATE=2026-10-26`**, the fixed synthetic business clock. Use fresh SQL/index paths between rehearsals; see the [demo runbook](docs/DEMO_RUNBOOK.md) for exact reset commands.
+## Reference workflows
 
-## Two interview demonstrations
-
-| Demo | Customer and exact request | Expected behavior |
+| Workflow | Customer request | Expected behavior |
 |---|---|---|
-| A — refund with approval | **C0001:** “I would like a refund for order O1002.” | Investigation verifies the owned EUR 249 order and return policy; Resolution proposes the next step. Customer confirms → operator reviews because EUR 249 exceeds EUR 150 → simulated processing → audit. Repeated processing creates no duplicate transaction. |
-| B — parallel tracking and styling | **C0001:** “Track my order O1001 and build a smart casual outfit under €150, size M.” | Tracking and Discovery overlap; Stylist consumes Discovery results. The response includes shipment status and an outfit with real synthetic variants, positive stock, size M and total price ≤ EUR 150. |
+| High-value refund | **C0001:** “I would like a refund for order O1002.” | Investigate the owned EUR 249 order and return policy; propose a resolution; require customer confirmation and operator review because the amount exceeds EUR 150; record simulated processing and audit events. |
+| Delivery enquiry with styling | **C0001:** “Track my order O1001 and build a smart casual outfit under €150, size M.” | Run Tracking and Discovery concurrently, then compose a validated outfit. Return both delivery information and existing variants with positive stock, size M and a combined price no greater than EUR 150. |
 
-The evidence inspector shows selected roles, tool calls, actual SQL/policy/catalog results, measured start/end times, dependencies, guardrails, Judge decisions and model usage. Repeat refund requests report the existing lifecycle rather than offering a new refund. A failed validation/Judge blocks a new actionable proposal.
+The evidence inspector provides the execution trace and supporting records. Repeated refund requests reuse the existing action and report its lifecycle; repeated confirmations or processing do not create duplicate transactions.
 
-The default tracking source is a **labeled cached mock record**. To exercise the mock carrier over HTTP, start `python -m uvicorn atlas.mock_carrier:app --host 127.0.0.1 --port 8001` in another terminal and restart the main API with `CARRIER_BASE_URL=http://127.0.0.1:8001`.
-
-## Execution modes
-
-| | `ATLAS_MODE=demo` | `ATLAS_MODE=llm` |
-|---|---|---|
-| Decisions | Deterministic routing, domain tools and feasible-outfit baseline | Model routing, native specialist tool calls, resolution/styling choices and grounded synthesis |
-| Retrieval | Offline lexical vectors by default | Semantic policy/catalog retrieval when `EMBEDDING_MODEL` is configured |
-| Judge | Not invoked; clearly labeled | Separate model call for financial proposals and multiple routed intents (including styling) |
-| Credentials | None for model inference | Configured chat model/key and a compatible endpoint |
-| Validation meaning | Software workflow correctness | Strict model acceptance additionally requires semantic queries, relevant model stages and no fallback |
-
-LLM mode supports optional lexical retrieval, but that configuration does **not** qualify as strict semantic/LLM evaluation. Provider failures produce visible warnings and bounded fallback; a required Judge failure blocks action. The Judge uses the same configured model in a separate call and can share the generator's errors.
-
-For local inference, install Ollama, then:
+Tracking uses a labeled cached mock record by default. To exercise the HTTP adapter, start the mock service separately and configure the main API accordingly:
 
 ```bash
-ollama serve  # separate terminal; skip if Ollama is already serving
-ollama pull qwen3:1.7b
-ollama pull all-minilm
-ollama create atlas-local -f models/Modelfile
+python -m uvicorn atlas.mock_carrier:app --host 127.0.0.1 --port 8001
+# In another terminal, start or restart the main API:
+CARRIER_BASE_URL=http://127.0.0.1:8001 python -m uvicorn atlas.api:app --host 127.0.0.1 --port 8000
 ```
 
-Use `.env.local.example` as a configuration reference. It specifies `ATLAS_MODE=llm`, `OPENAI_BASE_URL=http://localhost:11434/v1`, `OPENAI_API_KEY=ollama`, `OPENAI_MODEL=atlas-local`, `EMBEDDING_MODEL=all-minilm`, `LLM_TOKEN_PARAMETER=max_tokens` and model-specific reasoning/schema settings. Retain your operator key and rehearsal paths when changing profiles. For another compatible provider, set its endpoint, actual credentials and supported chat/embedding models. See [local model setup](docs/LOCAL_MODELS.md) and the [runbook](docs/DEMO_RUNBOOK.md).
+## Model configuration
 
-## Architecture
+| Behavior | `ATLAS_MODE=demo` | `ATLAS_MODE=llm` |
+|---|---|---|
+| Routing and decisions | Deterministic business baselines | Model-based routing, native specialist tool calls, resolution and styling decisions |
+| Response generation | Grounded templates | Grounded model synthesis |
+| Retrieval | Offline lexical vectors by default | Semantic retrieval when `EMBEDDING_MODEL` is configured |
+| Judge | Not invoked | Separate model call for financial resolutions or multiple routed intents, including styling |
+| Model credentials | Not required for the default offline configuration | Required for the selected compatible endpoint |
 
-The six business roles are **Central Orchestrator, Returns Investigation, Resolution, Product Discovery, Order Tracking and Personal Stylist**. The Judge is a quality gate, not another business agent.
+For a compatible provider, configure `.env`:
 
-```mermaid
-flowchart TD
-    O[Central Orchestrator] --> W[Selected parallel evidence workers]
-    W --> J[Join requested evidence]
-    J --> R[Resolution when return evidence exists]
-    R --> S[Personal Stylist when requested]
-    S --> A[Aggregate response]
-    A --> V[Deterministic validation]
-    V --> Q[Optional LLM Judge]
-    Q --> F{"Finalize: all checks pass?"}
-    F -->|no| H[Human support; no new action]
-    F -->|yes| C[Response and optional refund proposal]
+```dotenv
+ATLAS_MODE=llm
+OPENAI_BASE_URL=https://api.openai.com/v1
+OPENAI_API_KEY=your-provider-key
+OPENAI_MODEL=your-supported-chat-model
+EMBEDDING_MODEL=your-supported-embedding-model
+LLM_TOKEN_PARAMETER=max_completion_tokens
+LLM_JSON_SCHEMA=true
 ```
 
-The worker pool contains Returns Investigation, Product Discovery and Order Tracking. Conditional routing selects only relevant roles. All selected workers join before downstream stages; Stylist therefore waits for Discovery and may also wait for Tracking. SQL rules own customer identity, money, variants, stock and budget. [Architecture details and approval state machine →](docs/ARCHITECTURE.md)
+The chat model must support native function calls and the selected JSON output format. The supplied [Ollama profile](.env.local.example) uses `atlas-local` based on Qwen3 1.7B and the `all-minilm` encoder; see [local model configuration](docs/LOCAL_MODELS.md) for installation and model-specific settings. Keep credentials outside version control.
 
-## Verify and inspect results
+Provider failures are surfaced through warnings and bounded fallback. A required Judge rejection or failure blocks a new actionable proposal. LLM mode can run with lexical retrieval, but strict semantic/LLM evaluation additionally requires actual embedding queries and successful model stages without deterministic fallback.
+
+## Validation
 
 ```bash
 ruff check atlas scripts tests
 pytest -q
 python -m scripts.evaluate --mode demo
-python -m scripts.evaluate --mode demo --suite journeys --repeat 3 --output reports/demo-journeys.json
+python -m scripts.evaluate --mode demo --suite journeys --repeat 3 --output reports/workflows-demo.json
 ```
 
-Browser rehearsal (starts isolated real HTTP services, exercises both UIs, then stops them):
+Optional browser validation starts isolated real HTTP services and exercises both customer and operator workflows:
 
 ```bash
 pip install '.[browser]'
@@ -109,32 +140,36 @@ python -m playwright install chromium
 python -m scripts.browser_demo
 ```
 
-Real-model rehearsal, after configuring a working provider and semantic encoder:
+With a configured chat model and semantic encoder:
 
 ```bash
-python -m scripts.evaluate --mode llm --suite journeys --repeat 3 --output reports/llm-journeys.json
+python -m scripts.evaluate --mode llm --suite journeys --repeat 3 --output reports/workflows-llm.json
 ```
 
-Reports contain actual source hashes, evidence, audit events, role/timing checks, usage and fallback indicators. CI installs non-editably, verifies package imports outside the checkout, runs tests/API evaluations/Chromium rehearsals, builds Docker and requires the container's health status to become `healthy`. CI uploads reports and screenshots as artifacts. The manual release workflow publishes an image to GHCR; it does not provision hosting.
+Reports contain source hashes, scenario checks, execution evidence, audit events, timing, usage and fallback indicators. CI verifies non-editable package installation, tests, deterministic evaluations, Chromium workflows, Docker build and the container's actual health status. Reports and screenshots are retained as workflow artifacts.
 
-See the [current review](docs/REVIEW.md) and [validation history](docs/VALIDATION.md). Historical model reports apply only to their recorded source hashes. Deterministic test passes and controlled provider fixtures do not establish current live-model accuracy. No production readiness, business ROI or service-level performance is claimed.
+Automated CI uses deterministic execution and controlled provider fixtures; it does not establish live-model quality. Recorded inference results apply to their documented source hashes and configuration. The [evaluation protocol](docs/EVALUATION.md) and [validation records](docs/VALIDATION.md) distinguish software checks from model-quality evidence.
 
-## Data, persistence and boundaries
+## Data and deployment
 
-The reproducible seed includes **200 customers, 120 products, 600 variants, 600 orders, 600 shipments, 60 return histories**, plus four fictional policies. `data/generated/manifest.json` records counts and SHA-256 digests. Regenerate with `python -m atlas.dataset`; use a fresh database/index for a new dataset. Generated data/policies are CC0-1.0; code is MIT. [Data card →](docs/DATA_CARD.md)
+The reproducible dataset contains **200 customers, 120 products, 600 variants, 600 orders, 600 shipments and 60 return-history records**, plus four fictional policy documents. A manifest records row counts and SHA-256 digests. See the [data card](docs/DATA_CARD.md) for provenance and limitations.
 
-SQL stores business facts, session/agent memory, run evidence, proposals, audit and the transactional simulation outbox. Chroma stores versioned policy and catalog vectors. Customer bearer tokens bind ownership; admin routes require a separate key. `DEMO_ACCESS=true` intentionally permits selection of fictional accounts. Protected mode requires `DEMO_ACCESS=false` and configured `CUSTOMER_TOKENS`.
+The default installation uses SQLite and embedded Chroma. The existing Compose configuration provides PostgreSQL and the mock carrier:
 
-Session deletion removes messages/runs and revokes the token; financial audit remains. Deletion during an active chat returns 409 so the request cannot recreate deleted memory. Use one API process/replica; graph steps are not durably checkpointed, session locks are process-local and schema setup uses `create_all` rather than versioned migrations.
+```bash
+docker compose up --build -d
+```
 
-For PostgreSQL plus the existing mock carrier, configure `.env` and run `docker compose up --build -d`. [Deployment instructions](docs/DEPLOYMENT.md) cover volumes, Ollama container networking and optional Render hosting. An optional Streamlit chat client is included; the FastAPI web UI is the complete customer/operator demonstration interface.
+Configure `POSTGRES_PASSWORD` and `ADMIN_API_KEY` first. [Deployment documentation](docs/DEPLOYMENT.md) describes persistence, container networking and optional hosting. The manual release workflow publishes an image to GHCR; it does not provision a hosted application.
 
-## Documentation
+The supported reference topology uses a **single API process/replica**. Session locking is process-local, graph supersteps are not durably checkpointed, and schema initialization uses `create_all`. Synthetic account selection is enabled by default; protected customer access requires `DEMO_ACCESS=false` and a configured credential map. Production identity, migrations, distributed coordination and real business-system integrations remain outside the implemented scope.
 
-| Document | Purpose |
-|---|---|
-| [Demo runbook](docs/DEMO_RUNBOOK.md) | Launch, exact prompts, approvals, traces, resets and troubleshooting |
-| [Architecture](docs/ARCHITECTURE.md) | Six roles, graph dependencies, retrieval, trust boundaries and action lifecycle |
-| [Current review](docs/REVIEW.md) | Latest fixes, checks and unresolved limitations |
-| [Evaluation protocol](docs/EVALUATION.md) | Metrics, strict model acceptance and independent-evaluation limits |
-| [French presentation outline](docs/PRESENTATION_FR.md) | Six-slide business and technical story for the interview |
+## Documentation and license
+
+- [Architecture specification](docs/ARCHITECTURE.md): components, agent contracts, orchestration, data flows and safeguards.
+- [Operational runbook](docs/DEMO_RUNBOOK.md): startup, workflow execution, evidence inspection and reset procedures.
+- [Evaluation protocol](docs/EVALUATION.md): metrics, strict acceptance criteria and measurement limits.
+- [Validation records](docs/VALIDATION.md): dated execution evidence and implementation reviews.
+- [Data card](docs/DATA_CARD.md): synthetic dataset generation, provenance and limitations.
+
+Code is distributed under the [MIT license](LICENSE). Generated datasets and fictional policies are dedicated under CC0-1.0.
