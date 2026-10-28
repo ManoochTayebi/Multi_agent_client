@@ -1,6 +1,6 @@
 # Local LLM and semantic retrieval
 
-Historical model experiments were recorded on an Intel Mac with 16 GiB RAM and CPU inference. Those reports describe their own model digests and source hashes; they do not imply Ollama or its models are installed on your machine or in a new execution workspace. Install the runtime and models below for each machine. Model files and virtual environments remain outside version control. See [current review](REVIEW.md) for what was actually reverified.
+The current [recorded LLM verification](LIVE_VALIDATION.md) ran the repository profile on Linux CPU with Ollama 0.40.12: both exact reference journeys passed three repetitions without deterministic fallback, followed by a separate original-speed UI recording. Exact digests, configuration, hardware limits and source hashes are retained with the evidence. Earlier Intel Mac experiments remain historical records. Install the runtime/models on each machine; recorded results do not imply that they are already installed on the reader's computer. Model weights and virtual environments remain outside version control.
 
 ## Reproduce
 
@@ -14,11 +14,13 @@ ollama serve  # keep running; skip if the desktop app already serves port 11434
 ollama pull qwen3:1.7b
 ollama pull all-minilm
 ollama create atlas-local -f models/Modelfile
-cp .env.local.example .env
+cp .env.local.example .env  # fresh configuration only; preserve an existing .env
 # Replace ADMIN_API_KEY with a random value before starting the API.
 source .venv/bin/activate
 python -m uvicorn atlas.api:app --host 127.0.0.1 --port 8000
 ```
+
+For an existing `.env`, update the profile values manually or use the [README export commands](../README.md#activate-real-llm-execution-with-ollama), which override settings without replacing the file.
 
 Qwen3 1.7B is a quantized small chat model (approximately 1.4 GB download). all-minilm is a small semantic encoder (approximately 46 MB). `models/Modelfile` sets an 8192-token context to fit grounded multi-agent prompts. `LLM_REASONING_EFFORT=none` disables optional thinking for this model. Private reasoning is neither requested nor persisted. Bounded tool calls, operational decisions and sources are recorded.
 
@@ -27,6 +29,8 @@ Ollama's [compatibility endpoint](https://docs.ollama.com/api/openai-compatibili
 ```bash
 python -m scripts.evaluate --mode llm --suite journeys --repeat 2 --output reports/evaluation-llm-journeys.json
 python -m scripts.evaluate --mode llm --output reports/evaluation-llm.json
+# Optional real UI capture, after installing the browser extra and Chromium:
+python -m scripts.record_llm_demo --output reports/llm-recording.json
 ```
 
 `--suite journeys` checks customer confirmation, required human approval, audit, outbox completion and idempotency for O1002, followed by parallel order tracking and product styling. Strict LLM success requires every relevant model stage, no deterministic fallback, and all business checks. Reports retain failures. `--repeat` uses fresh isolated business stores; within each repeat the second journey runs against an already loaded chat model. Timings include cold-model loading but exclude corpus indexing/application startup.

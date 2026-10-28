@@ -61,7 +61,7 @@ The [architecture specification](docs/ARCHITECTURE.md) details runtime component
 
 ## Quick start
 
-Requires **Python 3.12+**. Run commands from the repository root.
+Requires **Python 3.12+**. Run commands from the repository root. The default launch uses **deterministic `demo` mode** for reproducible software checks. To enable native LLM tool calling and semantic retrieval, use the Ollama setup below or configure a compatible provider.
 
 ```bash
 git clone https://github.com/ManoochTayebi/Multi_agent_client.git
@@ -83,6 +83,34 @@ python -m uvicorn atlas.api:app --host 127.0.0.1 --port 8000
 Open the [customer workspace](http://localhost:8000). The **Operations** tab uses the configured operator key. Interactive API documentation is available at [http://localhost:8000/docs](http://localhost:8000/docs), with readiness information at [http://localhost:8000/health](http://localhost:8000/health).
 
 Startup seeds an empty database from checksum-verified fixtures and initializes the policy and product indexes. Existing business state is preserved. Keep `AS_OF_DATE=2026-10-26`, the fixed reference date for the included scenarios. The [operational runbook](docs/DEMO_RUNBOOK.md) covers fresh-state initialization, service startup and troubleshooting.
+
+### Activate real LLM execution with Ollama
+
+Install [Ollama](https://ollama.com/download). Keep `ollama serve` running in a separate terminal, unless the desktop application already serves port 11434. Then download the chat model and semantic encoder:
+
+```bash
+ollama pull qwen3:1.7b
+ollama pull all-minilm
+ollama create atlas-local -f models/Modelfile
+```
+
+In the activated Python environment, these settings override the offline defaults without overwriting an existing `.env`:
+
+```bash
+export ATLAS_MODE=llm
+export OPENAI_BASE_URL=http://localhost:11434/v1
+export OPENAI_API_KEY=ollama
+export OPENAI_MODEL=atlas-local
+export EMBEDDING_MODEL=all-minilm
+export LLM_TOKEN_PARAMETER=max_tokens
+export LLM_REASONING_EFFORT=none
+export LLM_JSON_SCHEMA=true
+python -m uvicorn atlas.api:app --host 127.0.0.1 --port 8000
+```
+
+Configure a private `ADMIN_API_KEY` as in the quick start. The `ollama` value is a local compatibility placeholder; no paid provider credential is required. [`.env.local.example`](.env.local.example) contains the same profile for a fresh local configuration.
+
+Check `/health` for **`mode: llm`**, **`retrieval: semantic`** and **`chat_model: atlas-local`**. A completed reference journey should show `llm_route`, native `llm_tools`, model decisions and a Judge verdict in its trace, with positive `model_usage.calls` and `embedding_usage.calls`. Inspect warnings and `degraded`: an LLM-mode label alone does not prove that every stage ran without fallback. [Full setup and troubleshooting](docs/DEMO_RUNBOOK.md).
 
 ## Reference workflows
 
@@ -161,9 +189,27 @@ With a configured chat model and semantic encoder:
 python -m scripts.evaluate --mode llm --suite journeys --repeat 3 --output reports/workflows-llm.json
 ```
 
+To record the two LLM-backed customer/operator journeys in Chromium at their original speed:
+
+```bash
+python -m scripts.record_llm_demo --output reports/llm-recording.json
+```
+
+This command requires the browser extra and configured chat/embedding models. It launches isolated application/mock-carrier services, saves a WebM, screenshots and full JSON evidence, and fails if either journey lacks required model stages, native tool execution, semantic queries, guardrail/Judge approval or strict workflow checks. It does not replace model responses or remove inference waits.
+
 Reports contain source hashes, scenario checks, execution evidence, audit events, timing, usage and fallback indicators. CI verifies non-editable package installation, tests, deterministic evaluations, Chromium workflows, Docker build and the container's actual health status. Reports and screenshots are retained as workflow artifacts.
 
 Automated CI uses deterministic execution and controlled provider fixtures; it does not establish live-model quality. Recorded inference results apply to their documented source hashes and configuration. The [evaluation protocol](docs/EVALUATION.md) and [validation records](docs/VALIDATION.md) distinguish software checks from model-quality evidence.
+
+### Recorded real-model verification
+
+On **28 October 2026**, both exact reference prompts passed **3/3 repetitions each** with Qwen3 1.7B (`atlas-local`) and `all-minilm` semantic embeddings: **6/6 strict passes**, 41 model calls, zero deterministic fallback and no observed business-rule or authorization check failures. Overall request p50 was **46.3 s** and p95 **73.9 s** on the recorded CPU setup; startup/indexing is excluded.
+
+A separate **2 min 45 s recorded walkthrough** executes both journeys through the real customer/operator UI, including confirmation, human approval and simulated completion. Its two LLM requests passed all 30 recording checks. The video preserves the original speed and inference waits; it is recorded execution, not a live session for its viewer.
+
+[Watch the MP4](docs/media/atlas-llm-walkthrough-20261028.mp4) · [Exact-prompt JSON evidence](docs/validation/live-llm-journeys-20261028.json) · [UI evidence](docs/validation/live-ui-recording-20261028.json) · [Method, model digests and limits](docs/LIVE_VALIDATION.md)
+
+These are disclosed development workflows, not a held-out quality benchmark or production SLA. The saved source hashes match the application modules and UI in this revision. Native model execution does not change the fictional data or simulated financial processing.
 
 ## Data and deployment
 
@@ -184,6 +230,7 @@ The supported reference topology uses a **single API process/replica**. Session 
 - [Architecture specification](docs/ARCHITECTURE.md): components, agent contracts, orchestration, data flows and safeguards.
 - [Operational runbook](docs/DEMO_RUNBOOK.md): startup, workflow execution, evidence inspection and reset procedures.
 - [Evaluation protocol](docs/EVALUATION.md): metrics, strict acceptance criteria and measurement limits.
+- [Recorded LLM execution](docs/LIVE_VALIDATION.md): current real-model results, full-speed video, environment and source provenance.
 - [Validation records](docs/VALIDATION.md): dated execution evidence and implementation reviews.
 - [Data card](docs/DATA_CARD.md): synthetic dataset generation, provenance and limitations.
 

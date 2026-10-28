@@ -1,6 +1,18 @@
 # Validation history
 
-The latest human-support verification is recorded below. The earlier reliability review remains in [REVIEW.md](REVIEW.md); older results apply only to their recorded source hashes.
+The latest real-model verification is recorded below. Earlier human-support and reliability reviews remain dated records tied to their source hashes.
+
+## Real-model verification — 28 October 2026
+
+Both exact README reference prompts passed three repetitions against fresh SQLite/Chroma stores: **6/6 strict LLM passes**, semantic `all-minilm` queries, native specialist tool calls, model decisions/synthesis and selective Judge execution, with no deterministic fallback. All application modules and UI assets include the latest human-support implementation and match this revision's source hashes.
+
+The batch recorded 41 model calls, 47,394 chat tokens, 12 semantic-query calls, p50 46.297 s and p95 73.893 s. No extra agent activations, business-rule check failures or authorization check failures were observed. The separate actual HTTP/Chromium recording passed both workflows and all 30 checks, including the live mock-carrier adapter and customer/operator approval controls. Its original-speed MP4 is 164.64 seconds long; codec conversion preserves the entire duration and inference waits.
+
+[Method and limits](LIVE_VALIDATION.md) · [Exact-prompt evaluation](validation/live-llm-journeys-20261028.json) · [UI recording evidence](validation/live-ui-recording-20261028.json) · [Runtime/model digests](validation/live-model-environment-20261028.json) · [MP4](media/atlas-llm-walkthrough-20261028.mp4)
+
+Execution used temporary local Ollama 0.40.12, the repository's unchanged Qwen3 1.7B Modelfile, an 8-vCPU quota and an 8 GiB memory limit. The initial abbreviated-prompt baseline also passed 6/6 and is saved separately. These runs supersede the earlier **local model unavailable** limitation for the source-matched reference workflows. They do not mean that the full 13-case suite has been rerun with live inference, or that historical model measurements apply to current source. CI remains offline/deterministic; live inference was executed and recorded separately.
+
+Offline revalidation after these clarifications also passed: Ruff, 68 tests, all 13 deterministic scenarios, six repeated financial/styling journeys and all 16 Chromium workflow checks, with no JavaScript errors. The seven architecture diagrams and relative documentation links were checked. Docker is unavailable locally; the final Actions container job builds the image and verifies the actual HEALTHCHECK.
 
 ## Human-support validation — 28 October 2026
 

@@ -359,4 +359,6 @@ CI installs `atlas` and `scripts` non-editably, validates imports outside the ch
 
 Software checks, controlled provider fixtures and actual model inference have different evidential value. Execution reports retain configuration and source hashes; historical results apply only to their recorded implementation. See the [evaluation protocol](EVALUATION.md), [validation records](VALIDATION.md), [operational runbook](DEMO_RUNBOOK.md) and [deployment guide](DEPLOYMENT.md).
 
+The [28 October recorded LLM verification](LIVE_VALIDATION.md) exercises both reference workflows with native model tool calls and semantic embeddings against this application source. It includes three isolated repetitions per workflow and a separate customer/operator UI recording. Source hashes, exact prompts, model digests, usage, timing and audit evidence are retained; this supplements the offline CI checks without changing the six-agent architecture.
+
 Production adoption would require versioned migrations rather than `create_all`, enterprise identity/RBAC, retention/backup policies, coordination and shared storage for multiple replicas, and authorized real business connectors. The current implementation does not claim production readiness, measured ROI, independently established model accuracy or a service-level performance guarantee.

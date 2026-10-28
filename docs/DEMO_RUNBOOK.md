@@ -191,7 +191,12 @@ For real inference with `.env.local.example` settings configured:
 
 ```bash
 python -m scripts.evaluate --mode llm --suite journeys --repeat 3 --output reports/llm-journeys.json
+python -m scripts.record_llm_demo --output reports/llm-recording.json
 ```
+
+The recording command uses the real customer/operator UI and HTTP services in LLM mode, with fresh SQL/Chroma state and the configured semantic encoder. It records the full-speed browser session, including inference waits, customer confirmation, operator approval and simulated completion. It writes a `.webm`, screenshots and a JSON report with the exact requests, full responses, model stages, native tools, semantic calls, guardrails, Judge verdicts and audit events. A fallback or failed strict check makes the command exit unsuccessfully; inspect that report rather than presenting it as a successful model run. Provider credentials and bearer tokens are excluded from the reports. The runner chooses its own free ports.
+
+When sharing the video, label it **recorded execution**, identify its model/source snapshot and keep its measured latency visible. It is a recording of actual inference, not a live session for the viewer. The app and six-agent business architecture are the same as the API evaluation; only the recording harness is additional.
 
 Strict success requires exact roles, relevant actual model stages/native tool calls, semantic retrieval configured/executed, no deterministic fallback, valid business rules and completed approval/dependency journeys. Reports include source hashes, agent timings, chat/embedding calls/tokens, cost estimates (null when unknown), retrieval relevance probes, extra-agent activations, fallback rate, business/authorization check failures and the actual evidence/audit. API/index startup time is excluded from per-request latency; per-run embedding usage excludes initial indexing.
 

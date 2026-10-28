@@ -1,0 +1,213 @@
+{
+  "ollama": {
+    "version": "0.40.12"
+  },
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "cpu_count": 9,
+  "cgroup_cpu_max": "800000 100000",
+  "cgroup_memory_max_bytes": 8589934592,
+  "models": [
+    {
+      "name": "atlas-local:latest",
+      "model": "atlas-local:latest",
+      "modified_at": "2026-10-28T14:54:28.358911493+01:00",
+      "size": 1359293085,
+      "digest": "8b0c9ba2ac873a27302d6c7aa402139caf40ce12aef1b317c8937eff97b74576",
+      "details": {
+        "parent_model": "qwen3:1.7b",
+        "format": "gguf",
+        "family": "qwen3",
+        "families": [
+          "qwen3"
+        ],
+        "parameter_size": "2.0B",
+        "quantization_level": "Q4_K_M",
+        "context_length": 40960,
+        "embedding_length": 2048,
+        "runner": "llamacpp"
+      },
+      "capabilities": [
+        "completion",
+        "tools",
+        "thinking"
+      ]
+    },
+    {
+      "name": "all-minilm:latest",
+      "model": "all-minilm:latest",
+      "modified_at": "2026-10-28T14:39:56.816920869+01:00",
+      "size": 45960996,
+      "digest": "1b226e2802dbb772b5fc32a58f103ca1804ef7501331012de126ab22f67475ef",
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "bert",
+        "families": [
+          "bert"
+        ],
+        "parameter_size": "23M",
+        "quantization_level": "F16",
+        "context_length": 512,
+        "embedding_length": 384,
+        "runner": "ggml"
+      },
+      "capabilities": [
+        "embedding"
+      ]
+    },
+    {
+      "name": "qwen3:1.7b",
+      "model": "qwen3:1.7b",
+      "modified_at": "2026-10-28T14:39:33.30076334+01:00",
+      "size": 1359293444,
+      "digest": "8f68893c685c3ddff2aa3fffce2aa60a30bb2da65ca488b61fff134a4d1730e7",
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "qwen3",
+        "families": [
+          "qwen3"
+        ],
+        "parameter_size": "2.0B",
+        "quantization_level": "Q4_K_M",
+        "context_length": 40960,
+        "embedding_length": 2048,
+        "runner": "ggml"
+      },
+      "capabilities": [
+        "completion",
+        "tools",
+        "thinking"
+      ]
+    }
+  ],
+  "configuration": {
+    "ATLAS_MODE": "llm",
+    "OPENAI_BASE_URL": "http://127.0.0.1:11545/v1",
+    "OPENAI_MODEL": "atlas-local",
+    "EMBEDDING_MODEL": "all-minilm",
+    "LLM_TOKEN_PARAMETER": "max_tokens",
+    "LLM_REASONING_EFFORT": "none",
+    "LLM_JSON_SCHEMA": "true",
+    "LLM_MAX_TOKENS": "800",
+    "LLM_TIMEOUT_SECONDS": "180",
+    "LLM_MAX_RETRIES": "0",
+    "INPUT_COST_PER_MILLION": "0",
+    "OUTPUT_COST_PER_MILLION": "0",
+    "AS_OF_DATE": "2026-10-26",
+    "NO_PROXY": "localhost,127.0.0.1"
+  },
+  "runtime_archive": {
+    "name": "ollama-linux-amd64.tar.zst",
+    "size": 1525425005,
+    "digest": "sha256:f8adcb7e08d272283a4bd3abc18cf581afe37e64b2aee04fda4f407f215485ba",
+    "browser_download_url": "https://github.com/ollama/ollama/releases/download/v0.40.12/ollama-linux-amd64.tar.zst"
+  },
+  "modelfile_sha256": "f7e7b8ec9d835cb5812d3fd441d5b299b90d0e431d27fc339f48c8eddd34f747",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "packages": {
+    "fastapi": "0.162.0",
+    "langgraph": "1.2.17",
+    "chromadb": "1.5.9",
+    "openai": "3.37.0",
+    "sqlalchemy": "2.1.6",
+    "pydantic": "2.14.1",
+    "httpx": "0.28.1",
+    "playwright": "1.56.0"
+  },
+  "runtime_after_evaluation": {
+    "models": [
+      {
+        "name": "all-minilm:latest",
+        "model": "all-minilm:latest",
+        "size": 49387928,
+        "digest": "1b226e2802dbb772b5fc32a58f103ca1804ef7501331012de126ab22f67475ef",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "bert",
+          "families": [
+            "bert"
+          ],
+          "parameter_size": "23M",
+          "quantization_level": "F16"
+        },
+        "expires_at": "2026-10-28T15:23:01.540135906+01:00",
+        "size_vram": 0,
+        "context_length": 256,
+        "runner": "llamacpp"
+      },
+      {
+        "name": "atlas-local:latest",
+        "model": "atlas-local:latest",
+        "size": 2427715583,
+        "digest": "8b0c9ba2ac873a27302d6c7aa402139caf40ce12aef1b317c8937eff97b74576",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "2.0B",
+          "quantization_level": "Q4_K_M"
+        },
+        "expires_at": "2026-10-28T15:23:00.944616568+01:00",
+        "size_vram": 0,
+        "context_length": 8192,
+        "runner": "llamacpp"
+      }
+    ]
+  },
+  "runtime_after_recording": {
+    "models": [
+      {
+        "name": "atlas-local:latest",
+        "model": "atlas-local:latest",
+        "size": 2427715583,
+        "digest": "8b0c9ba2ac873a27302d6c7aa402139caf40ce12aef1b317c8937eff97b74576",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "2.0B",
+          "quantization_level": "Q4_K_M"
+        },
+        "expires_at": "2026-10-28T15:27:13.113629037+01:00",
+        "size_vram": 0,
+        "context_length": 8192,
+        "runner": "llamacpp"
+      },
+      {
+        "name": "all-minilm:latest",
+        "model": "all-minilm:latest",
+        "size": 49387928,
+        "digest": "1b226e2802dbb772b5fc32a58f103ca1804ef7501331012de126ab22f67475ef",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "bert",
+          "families": [
+            "bert"
+          ],
+          "parameter_size": "23M",
+          "quantization_level": "F16"
+        },
+        "expires_at": "2026-10-28T15:26:23.656075378+01:00",
+        "size_vram": 0,
+        "context_length": 256,
+        "runner": "llamacpp"
+      }
+    ]
+  },
+  "application_base_commit": "10f0330f65854c9b8f481c0a2c74f64a5a893adc",
+  "notes": [
+    "Local CPU execution. Models and runtime were temporarily installed in the validation workspace, not on the repository reader's machine.",
+    "Only non-secret configuration is included. Local provider key, operator key and bearer tokens are excluded.",
+    "Ollama model inference was limited to one parallel slot; LangGraph worker overlap does not imply simultaneous model inference."
+  ]
+}
