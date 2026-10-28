@@ -1,6 +1,6 @@
 # Atlas CustomerAI
 
-[![CI](https://github.com/ManoochTayebi/Multi_agent_client/actions/workflows/ci.yml/badge.svg)](https://github.com/ManoochTayebi/Multi_agent_client/actions/workflows/ci.yml)
+<!-- [![CI](https://github.com/ManoochTayebi/Multi_agent_client/actions/workflows/ci.yml/badge.svg)](https://github.com/ManoochTayebi/Multi_agent_client/actions/workflows/ci.yml) -->
 
 **An agentic customer-assistance platform for omnichannel fashion retail.**
 
